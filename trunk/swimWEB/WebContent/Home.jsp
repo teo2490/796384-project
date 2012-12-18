@@ -33,7 +33,7 @@
 				        </ul>
 				    </div>
 				</div>
-				<h1 align="center">Benvenuti in SWIMv2!</h1>
+				<h1 align="center">BENVENUTI IN SWIMv2!</h1>
 				<%
 					String messaggio = (String) request.getAttribute("messaggio");
 					if(messaggio != null) {
@@ -41,24 +41,27 @@
 					}
 				%>
                 <table width="746" border="0" align="center">
-                  <tr>
-                    <td width="746"><form action="RicercaAiuto" method="post" onsubmit="return check()">
+  <tr>
+    <td>
+    	<form action="RicercaAiuto" method="post" onSubmit="return check()">
+    	<div align="center">
 					<fieldset>
-						<br />
+						<h3><u>CERCA UN AIUTO</u></h3><br>
 						<label for="id">Tipo di aiuto:</label>
 						<br />
 					<input type="text" name="helpKey" id="helpKey" width="746" />
-						<br />
-						<input type="submit" name="submit" value="OK" />
 						<br /><br />
+						<input type="submit" name="submit" value="OK" />
+						<br /><br /><br />
 					</fieldset>
-				</form></td>
-                  </tr>
-                </table>
-                 <table width="746" border="0" align="center">
-                  <tr>
-                    <td><form action="Login" method="post" onsubmit="return check()">
+				</div>
+		</form>
+    </td>
+    <td>
+    	<form action="Login" method="post" onSubmit="return check()">
+    	<div align="center">
 					<fieldset>
+						<h3><u>LOGIN<u></h3><br>
 						<label for="id">Codice utente:</label>
 						<br />
 						<input type="text" name="id" id="id" />
@@ -69,9 +72,19 @@
 						<br /><br />
 						<input type="submit" name="submit" value="OK" />
 					</fieldset>
-				</form></td>
-                    <td><form action="Registrazione" method="post" onsubmit="return check()">
+				</div>
+		</form>
+    </td>
+  </tr>
+  <tr>
+    <td>
+		<div align="center"><img src="image/logo.jpeg"  width="300" height="300"/></div>
+	</td>
+    <td>
+    	<div align="center">
+    	<form action="Registrazione" method="post" onSubmit="return check()">
 					<fieldset>
+					<h3><u>REGISTRATI</u></h3><br>
 						<label for="id">						Email:</label>
 						<br />
 						<input type="text" name="mail" id="mail" />
@@ -80,7 +93,6 @@
 						<br />
 						<input type="password" name="password" id="password" />
                         <br />
-                        <label for="password"></label>
                         <label for="label">Nome:</label>
                         <br />
                         <input type="text" name="nome" id="nome" />
@@ -91,12 +103,11 @@
                         <br /><br />
 					    <input type="submit" name="submit2" value="OK" />
 					</fieldset>
-				</form>
-                      <label for="label"></label></td>
-                    <br /><br />
-                  </tr>
-                </table>
-
+		</form>
+		</div>
+    </td>
+  </tr>
+</table>
   </div>
 </div>	
 </body>
