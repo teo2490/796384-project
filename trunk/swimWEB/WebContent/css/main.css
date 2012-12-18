@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+
+body {
+	background: none repeat scroll 0 0 #EEF6E9;
+	padding: 30px;
+	color: #7C6031;
+ 	font: 16px Arial,Helvetica,sans-serif;
+}
+
+a {
+	color: #408080;
+}
+
+a:hover {
+	color: #60A0A0;
+	text-decoration: none;
+}
+
+#header {
+	height: 253px;
+	width: 800px;
+	background-image: url('../image/top.jpg');
+	background-repeat:no-repeat;
+	margin: auto;
+}
+
+#content {
+	width: 820px;
+	margin: 0 auto;
+	padding: 2px 0 2px 0 ;
+	background: none repeat scroll 0 0 #B4DA9F;
+}
+
+#subcontent {
+	margin: 10px;	
+}
+
+#logo {
+	width: 342px;
+	height: 189px;
+	margin-left: 100px;	
+	background-image: url('../image/SwimLogo.png');
+	background-repeat:no-repeat;
+}
