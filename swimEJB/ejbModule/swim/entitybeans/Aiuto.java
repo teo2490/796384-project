@@ -10,7 +10,7 @@ public class Aiuto {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
 	private int id;
 	private String tipo;
-	private boolean conferma;
+	private boolean conferma = false;
 	private String feedback;
 	
 	@ManyToOne
@@ -18,4 +18,28 @@ public class Aiuto {
 	
 	@ManyToOne
 	private UtenteRegistrato utRiceve;
+	
+	public int getID(){
+		return id;
+	}
+	
+	public String getTipo(){
+		return tipo;
+	}
+	
+	public void setTipo(String tipo){
+		this.tipo=tipo;
+	}
+	
+	public void switchConferma(){
+		this.conferma=true;
+	}
+	
+	public String getFeedback(){
+		return feedback;
+	}
+	
+	public void setFeedback(String feedback){
+		this.feedback=feedback;
+	}
 }

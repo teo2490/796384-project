@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
+@Table(name="UtenteRegistrato")
 public class UtenteRegistrato {
 	
 	@Id
@@ -15,15 +16,21 @@ public class UtenteRegistrato {
 	private String cognome;
 	private String url;
 	
-	//Aiuti forniti
+	/**
+	 * Aiuti forniti
+	 */
 	@OneToMany(mappedBy="utFornisce")
 	private Set<Aiuto> sHelp;
 	
-	//Aiuti ricevuti e richieste di amicizia
+	/**
+	 * Aiuti ricevuti e richieste di amicizia
+	 */
 	@OneToMany(mappedBy="utRiceve")
 	private Set<Aiuto> rHelp;
 	
-	//Abilità possedute DA SISTEMARE
+	/**
+	 * Abilità possedute
+	 */
 	@ManyToMany
 	@JoinTable(
 		    name="EJB_ROSTER_TEAM_PLAYER",
@@ -73,6 +80,14 @@ public class UtenteRegistrato {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public Set<Aiuto> getShelp(){
+		return this.sHelp;
+	}
+	
+	public Set<Aiuto> getRhelp(){
+		return this.rHelp;
 	}
 	
 	@Override
