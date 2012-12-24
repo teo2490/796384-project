@@ -94,6 +94,10 @@ public class UtenteRegistrato {
 		this.url = url;
 	}
 	
+	public void setAbilita(Abilita abil){
+		this.abilita.add(abil);
+	}
+	
 	//Servono o bastano le query??
 	/*public Set<Aiuto> getShelp(){
 		return this.sHelp;

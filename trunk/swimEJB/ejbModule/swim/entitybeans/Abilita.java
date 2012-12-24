@@ -41,5 +41,9 @@ public class Abilita {
 	public void switchConferma(){
 		this.conferma = true;
 	}
+	
+	public void setAmministratore(Amministratore admin){
+		this.admin = admin;
+	}
 
 }

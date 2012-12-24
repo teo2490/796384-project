@@ -44,9 +44,9 @@ public class ManagerAbilita implements ManagerAbilitaRemote{
 		}
 	}
 	
-	/*public void aggiungiAbilita(UtenteRegistrato utente){
-		utente.se
-	}*/
+	public void aggiungiAbilita(UtenteRegistrato utente){
+		utente.setAbilita(abilita);
+	}
 	
 	public void invioRichiestaNuovaAbilita(String nome, String descr){
 		creaNuovaAbilitaDirect(nome, descr);
