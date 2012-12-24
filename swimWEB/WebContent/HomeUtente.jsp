@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>Home Amministratore</title>
+		<title>Home Utente</title>
 		<style type="text/css">
 			@import url(css/main.css);
 		</style>	
@@ -29,10 +29,28 @@
 						out.println("<p>" + messaggio + "</p>");
 					}
 				%>
-				<p>Ciao ${sessionScope.utente.nome} ${sessionScope.utente.cognome}</p>				
+				<br/><br/><br/>
+<table width="795px" border="0" align="center">
+  <tr>
+    <td>
+	<div align="center"><h3>PROFILO</h3></div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+	<p>Ciao ${sessionScope.utente.nome} ${sessionScope.utente.cognome}</p>				
 				<ul>
-					<li><a href="gestAbilitaAdmin">Gestione Abilita'</a></li>
+					<li><a href="RicercaAiutoSistema.jsp">Cerca Aiuto nell'intero Sistema</a></li>
+					<li><a href="RicercaAiutoAmici.jsp">Cerca Aiuto tra gli Amici</a></li>
+					<li><a href="RicercaProfilo.jsp">Cerca Utente</a></li>
+					<li><a href="GestAmicizia">Gestione Amicizie</a></li>
+					<li><a href="gestAbilita">Gestione Abilita'</a></li>
+					<li><a href="gestAiuto">Gestione Aiuti</a></li>
+					<li><a href="gestProfilo">Gestione Profilo'</a></li>
 				</ul>
+    </td>
+  </tr>
+</table>			
 			</div>
 		</div>
 	</body>
