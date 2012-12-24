@@ -42,4 +42,12 @@ public class Aiuto {
 	public void setFeedback(String feedback){
 		this.feedback=feedback;
 	}
+	
+	public void setUtFornisce(UtenteRegistrato richiesto){
+		this.utFornisce = richiesto;
+	}
+	
+	public void setUtRiceve(UtenteRegistrato richiedente){
+		this.utRiceve = richiedente;
+	}
 }

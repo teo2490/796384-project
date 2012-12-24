@@ -23,10 +23,22 @@ public class UtenteRegistrato {
 	private Set<Aiuto> sHelp;
 	
 	/**
-	 * Aiuti ricevuti e richieste di amicizia
+	 * Aiuti ricevuti (??e richieste di amicizia??)
 	 */
 	@OneToMany(mappedBy="utRiceve")
 	private Set<Aiuto> rHelp;
+	
+	/**
+	 * Amicizie di cui si è il richiedente
+	 */
+	@OneToMany(mappedBy="utRichiedente")
+	private Set<Amicizia> sFriendship;
+	
+	/**
+	 * Amicizie di cui si è il richiesto
+	 */
+	@OneToMany(mappedBy="utRichiesto")
+	private Set<Amicizia> rFriendship;
 	
 	/**
 	 * Abilità possedute
@@ -82,13 +94,22 @@ public class UtenteRegistrato {
 		this.url = url;
 	}
 	
-	public Set<Aiuto> getShelp(){
+	//Servono o bastano le query??
+	/*public Set<Aiuto> getShelp(){
 		return this.sHelp;
 	}
 	
 	public Set<Aiuto> getRhelp(){
 		return this.rHelp;
 	}
+	
+	public Set<Amicizia> getSfriendship(){
+		return this.sFriendship;
+	}
+	
+	public Set<Amicizia> getRfriendship(){
+		return this.rFriendship;
+	}*/
 	
 	@Override
 	public int hashCode() {
