@@ -27,20 +27,21 @@
 					<div id="logo">
 						&nbsp;
 					</div>					
-					<div id="menu">
-				        <ul>
-				            <li><a href="#">Home</a></li>				            
-				        </ul>
-				    </div>
+
 				</div>
 				<h1 align="center">BENVENUTI IN SWIMv2!</h1>
+					<div id="menu">
+				        <ul>
+				            <li><a href="Home.jsp">Home</a></li>				            
+				        </ul>
+				    </div>
 				<%
 					String messaggio = (String) request.getAttribute("messaggio");
 					if(messaggio != null) {
 						out.println("<p>" + messaggio + "</p>");
 					}
 				%>
-                <table width="746" border="0" align="center">
+                <table width="795px" border="0" align="center">
   <tr>
     <td>
     	<form action="RicercaAiuto" method="post" onSubmit="return check()">
@@ -61,8 +62,8 @@
     	<form action="Login" method="post" onSubmit="return check()">
     	<div align="center">
 					<fieldset>
-						<h3><u>LOGIN<u></h3><br>
-						<input type="hidden" name="<%= LoginServlet.PAR_LOGIN %>" value="1" />
+						<h3><u>LOGIN</u></h3><br>
+						<!-- input type Desktop/TODO -->
 						<label for="id">Codice utente:</label>
 						<br />
 						<input type="text" name="id" id="id" />
