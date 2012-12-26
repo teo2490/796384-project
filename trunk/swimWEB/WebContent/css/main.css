@@ -38,7 +38,7 @@ a:hover {
 #logo {
 	width: 795px;
 	height: 265px;
-	
-	background-image: url('../image/copertina.png');
+	border: ;
+	background-image: url('../image/copertina2.jpg');
 	background-repeat:no-repeat;
 }
