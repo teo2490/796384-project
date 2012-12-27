@@ -1,7 +1,10 @@
 package swim.sessionbeans;
 
+import java.util.Set;
+
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -32,6 +35,24 @@ public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
 		} else {
 			return false;
 		}
+	}
+	
+	public boolean esisteMail(String email){
+		Query q = em.createQuery("SELECT email FROM UtenteRegistrato");
+		Set<String> allEmail = (Set<String>)q.getResultList();
+		if(!allEmail.contains(email)){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public void aggiungiUtente(String email, String password, String nome, String cognome){
+		utente = new UtenteRegistrato();
+		utente.setEmail(email);
+		utente.setPsw(password);
+		utente.setNome(nome);
+		utente.setCognome(cognome);
 	}
 	
 	public void cambioPsw(String newPsw, String oldPsw) throws SwimBeanException{
