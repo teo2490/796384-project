@@ -1,17 +1,19 @@
 package swim.entitybeans;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
 
 @Entity
-@SequenceGenerator(name="seq",sequenceName="CUST_SEQ")
+//@SequenceGenerator(name="seq", sequenceName="CUST_SEQ")
 public class Abilita {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+	@Temporal(TemporalType.TIMESTAMP)
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
 	@Column(name="A_ID")
-	private int id;
+	private /*int*/Date id;
 	private String nome;
 	private boolean conferma = false;
 	private String descrizione;

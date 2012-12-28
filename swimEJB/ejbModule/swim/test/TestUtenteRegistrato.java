@@ -26,19 +26,21 @@ public class TestUtenteRegistrato {
 	private static final int INDICE_UTENTE_PREDEFINITO = 0;
 	
 
-	@BeforeClass
+	/*@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		ctx = ContextUtil.getInitialContext();
 		manager = (ManagerUtenteRegistratoRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerUtenteRegistrato/remote"), ManagerUtenteRegistratoRemote.class);
 		ManagerInizializzazioneDatabaseRemote db = (ManagerInizializzazioneDatabaseRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerInizializzazioneDatabase/remote"), ManagerInizializzazioneDatabaseRemote.class);
 		db.pulisci();
 		db.creaUtentiPredefiniti();
-	}
+	}*/
 	
 	@Test
 	public void testVerificaLogin(){
-		String email = EMAIL_UTENTI[INDICE_UTENTE_PREDEFINITO];
-		String psw = PASSWORD_UTENTI[INDICE_UTENTE_PREDEFINITO];
+		//String email = EMAIL_UTENTI[INDICE_UTENTE_PREDEFINITO];
+		//String psw = PASSWORD_UTENTI[INDICE_UTENTE_PREDEFINITO];
+		String email = "user@user.it";
+		String psw = "user";
 		
 		UtenteRegistrato u = manager.verificaLogin(email, psw);
 		assertNotNull("L'utente deve esistere", u);
