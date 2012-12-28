@@ -1,14 +1,17 @@
 package swim.entitybeans;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
-@SequenceGenerator(name="seq",sequenceName="CUST_SEQ")
+//@SequenceGenerator(name="seq",sequenceName="CUST_SEQ")
 public class Aiuto {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
-	private int id;
+	@Temporal(TemporalType.TIMESTAMP)
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+	private /*int*/Date id;
 	private String tipo;
 	private boolean conferma = false;
 	private String feedback;
@@ -19,7 +22,7 @@ public class Aiuto {
 	@ManyToOne
 	private UtenteRegistrato utRiceve;
 	
-	public int getID(){
+	public /*int*/Date getID(){
 		return id;
 	}
 	

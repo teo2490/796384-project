@@ -1,5 +1,6 @@
 package swim.sessionbeans;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.ejb.Remote;
@@ -20,11 +21,14 @@ public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
 	private UtenteRegistrato utente;
 	
 	public UtenteRegistrato verificaLogin(String email, String password){
-		utente = em.find(UtenteRegistrato.class, email);
-		if(utente.getPsw().equals(password)) {
-			return utente;
-		} else {
+		Query q = em.createQuery("SELECT u FROM UtenteRegistrato u WHERE u.U_ID = :email AND u.password = :password");
+		q.setParameter("email", email);
+		q.setParameter("password", password);
+		List<UtenteRegistrato> utenti = (List<UtenteRegistrato>) q.getResultList();
+		if(utenti.isEmpty()){
 			return null;
+		} else {
+			return utenti.get(0);
 		}
 	}
 	
