@@ -59,7 +59,7 @@
 		</form>
     </td>
     <td>
-    	<form action="Login" method="post" onSubmit="return check()">
+    	<form action="/swimWEB/src/servlet/LoginServlet.java" method="post">
     	<div align="center">
 					<fieldset>
 						<h3><u>LOGIN</u></h3><br>
