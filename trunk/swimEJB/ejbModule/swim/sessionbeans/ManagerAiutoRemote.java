@@ -11,6 +11,7 @@ import java.util.Set;
 public interface ManagerAiutoRemote {
 	
 	public Set<UtenteRegistrato> ricercaPerAbilita(String abilita) throws SwimBeanException;
+	public Set<UtenteRegistrato> ricercaTraAmici(String abilita) throws SwimBeanException;
 	public void invioRichiestaAiuto(String tipo, UtenteRegistrato richiedente, UtenteRegistrato richiesto);
 	public void confermaRichiesta();
 	public String controlloFeedback() throws SwimBeanException;

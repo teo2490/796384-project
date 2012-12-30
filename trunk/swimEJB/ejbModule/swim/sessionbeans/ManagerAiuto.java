@@ -27,6 +27,18 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 		aiuto.setUtRiceve(richiedente);
 	}
 	
+	// SERVE UN METODO DI RICERCA AIUTO SOLO TRA GLI AMICI!!
+	public Set<UtenteRegistrato> ricercaTraAmici(String abilita) throws SwimBeanException{
+		Query q = em.createQuery("");
+		Set<UtenteRegistrato> utenti = (Set<UtenteRegistrato>) q.setParameter("abilita", abilita).getResultList();
+		if(utenti.size() == 0){
+			throw new SwimBeanException("Nessun utente ha questa abilita'");
+		} else {
+			return utenti;
+		}
+	}
+	
+	
 	//Funziona?? Oppure devo ritornare utente per utente??
 	public Set<UtenteRegistrato> ricercaPerAbilita(String abilita) throws SwimBeanException{
 		Query q = em.createQuery("SELECT u FROM UtenteRegistrato u WHERE :abilita IN u.abilita");
