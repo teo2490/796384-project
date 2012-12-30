@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Set;
 
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
@@ -11,27 +12,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import swim.entitybeans.UtenteRegistrato;
+import swim.sessionbeans.ManagerAiutoRemote;
 import swim.sessionbeans.ManagerUtenteRegistratoRemote;
+import swim.sessionbeans.SwimBeanException;
 import swim.util.ContextUtil;
 
 /**
- * Servlet implementation class RegistrazioneServlet
+ * Servlet implementation class RicercaAiutoServlet
  */
-public class RegistrazioneServlet extends HttpServlet {
+public class RicercaAiutoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegistrazioneServlet() {
+    public RicercaAiutoServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.doPost(request, response);
+		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -42,27 +46,18 @@ public class RegistrazioneServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 		try {
 			Object obj = ContextUtil.getInitialContext().lookup("ManagerUtenteRegistrato/remote");
-			ManagerUtenteRegistratoRemote manager = (ManagerUtenteRegistratoRemote) PortableRemoteObject.narrow(obj, ManagerUtenteRegistratoRemote.class);
+			ManagerAiutoRemote manager = (ManagerAiutoRemote) PortableRemoteObject.narrow(obj, ManagerAiutoRemote.class);
 			
-			String email = request.getParameter("email");
-			String password = request.getParameter("password");
-			String nome = request.getParameter("nome");
-			String cognome = request.getParameter("cognome");
-			
-			boolean exist = true;
-			if(manager.esisteMail(email)==false)	exist = false;
-			
-			if(exist = false){
-				manager.aggiungiUtente(email,password,nome,cognome);
+			String abilita = request.getParameter("helpKey");
+			try {
+				Set<UtenteRegistrato> possAiutanti = manager.ricercaPerAbilita(abilita);
+			} catch (SwimBeanException e) {
+				e.printStackTrace();
 			}
+//DEVO STAMPARE UNO ALLA VOLTA TUTTI I POSSIBILI AIUTANTI
 			
-			RequestDispatcher disp;
-			if(exist = true) {
-				request.setAttribute("messaggio", "Errore: codice utente o password errati.");
-				disp = request.getRequestDispatcher("Home.jsp");
-			} else {
-				disp = request.getRequestDispatcher("HomeUtente.jsp");
-			}
+			RequestDispatcher disp = null;
+
 			disp.forward(request, response);
 		} catch (NamingException e) {
 			e.printStackTrace();

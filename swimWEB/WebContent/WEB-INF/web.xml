@@ -20,4 +20,24 @@
     <servlet-name>RegistrazioneServlet</servlet-name>
     <url-pattern>/RegistrazioneServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RicercaAiutoServlet</display-name>
+    <servlet-name>RicercaAiutoServlet</servlet-name>
+    <servlet-class>servlet.RicercaAiutoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RicercaAiutoServlet</servlet-name>
+    <url-pattern>/RicercaAiutoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RicercaAiutoAmiciServlet</display-name>
+    <servlet-name>RicercaAiutoAmiciServlet</servlet-name>
+    <servlet-class>servlet.RicercaAiutoAmiciServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RicercaAiutoAmiciServlet</servlet-name>
+    <url-pattern>/RicercaAiutoAmiciServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -40,13 +40,13 @@
     <td>
 	<p>Ciao ${sessionScope.utente.nome} ${sessionScope.utente.cognome}</p>				
 				<ul>
-					<li><a href="RicercaAiutoSistema.jsp">Cerca Aiuto nell'intero Sistema</a></li>
+					<li><a href="RicercaAiuto.jsp">Cerca Aiuto nell'intero Sistema</a></li>
 					<li><a href="RicercaAiutoAmici.jsp">Cerca Aiuto tra gli Amici</a></li>
 					<li><a href="RicercaProfilo.jsp">Cerca Utente</a></li>
 					<li><a href="GestAmicizia">Gestione Amicizie</a></li>
-					<li><a href="gestAbilita">Gestione Abilita'</a></li>
-					<li><a href="gestAiuto">Gestione Aiuti</a></li>
-					<li><a href="gestProfilo">Gestione Profilo'</a></li>
+					<li><a href="GestAbilita">Gestione Abilita'</a></li>
+					<li><a href="GestAiuto">Gestione Aiuti</a></li>
+					<li><a href="GestProfilo">Gestione Profilo'</a></li>
 				</ul>
     </td>
   </tr>
