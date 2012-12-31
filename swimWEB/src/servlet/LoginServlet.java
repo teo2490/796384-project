@@ -51,25 +51,25 @@ public class LoginServlet extends HttpServlet {
 		try {
 			Object obj = ContextUtil.getInitialContext().lookup("ManagerUtenteRegistrato/remote");
 			ManagerUtenteRegistratoRemote manager = (ManagerUtenteRegistratoRemote) PortableRemoteObject.narrow(obj, ManagerUtenteRegistratoRemote.class);
-			
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			
+			RequestDispatcher disp;
+			disp = request.getRequestDispatcher("Home.jsp");
+			/*
+			if(email.equals("admin1") || email.equals("admin2")){
+				//CASO ADMIN.. 
+				disp = request.getRequestDispatcher("HomeAdmin.jsp");
+			}
+			*/
 			UtenteRegistrato u = manager.verificaLogin(email, password);
 			
-			RequestDispatcher disp;
 			if(u == null) {
 				request.setAttribute("messaggio", "Errore: codice utente o password errati.");
 				disp = request.getRequestDispatcher("Home.jsp");
 			} else {
 				request.getSession().setAttribute("utente", u);
-				
-				if(u.getNome() != null) {
-					disp = request.getRequestDispatcher("HomeUtente.jsp");
-				} 
-				else {
-					disp = request.getRequestDispatcher("HomeAdmin.jsp");
-				}
+				disp = request.getRequestDispatcher("HomeUtente.jsp");
 			}
 			disp.forward(request, response);
 		} catch (NamingException e) {
