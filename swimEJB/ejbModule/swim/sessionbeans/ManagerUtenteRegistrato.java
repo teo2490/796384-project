@@ -19,12 +19,18 @@ public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
 	private EntityManager em;
 	
 	private UtenteRegistrato utente;
+	private List<UtenteRegistrato> utenti;
 	
+	//CAMBIATO u.U_ID in u.email
 	public UtenteRegistrato verificaLogin(String email, String password){
-		Query q = em.createQuery("SELECT u FROM UtenteRegistrato u WHERE u.U_ID = :email AND u.password = :password");
+		try{
+		Query q = em.createQuery("SELECT u FROM UtenteRegistrato u WHERE u.email = :email AND u.password = :password");
 		q.setParameter("email", email);
 		q.setParameter("password", password);
-		List<UtenteRegistrato> utenti = (List<UtenteRegistrato>) q.getResultList();
+		utenti = (List<UtenteRegistrato>) q.getResultList();
+	} catch (Exception e) {
+		return null;
+	}
 		if(utenti.isEmpty()){
 			return null;
 		} else {

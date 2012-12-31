@@ -14,5 +14,4 @@ public interface ManagerUtenteRegistratoRemote {
 	public void cambioPsw(String newPsw, String oldPsw) throws SwimBeanException;
 	public void cambioImm(String url);
 	public void logout();
-
 }
