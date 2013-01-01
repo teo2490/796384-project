@@ -24,6 +24,10 @@ public class Abilita {
 	@ManyToMany(mappedBy="abilita")
 	private List<UtenteRegistrato> utente;
 	
+	public Date getId(){
+		return this.id;
+	}
+	
 	public String getNome(){
 		return this.nome;
 	}
