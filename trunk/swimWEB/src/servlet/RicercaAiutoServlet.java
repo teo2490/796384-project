@@ -44,17 +44,20 @@ public class RicercaAiutoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        Set<UtenteRegistrato> possAiutanti = null;
 		try {
 			Object obj = ContextUtil.getInitialContext().lookup("ManagerUtenteRegistrato/remote");
 			ManagerAiutoRemote manager = (ManagerAiutoRemote) PortableRemoteObject.narrow(obj, ManagerAiutoRemote.class);
 			
 			String abilita = request.getParameter("helpKey");
 			try {
-				Set<UtenteRegistrato> possAiutanti = manager.ricercaPerAbilita(abilita);
+				possAiutanti = manager.ricercaPerAbilita(abilita);
 			} catch (SwimBeanException e) {
 				e.printStackTrace();
 			}
-//DEVO STAMPARE UNO ALLA VOLTA TUTTI I POSSIBILI AIUTANTI
+//Invio l'elenco dei possibili aiutanti alla pagina di scelta
+			request.setAttribute("possAiutanti",possAiutanti);
+			request.getRequestDispatcher("ShowAiutanti.jsp").forward(request, response);
 			
 			RequestDispatcher disp = null;
 

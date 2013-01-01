@@ -20,6 +20,9 @@
 		}
 		</script>
 </head>
+<%@ page import="swim.sessionbeans.*" %>
+<%@ page import="swim.entitybeans.*" %>
+<%@ page import="java.util.*" %>
 <body>
 <div id="content">
 			<div id="subcontent">
@@ -44,16 +47,26 @@
   </tr>
   <tr>
     <td>
+    <!-- IL TAG <form> E' DA TENERE?!? -->
 		<form action="RicercaAiuto" method="post" onSubmit="return check()">
     		<div align="center">
 					<fieldset>
 						<h3><u>CERCA UN AIUTO</u></h3><br>
 						<label for="id">Tipo di aiuto:</label>
 						<br />
-					<input type="text" name="helpKey" id="helpKey" width="746" />
-						<br /><br />
-						<input type="submit" name="submit" value="OK" />
-						<br /><br /><br />
+						
+					<select name="helpKey">
+					<%
+					ManagerAbilita man = new ManagerAbilita();
+					Set<Abilita> elenco = man.getElencoAbilita();
+					if (elenco != null) 
+			        { 
+						for (Abilita e: elenco)	{ out.println("<option value = '"+e.getId()+"' >"+e.getNome()); }
+			        }   
+					%>
+					</select>
+					<input type="submit" name="submit" value="OK" />
+					<br /><br /><br />
 					</fieldset>
 			</div>
 		</form>
