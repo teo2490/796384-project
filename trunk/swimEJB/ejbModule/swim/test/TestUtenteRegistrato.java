@@ -6,8 +6,12 @@ import static org.junit.Assert.*;
 import static swim.test.ManagerInizializzazioneDatabaseRemote.EMAIL_UTENTI;
 import static swim.test.ManagerInizializzazioneDatabaseRemote.PASSWORD_UTENTI;
 
+import java.io.IOException;
+
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
+import javax.servlet.RequestDispatcher;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -18,7 +22,8 @@ import swim.util.ContextUtil;
 
 public class TestUtenteRegistrato {
 	
-	private static InitialContext ctx = null;
+	
+	private static Object obj = null;
 	private static ManagerUtenteRegistratoRemote manager = null;
 	
 	private static final String EMAIL_NEW_UTENTE = "test@email.it";
@@ -41,13 +46,17 @@ public class TestUtenteRegistrato {
 		//String psw = PASSWORD_UTENTI[INDICE_UTENTE_PREDEFINITO];
 		String email = "user@user.it";
 		String psw = "user";
-		
-		UtenteRegistrato u = manager.verificaLogin(email, psw);
-		assertNotNull("L'utente deve esistere", u);
-		assertEquals("L'utente restituito è diverso da quello richiesto", u.getEmail(), email);
-		
-		u = manager.verificaLogin(EMAIL_NEW_UTENTE, PASSWORD_NEW_UTENTE);
-		assertNull("Non deve essere restituito un utente se non esiste", u);
+		UtenteRegistrato u = null;
+		try {
+			obj = ContextUtil.getInitialContext().lookup("ManagerUtenteRegistrato/remote");
+			manager = (ManagerUtenteRegistratoRemote) PortableRemoteObject.narrow(obj, ManagerUtenteRegistratoRemote.class);
+			u = manager.verificaLogin(email, psw);
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+		assertNull("L'utente non è presente nel DB!", u);
+		//u = manager.verificaLogin(EMAIL_NEW_UTENTE, PASSWORD_NEW_UTENTE);
+		//assertNull("Non deve essere restituito un utente se non esiste", u);
 	}
 
 }
