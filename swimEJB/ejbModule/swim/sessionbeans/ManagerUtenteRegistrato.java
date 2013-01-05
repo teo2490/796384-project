@@ -23,14 +23,10 @@ public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
 	
 	//CAMBIATO u.U_ID in u.email
 	public UtenteRegistrato verificaLogin(String email, String password){
-		try{
 		Query q = em.createQuery("SELECT u FROM UtenteRegistrato u WHERE u.email = :email AND u.password = :password");
 		q.setParameter("email", email);
 		q.setParameter("password", password);
 		utenti = (List<UtenteRegistrato>) q.getResultList();
-	} catch (Exception e) {
-		return null;
-	}
 		if(utenti.isEmpty()){
 			return null;
 		} else {
@@ -50,7 +46,7 @@ public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
 	public boolean esisteMail(String email){
 		Query q = em.createQuery("SELECT email FROM UtenteRegistrato");
 		Set<String> allEmail = (Set<String>)q.getResultList();
-		if(!allEmail.contains(email)){
+		if(allEmail.contains(email)){
 			return true;
 		} else {
 			return false;
