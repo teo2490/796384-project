@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 		try {
 			Object obj = ContextUtil.getInitialContext().lookup("ManagerUtenteRegistrato/remote");
 			ManagerUtenteRegistratoRemote manager = (ManagerUtenteRegistratoRemote) PortableRemoteObject.narrow(obj, ManagerUtenteRegistratoRemote.class);
-			String email = request.getParameter("email");
+			String email = request.getParameter("id");
 			String password = request.getParameter("password");
 			
 			RequestDispatcher disp;
@@ -63,6 +63,7 @@ public class LoginServlet extends HttpServlet {
 			}
 			*/
 			UtenteRegistrato u = manager.verificaLogin(email, password);
+			//UtenteRegistrato u = manager.prova();
 			
 			if(u == null) {
 				request.setAttribute("messaggio", "Errore: codice utente o password errati.");
