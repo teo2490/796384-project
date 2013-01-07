@@ -29,7 +29,7 @@ public class ManagerAbilita implements ManagerAbilitaRemote{
 	
 	//Funziona?? Oppure devo tornare abilita per abilita??
 	public List<Abilita> getElencoAbilita(){
-		Query q = em.createQuery("SELECT a FROM Abilita a");
+		Query q = em.createQuery("SELECT a FROM Abilita a WHERE a.conferma = 1");
 		List<Abilita> allAbilita = (List<Abilita>) q.getResultList();
 		return allAbilita;
 	}
