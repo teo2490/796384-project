@@ -1,5 +1,6 @@
 package swim.sessionbeans;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.ejb.Remote;
@@ -27,9 +28,9 @@ public class ManagerAbilita implements ManagerAbilitaRemote{
 	}
 	
 	//Funziona?? Oppure devo tornare abilita per abilita??
-	public Set<Abilita> getElencoAbilita(){
+	public List<Abilita> getElencoAbilita(){
 		Query q = em.createQuery("SELECT a FROM Abilita a");
-		Set<Abilita> allAbilita = (Set<Abilita>) q.getResultList();
+		List<Abilita> allAbilita = (List<Abilita>) q.getResultList();
 		return allAbilita;
 	}
 	
