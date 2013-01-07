@@ -45,7 +45,7 @@ public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
 	
 	public boolean esisteMail(String email){
 		Query q = em.createQuery("SELECT email FROM UtenteRegistrato");
-		Set<String> allEmail = (Set<String>)q.getResultList();
+		List<String> allEmail = (List<String>)q.getResultList();
 		if(allEmail.contains(email)){
 			return true;
 		} else {
