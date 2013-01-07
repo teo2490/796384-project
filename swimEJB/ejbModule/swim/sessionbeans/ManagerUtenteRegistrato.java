@@ -59,6 +59,7 @@ public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
 		utente.setPsw(password);
 		utente.setNome(nome);
 		utente.setCognome(cognome);
+		em.persist(utente);
 	}
 	
 	public void cambioPsw(String newPsw, String oldPsw) throws SwimBeanException{
