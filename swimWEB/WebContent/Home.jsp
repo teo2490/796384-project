@@ -84,7 +84,7 @@
 	</td>
     <td>
     	<div align="center">
-    	<form action="Registrazione" method="post" onSubmit="return check()">
+    	<form action="RegistrazioneServlet" method="post" onSubmit="return check()">
 					<fieldset>
 					<h3><u>REGISTRATI</u></h3><br>
 						<label for="id">						Email:</label>
@@ -95,11 +95,11 @@
 						<br />
 						<input type="password" name="password" id="password" />
                         <br />
-                        <label for="label">Nome:</label>
+                        <label for="nome">Nome:</label>
                         <br />
                         <input type="text" name="nome" id="nome" />
                         <br />
-                        <label for="label">Cognome:</label>
+                        <label for="cognome">Cognome:</label>
                         <br />
                         <input type="text" name="cognome" id="cognome" />
                         <br /><br />

@@ -44,25 +44,25 @@ public class RegistrazioneServlet extends HttpServlet {
 			Object obj = ContextUtil.getInitialContext().lookup("ManagerUtenteRegistrato/remote");
 			ManagerUtenteRegistratoRemote manager = (ManagerUtenteRegistratoRemote) PortableRemoteObject.narrow(obj, ManagerUtenteRegistratoRemote.class);
 			
-			String email = request.getParameter("email");
+			String email = request.getParameter("id");
 			String password = request.getParameter("password");
 			String nome = request.getParameter("nome");
 			String cognome = request.getParameter("cognome");
 			
-			boolean exist = true;
-			if(manager.esisteMail(email)==false)	exist = false;
+			boolean exist = false;
+			if(manager.esisteMail(email))	exist = true;
 			
-			if(exist = false){
+			if(exist == false){
 				manager.aggiungiUtente(email,password,nome,cognome);
 			}
 			
 			RequestDispatcher disp;
-			if(exist = true) {
-				request.setAttribute("messaggio", "Errore: codice utente o password errati.");
-				disp = request.getRequestDispatcher("Home.jsp");
+			if(exist == true) {
+				request.setAttribute("messaggio", "Errore: Registrazione.");
 			} else {
-				disp = request.getRequestDispatcher("HomeUtente.jsp");
+				request.setAttribute("messaggio", "Registrazione completata! Ora puoi effettuare il login.");
 			}
+			disp = request.getRequestDispatcher("Home.jsp");
 			disp.forward(request, response);
 		} catch (NamingException e) {
 			e.printStackTrace();
