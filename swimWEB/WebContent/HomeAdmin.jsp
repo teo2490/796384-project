@@ -18,8 +18,8 @@
 					</div>					
 					<div id="menu">
 				        <ul>
-				            <li><a href="Main">Main</a></li>
-				            <li><a href="Logout">Logout</a></li>				            
+				            <li><a href="Home.jsp">Home</a></li>
+				            <li><a href="LogoutServlet">Logout</a></li>				            
 				        </ul>
 				    </div>
 				</div>
@@ -37,7 +37,7 @@
   </tr>
   <tr>
     <td>
-	<p>Ciao ${sessionScope.utente.nome} ${sessionScope.utente.cognome}</p>				
+	<p>Ciao Amministratore</p>				
 				<ul>
 					<li><a href="gestAbilitaAdmin">Gestione Abilita'</a></li>
 				</ul>
