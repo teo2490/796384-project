@@ -11,7 +11,7 @@ import swim.entitybeans.Amministratore;
 public interface ManagerAmministratoreRemote {
 	
 	public Amministratore verificaLogin(String email, String password);
-	public void logout();
+	//public void logout();
 	public Set<Abilita> getElencoRichieste();
 	public void aggiungiAbilita();
 	public void eliminaAbilita();

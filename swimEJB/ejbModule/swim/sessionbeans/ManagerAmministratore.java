@@ -29,11 +29,11 @@ public class ManagerAmministratore implements ManagerAmministratoreRemote{
 			return null;
 		}
 	}
-	
+	/*
 	public void logout(){
 		admin = null;
 	}
-	
+	*/
 	public Set<Abilita> getElencoRichieste(){
 		Query q = em.createQuery("SELECT a FROM Abilita a WHERE a.conferma = 0");
 		Set<Abilita> richieste = (Set<Abilita>) q.getResultList();
