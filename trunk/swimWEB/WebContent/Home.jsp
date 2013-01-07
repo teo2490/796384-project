@@ -18,6 +18,17 @@
 			}
 			return true;
 		}
+		
+		function check2() {
+			if(document.getElementById("mail").value == "" ||
+				document.getElementById("password").value == "" ||
+				document.getElementById("nome").value == "" ||
+				document.getElementById("cognome").value == "" ) {
+		  		alert("Uno o più campi sono incompleti.");
+		 		return false;
+			}
+			return true;
+		}
 		</script>
 </head>
 <body>
@@ -44,7 +55,7 @@
                 <table width="795px" border="0" align="center">
   <tr>
     <td>
-    	<form action="RicercaAiuto" method="post" onSubmit="return check()">
+    	<form action="RicercaAiuto" method="post">
     	<div align="center">
 					<fieldset>
 						<h3><u>CERCA UN AIUTO</u></h3><br>
@@ -84,7 +95,7 @@
 	</td>
     <td>
     	<div align="center">
-    	<form action="RegistrazioneServlet" method="post" onSubmit="return check()">
+    	<form action="RegistrazioneServlet" method="post" onSubmit="return check2()">
 					<fieldset>
 					<h3><u>REGISTRATI</u></h3><br>
 						<label for="id">						Email:</label>
