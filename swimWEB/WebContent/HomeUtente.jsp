@@ -40,7 +40,7 @@
     <td>
 	<p>Ciao ${sessionScope.utente.nome} ${sessionScope.utente.cognome}</p>				
 				<ul>
-					<li><a href="RicercaAiuto.jsp">Cerca Aiuto nell'intero Sistema</a></li>
+					<li><a href="RicercaAiutoSistema.jsp">Cerca Aiuto nell'intero Sistema</a></li>
 					<li><a href="RicercaAiutoAmici.jsp">Cerca Aiuto tra gli Amici</a></li>
 					<li><a href="RicercaProfilo.jsp">Cerca Utente</a></li>
 					<li><a href="GestAmicizia">Gestione Amicizie</a></li>

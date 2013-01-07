@@ -23,6 +23,8 @@
 <%@ page import="swim.sessionbeans.*" %>
 <%@ page import="swim.entitybeans.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="swim.util.ContextUtil" %>
+<%@ page import="javax.rmi.PortableRemoteObject" %>
 <body>
 <div id="content">
 			<div id="subcontent">
@@ -58,9 +60,10 @@
 						
 					<select name="helpKey">
 					<%
-					ManagerAbilita man = new ManagerAbilita();
-					Set<Abilita> elenco = man.getElencoAbilita();
-					if (elenco != null) 
+					Object obj = ContextUtil.getInitialContext().lookup("ManagerAbilita/remote");
+					ManagerAbilitaRemote man = (ManagerAbilitaRemote) PortableRemoteObject.narrow(obj, ManagerAbilitaRemote.class);
+					List<Abilita> elenco = man.getElencoAbilita();
+					if (elenco.size() >0) 
 			        { 
 						for (Abilita e: elenco)	{ out.println("<option value = '"+e.getId()+"' >"+e.getNome()); }
 			        }   
