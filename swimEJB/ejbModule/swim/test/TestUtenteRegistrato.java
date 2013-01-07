@@ -31,14 +31,14 @@ public class TestUtenteRegistrato {
 	private static final int INDICE_UTENTE_PREDEFINITO = 0;
 	
 
-	/*@BeforeClass
+	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		ctx = ContextUtil.getInitialContext();
-		manager = (ManagerUtenteRegistratoRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerUtenteRegistrato/remote"), ManagerUtenteRegistratoRemote.class);
-		ManagerInizializzazioneDatabaseRemote db = (ManagerInizializzazioneDatabaseRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerInizializzazioneDatabase/remote"), ManagerInizializzazioneDatabaseRemote.class);
+		obj = ContextUtil.getInitialContext().lookup("ManagerUtenteRegistrato/remote");
+		//manager = (ManagerUtenteRegistratoRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerUtenteRegistrato/remote"), ManagerUtenteRegistratoRemote.class);
+		ManagerInizializzazioneDatabaseRemote db = (ManagerInizializzazioneDatabaseRemote) PortableRemoteObject.narrow(obj, ManagerInizializzazioneDatabaseRemote.class);
 		db.pulisci();
 		db.creaUtentiPredefiniti();
-	}*/
+	}
 	
 	@Test
 	public void testVerificaLogin(){
@@ -55,8 +55,8 @@ public class TestUtenteRegistrato {
 			e.printStackTrace();
 		}
 		assertNull("L'utente non è presente nel DB!", u);
-		//u = manager.verificaLogin(EMAIL_NEW_UTENTE, PASSWORD_NEW_UTENTE);
-		//assertNull("Non deve essere restituito un utente se non esiste", u);
+		u = manager.verificaLogin(EMAIL_NEW_UTENTE, PASSWORD_NEW_UTENTE);
+		assertNull("Non deve essere restituito un utente se non esiste", u);
 	}
 
 }
