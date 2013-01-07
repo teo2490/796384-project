@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import swim.sessionbeans.ManagerAmministratoreRemote;
 import swim.sessionbeans.ManagerUtenteRegistratoRemote;
 import swim.util.ContextUtil;
+import swim.entitybeans.Amministratore;
 import swim.entitybeans.UtenteRegistrato;
 
 
@@ -56,12 +58,25 @@ public class LoginServlet extends HttpServlet {
 			
 			RequestDispatcher disp;
 			disp = request.getRequestDispatcher("Home.jsp");
-			/*
-			if(email.equals("admin1") || email.equals("admin2")){
-				//CASO ADMIN.. 
-				disp = request.getRequestDispatcher("HomeAdmin.jsp");
-			}
-			*/
+			
+			if(email.equals("admin1@swim.it") || email.equals("admin2@swim.it")){
+				Object objadm = ContextUtil.getInitialContext().lookup("ManagerAmministratore/remote");
+				ManagerAmministratoreRemote manageradm = (ManagerAmministratoreRemote) PortableRemoteObject.narrow(objadm, ManagerAmministratoreRemote.class);
+				String emailadm = request.getParameter("id");
+				String passwordadm = request.getParameter("password");
+				Amministratore a = manageradm.verificaLogin(emailadm, passwordadm);
+				
+				if(a == null) {
+					request.setAttribute("messaggio", "Errore: codice utente o password errati.");
+					disp = request.getRequestDispatcher("Home.jsp");
+				} else {
+					request.getSession().setAttribute("utente", a);
+					disp = request.getRequestDispatcher("HomeAdmin.jsp");
+				}
+				disp.forward(request, response);
+				
+			}else{
+			
 			UtenteRegistrato u = manager.verificaLogin(email, password);
 			//UtenteRegistrato u = manager.prova();
 			
@@ -72,7 +87,7 @@ public class LoginServlet extends HttpServlet {
 				request.getSession().setAttribute("utente", u);
 				disp = request.getRequestDispatcher("HomeUtente.jsp");
 			}
-			disp.forward(request, response);
+			disp.forward(request, response);}
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
