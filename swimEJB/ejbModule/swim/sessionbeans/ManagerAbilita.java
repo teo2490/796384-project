@@ -1,5 +1,6 @@
 package swim.sessionbeans;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -8,6 +9,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+import com.sun.jmx.snmp.Timestamp;
 
 import swim.entitybeans.Abilita;
 import swim.entitybeans.UtenteRegistrato;
@@ -25,6 +28,7 @@ public class ManagerAbilita implements ManagerAbilitaRemote{
 		abilita = new Abilita();
 		abilita.setNome(nome);
 		abilita.setDescrizione(descr);
+		em.persist(abilita);
 	}
 	
 	//Funziona?? Oppure devo tornare abilita per abilita??

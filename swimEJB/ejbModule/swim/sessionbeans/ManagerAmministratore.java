@@ -1,5 +1,6 @@
 package swim.sessionbeans;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.ejb.Remote;
@@ -34,9 +35,9 @@ public class ManagerAmministratore implements ManagerAmministratoreRemote{
 		admin = null;
 	}
 	*/
-	public Set<Abilita> getElencoRichieste(){
+	public List<Abilita> getElencoRichieste(){
 		Query q = em.createQuery("SELECT a FROM Abilita a WHERE a.conferma = 0");
-		Set<Abilita> richieste = (Set<Abilita>) q.getResultList();
+		List<Abilita> richieste = (List<Abilita>) q.getResultList();
 		return richieste;
 	}
 	

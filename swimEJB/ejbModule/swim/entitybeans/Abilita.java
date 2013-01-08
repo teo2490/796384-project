@@ -11,7 +11,8 @@ public class Abilita {
 
 	@Id
 	@Temporal(TemporalType.TIMESTAMP)
-	//@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	//OLD @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
 	@Column(name="A_ID")
 	private /*int*/Date id;
 	private String nome;
