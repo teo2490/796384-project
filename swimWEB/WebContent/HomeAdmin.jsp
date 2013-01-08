@@ -39,7 +39,7 @@
     <td>
 	<p>Ciao Amministratore</p>				
 				<ul>
-					<li><a href="gestAbilitaAdmin">Gestione Abilita'</a></li>
+					<li><a href="GestAbilitaAdmin.jsp">Gestione Abilita'</a></li>
 				</ul>
     </td>
   </tr>
