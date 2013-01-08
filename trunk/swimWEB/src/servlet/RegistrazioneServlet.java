@@ -44,7 +44,7 @@ public class RegistrazioneServlet extends HttpServlet {
 			Object obj = ContextUtil.getInitialContext().lookup("ManagerUtenteRegistrato/remote");
 			ManagerUtenteRegistratoRemote manager = (ManagerUtenteRegistratoRemote) PortableRemoteObject.narrow(obj, ManagerUtenteRegistratoRemote.class);
 			
-			String email = request.getParameter("id");
+			String email = request.getParameter("mail");
 			String password = request.getParameter("password");
 			String nome = request.getParameter("nome");
 			String cognome = request.getParameter("cognome");

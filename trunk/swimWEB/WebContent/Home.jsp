@@ -31,6 +31,11 @@
 		}
 		</script>
 </head>
+<%@ page import="swim.sessionbeans.*" %>
+<%@ page import="swim.entitybeans.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="swim.util.ContextUtil" %>
+<%@ page import="javax.rmi.PortableRemoteObject" %>
 <body>
 <div id="content">
 			<div id="subcontent">
@@ -55,18 +60,28 @@
                 <table width="795px" border="0" align="center">
   <tr>
     <td>
-    	<form action="RicercaAiuto" method="post">
-    	<div align="center">
+    	<form action="RicercaAiutoServlet" method="post" onSubmit="return check()">
+    		<div align="center">
 					<fieldset>
 						<h3><u>CERCA UN AIUTO</u></h3><br>
 						<label for="id">Tipo di aiuto:</label>
-						<br />
-					<input type="text" name="helpKey" id="helpKey" width="746" />
 						<br /><br />
-						<input type="submit" name="submit" value="OK" />
-						<br /><br /><br />
+						
+					<select name="helpKey">
+					<%
+					Object obj = ContextUtil.getInitialContext().lookup("ManagerAbilita/remote");
+					ManagerAbilitaRemote man = (ManagerAbilitaRemote) PortableRemoteObject.narrow(obj, ManagerAbilitaRemote.class);
+					List<Abilita> elenco = man.getElencoAbilita();
+					if (elenco.size() >0) 
+			        { 
+						for (Abilita e: elenco)	{ out.println("<option value = '"+e.getId()+"' >"+e.getNome()); }
+			        }   
+					%>
+					</select>
+					<input type="submit" name="submit" value="OK" />
+					<br /><br /><br />
 					</fieldset>
-				</div>
+			</div>
 		</form>
     </td>
     <td>
