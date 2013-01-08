@@ -45,25 +45,21 @@
     </td>
   </tr>
   <tr>
-<!-- QUI -->
-    <td>
-    <form action="RichiestaNuovaAbilitaServlet" method="post" onSubmit="return check()">
-    	<div align="center">
-					<fieldset>
-						<h3><u>Richiesta di una nuova abilità</u></h3><br>
-						<label for="nome">Nome:</label>
-						<br />
-						<input type="text" name="nome" id="nome" />
-						<br />
-						<label for="desc">Descrizione:</label>
-						<br />
-						<input type="text" name="desc" id="desc" />
-						<br /><br />
-						<input type="submit" name="submit" value="OK" />
-					</fieldset>
-				</div>
-		</form>
-    </td>
+  	 <td>
+  	 <div align="center">
+  	 				<%
+					Object obj = ContextUtil.getInitialContext().lookup("ManagerAmministratore/remote");
+  	 				ManagerAmministratoreRemote man = (ManagerAmministratoreRemote) PortableRemoteObject.narrow(obj, ManagerAmministratoreRemote.class);
+					Amministratore a = (Amministratore) request.getAttribute("utente");
+					List<Abilita> elenco = man.getElencoRichieste();
+					if (elenco.size() >0)  
+			        { 
+						for (Abilita e: elenco)	{ out.print("<p>"+e.getNome()+"</p><img src=\"image/ok.png\" height=\"20px\" width=\"20px\"><img src=\"image/no.png\" height=\"20px\" width=\"20px\" style=\"margin-left: 15px\"><br />"); }
+			        }   
+					%>
+		<br /><br /><br />
+	</div>
+	 </td>
   </tr>
 </table>			
 </body>
