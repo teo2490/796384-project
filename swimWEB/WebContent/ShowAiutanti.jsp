@@ -10,6 +10,7 @@
 		</style>	
 	</head>
 	<%@ page import="java.util.*" %>
+	<%@ page import="swim.entitybeans.*" %>
 	<body>
 		<div id="content">
 			<div id="subcontent">
@@ -25,10 +26,11 @@
 				        </ul>
 				    </div>
 				</div>
-			<%
-			List ris = new ArrayList();
-			ris = (List)request.getAttribute("possAiutanti");
+			<% 
+			List<UtenteRegistrato> ris = new ArrayList<UtenteRegistrato>();
+			ris = (List<UtenteRegistrato>)request.getAttribute("possAiutanti");
 			//Devo stampare i possibili aiutanti
+			//..
 			%>
 			</div>
 		</div>

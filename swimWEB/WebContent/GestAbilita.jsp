@@ -4,21 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Ricerca Aiuto</title>
+<title>Gestione Abilità</title>
 <style type="text/css">
 			@import url(css/main.css);
 </style>
-<script type="text/javascript">
-		/* funzione Controllo Inserimento Dati*/
-		function check() {
-			if(document.getElementById("helpKey").value == "")
-			{
-		  		alert("Uno o più campi sono incompleti.");
-		 		return false;
-			}
-			return true;
-		}
-		</script>
 </head>
 <%@ page import="swim.sessionbeans.*" %>
 <%@ page import="swim.entitybeans.*" %>
@@ -45,24 +34,40 @@
 <table width="795px" border="0" align="center">
   <tr>
     <td>
-	<div align="center"><h3>RICERCA AIUTO NELL'INTERO SISTEMA</h3></div>
+	<div align="center"><h3>GESTIONE ABILITA'</h3></div>
     </td>
   </tr>
   <tr>
     <td>
-    <!-- IL TAG <form> E' DA TENERE?!? -->
-		<form action="RicercaAiutoServlet" method="post" onSubmit="return check()">
-    		<div align="center">
-					<fieldset>
-						<h3><u>CERCA UN AIUTO</u></h3><br>
-						<label for="id">Tipo di aiuto:</label>
-						<br /><br />
-						
-					<select name="helpKey">
+    	<div align="center">
+					
+						<h3><u>Abilita'</u></h3><br>
 					<%
 					Object obj = ContextUtil.getInitialContext().lookup("ManagerAbilita/remote");
 					ManagerAbilitaRemote man = (ManagerAbilitaRemote) PortableRemoteObject.narrow(obj, ManagerAbilitaRemote.class);
-					List<Abilita> elenco = man.getElencoAbilita();
+					UtenteRegistrato u1 = (UtenteRegistrato) request.getAttribute("utente");
+					List<Abilita> elenco = man.getAbilitaUtente(u1);
+					if (elenco.size() >0) 
+			        { 
+						for (Abilita e: elenco)	{ out.println("<p>"+e.getNome()+"</p>"); }
+			        }   
+					%>
+					<br /><br /><br />
+			</div>
+    </td>
+    <td>
+   <form action="AggiungiAbilitaServlet" method="post" onSubmit="return check()">
+    		<div align="center">
+					<fieldset>
+						<h3><u>Aggiungi abilita'</u></h3><br>
+						<br /><br />
+						
+					<select name="abilita">
+					<%
+					Object obja = ContextUtil.getInitialContext().lookup("ManagerAbilita/remote");
+					ManagerAbilitaRemote mana = (ManagerAbilitaRemote) PortableRemoteObject.narrow(obja, ManagerAbilitaRemote.class);
+					UtenteRegistrato u = (UtenteRegistrato) request.getAttribute("utente");
+					List<Abilita> elencoa = mana.getElencoAbilitaNonMie(u);
 					if (elenco.size() >0) 
 			        { 
 						for (Abilita e: elenco)	{ out.println("<option value = '"+e.getId()+"' >"+e.getNome()); }
