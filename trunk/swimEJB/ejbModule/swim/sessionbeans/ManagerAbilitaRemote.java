@@ -12,7 +12,8 @@ import swim.entitybeans.UtenteRegistrato;
 public interface ManagerAbilitaRemote {
 	
 	public List<Abilita> getElencoAbilita();
-	public Set<Abilita> getAbilitaUtente(UtenteRegistrato utente) throws SwimBeanException;
+	public List<Abilita> getAbilitaUtente(UtenteRegistrato utente) throws SwimBeanException;
+	public List<Abilita> getElencoAbilitaNonMie(UtenteRegistrato utente);
 	public void aggiungiAbilita(UtenteRegistrato utente);
 	public void invioRichiestaNuovaAbilita(String nome, String descrizione);
 
