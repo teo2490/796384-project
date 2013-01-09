@@ -70,4 +70,14 @@
     <servlet-name>RichiestaNuovaAbilitaServlet</servlet-name>
     <url-pattern>/RichiestaNuovaAbilitaServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ConfermaAbilitaServlet</display-name>
+    <servlet-name>ConfermaAbilitaServlet</servlet-name>
+    <servlet-class>servlet.ConfermaAbilitaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConfermaAbilitaServlet</servlet-name>
+    <url-pattern>/ConfermaAbilitaServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
