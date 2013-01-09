@@ -54,7 +54,8 @@
 					List<Abilita> elenco = man.getElencoRichieste();
 					if (elenco.size() >0)  
 			        { 
-						for (Abilita e: elenco)	{ out.print("<p>"+e.getNome()+"</p><img src=\"image/ok.png\" height=\"20px\" width=\"20px\"><img src=\"image/no.png\" height=\"20px\" width=\"20px\" style=\"margin-left: 15px\"><br />"); }
+						//"<p>"+e.getNome()+"</p><img src=\"image/ok.png\" height=\"20px\" width=\"20px\"><img src=\"image/no.png\" height=\"20px\" width=\"20px\" style=\"margin-left: 15px\"><br />"
+						for (Abilita e: elenco)	{ out.println("<form action=\"ConfermaAbilitaServlet\" method=\"post\"><input type=\"text\" name=\"nome\" id=\"nome\" value=\""+e.getNome()+"\" /><input type=\"text\" name=\"desc\" id=\"desc\" value=\""+e.getDescrizione()+"\" /><input type=\"submit\" name=\"submit\" value=\"Conferma\" id=\"ok\"/><br />"); }
 			        }   
 					%>
 		<br /><br /><br />
