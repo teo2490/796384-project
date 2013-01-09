@@ -1,6 +1,7 @@
 package swim.test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.ejb.Remote;
@@ -18,16 +19,20 @@ public class ManagerInizializzazioneDatabase implements ManagerInizializzazioneD
 	
 	private static final String[] NOME_ABILITA = {"Cucinare", "Verniciare", "Java", "C/C++"};
 	
-	public void pulisci(){
-		for(UtenteRegistrato u: (ArrayList<UtenteRegistrato>) em.createQuery("SELECT u FROM UtenteRegistrato u").getResultList()){
-			u.setAbilita(null);
+	/*public void pulisci(){
+		List<UtenteRegistrato> u = (List<UtenteRegistrato>) em.createQuery("SELECT u FROM UtenteRegistrato u").getResultList();
+		for(int i=0; i<u.size(); i++){	
+			u.get(i).setEmail(null);
+			u.get(i).setPsw(null);
+			u.get(i).setNome(null);
+			u.get(i).setCognome(null);
 			em.persist(u);
 		}
 		em.flush();
 		for(String nome: NOME_ABILITA){
 			em.createQuery("DELETE" +nome+ " o").executeUpdate();
 		}
-	}
+	}*/
 	
 	public void creaUtentiPredefiniti(){
 		for(int i=0; i < NUMERO_UTENTI_PREDEFINITI; i++){

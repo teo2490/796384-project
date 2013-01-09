@@ -16,7 +16,7 @@ public interface ManagerInizializzazioneDatabaseRemote {
 	public static final String[] NOME_ABILITA = {"Cucinare", "Verniciare", "Java", "C/C++"};
 	public static final String[] DESCR_ABILITA = {"Sa cucinare!", "Sa verniciare!", "Sa programare in java", "Sa programmare in C/C++"};*/
 	
-	public void pulisci();
+	//public void pulisci();
 	public void creaUtentiPredefiniti();
 
 }
