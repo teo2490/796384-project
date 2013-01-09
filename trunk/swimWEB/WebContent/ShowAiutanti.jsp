@@ -28,9 +28,9 @@
 				</div>
 			<% 
 			List<UtenteRegistrato> ris = new ArrayList<UtenteRegistrato>();
-			ris = (List<UtenteRegistrato>)request.getAttribute("possAiutanti");
+			ris = (List<UtenteRegistrato>)request.getSession().getAttribute("possAiutanti");
 			//Devo stampare i possibili aiutanti
-			//..
+			for (UtenteRegistrato u: ris)	{ out.println("<p>"+u.getNome()+"&nbsp"+u.getCognome()+"&nbsp"+u.getEmail()+"&nbsp"+"</p>"); }
 			%>
 			</div>
 		</div>

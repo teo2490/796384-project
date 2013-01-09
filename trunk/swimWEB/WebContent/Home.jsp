@@ -60,7 +60,7 @@
                 <table width="795px" border="0" align="center">
   <tr>
     <td>
-    	<form action="RicercaAiutoServlet" method="post" onSubmit="return check()">
+    	<form action="RicercaAiutoServlet" method="post">
     		<div align="center">
 					<fieldset>
 						<h3><u>CERCA UN AIUTO</u></h3><br>
@@ -76,6 +76,7 @@
 			        { 
 						for (Abilita e: elenco)	{ out.println("<option value = '"+e.getId()+"' >"+e.getNome()); }
 			        }   
+					//COSA GLI PASSO?!?
 					%>
 					</select>
 					<input type="submit" name="submit" value="OK" />

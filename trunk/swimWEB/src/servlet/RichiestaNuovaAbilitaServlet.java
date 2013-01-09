@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import swim.entitybeans.UtenteRegistrato;
 import swim.sessionbeans.ManagerAbilitaRemote;
 import swim.sessionbeans.ManagerUtenteRegistratoRemote;
 import swim.util.ContextUtil;
@@ -41,6 +42,12 @@ public class RichiestaNuovaAbilitaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        //---Impedisce di fare azioni senza essere loggato
+        UtenteRegistrato u = (UtenteRegistrato) request.getSession().getAttribute("utente");
+        if(u.equals(null)){
+        	return;
+        }
+        //---
 		try {
 			Object obj = ContextUtil.getInitialContext().lookup("ManagerAbilita/remote");
 			ManagerAbilitaRemote manager = (ManagerAbilitaRemote) PortableRemoteObject.narrow(obj, ManagerAbilitaRemote.class);
