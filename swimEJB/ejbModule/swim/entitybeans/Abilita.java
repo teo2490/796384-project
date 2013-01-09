@@ -33,7 +33,7 @@ public class Abilita {
 		return this.nome;
 	}
 	
-	public String getDescrizioni(){
+	public String getDescrizione(){
 		return this.descrizione;
 	}
 	

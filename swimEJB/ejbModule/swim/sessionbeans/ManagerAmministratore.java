@@ -41,9 +41,12 @@ public class ManagerAmministratore implements ManagerAmministratoreRemote{
 		return richieste;
 	}
 	
-	public void aggiungiAbilita(){
+	public void aggiungiAbilita(String nome, String desc, Amministratore a){
+		abilita.setNome(nome);
+		abilita.setDescrizione(desc);
 		abilita.switchConferma();
-		abilita.setAmministratore(admin);
+		abilita.setAmministratore(a);
+		em.persist(abilita);
 	}
 	
 	//Funziona?? Non so se va bene la query o serve altro!
