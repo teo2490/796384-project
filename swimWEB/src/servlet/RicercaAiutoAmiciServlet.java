@@ -43,17 +43,26 @@ public class RicercaAiutoAmiciServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        Set<UtenteRegistrato> possAiutanti = null;
+        //---Impedisce di fare azioni senza essere loggato
+        UtenteRegistrato u = (UtenteRegistrato) request.getSession().getAttribute("utente");
+        if(u.equals(null)){
+        	return;
+        }
+        //---
 		try {
-			Object obj = ContextUtil.getInitialContext().lookup("ManagerUtenteRegistrato/remote");
+			Object obj = ContextUtil.getInitialContext().lookup("ManagerAiuto/remote");
 			ManagerAiutoRemote manager = (ManagerAiutoRemote) PortableRemoteObject.narrow(obj, ManagerAiutoRemote.class);
 			
 			String abilita = request.getParameter("helpKey");
 			try {
-				Set<UtenteRegistrato> possAiutanti = manager.ricercaTraAmici(abilita);
+				possAiutanti = manager.ricercaTraAmici(abilita);
 			} catch (SwimBeanException e) {
 				e.printStackTrace();
 			}
-//DEVO STAMPARE UNO ALLA VOLTA TUTTI I POSSIBILI AIUTANTI
+			//Invio l'elenco dei possibili amici aiutanti alla pagina di scelta
+			request.setAttribute("possAiutanti",possAiutanti);
+			request.getRequestDispatcher("ShowAiutanti.jsp").forward(request, response);
 			
 			RequestDispatcher disp = null;
 

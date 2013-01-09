@@ -46,7 +46,7 @@ public class RicercaAiutoServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         Set<UtenteRegistrato> possAiutanti = null;
 		try {
-			Object obj = ContextUtil.getInitialContext().lookup("ManagerUtenteRegistrato/remote");
+			Object obj = ContextUtil.getInitialContext().lookup("ManagerAiuto/remote");
 			ManagerAiutoRemote manager = (ManagerAiutoRemote) PortableRemoteObject.narrow(obj, ManagerAiutoRemote.class);
 			
 			String abilita = request.getParameter("helpKey");
@@ -57,9 +57,9 @@ public class RicercaAiutoServlet extends HttpServlet {
 			}
 //Invio l'elenco dei possibili aiutanti alla pagina di scelta
 			request.setAttribute("possAiutanti",possAiutanti);
-			request.getRequestDispatcher("ShowAiutanti.jsp").forward(request, response);
-			
-			RequestDispatcher disp = null;
+			//request.getRequestDispatcher("ShowAiutanti.jsp").forward(request, response);
+			//RequestDispatcher disp = null;
+			RequestDispatcher disp = request.getRequestDispatcher("ShowAiutanti.jsp");
 
 			disp.forward(request, response);
 		} catch (NamingException e) {
