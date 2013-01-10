@@ -46,7 +46,7 @@
 					<li><a href="GestAmicizia">Gestione Amicizie</a></li>
 					<li><a href="GestAbilita.jsp">Gestione Abilita'</a></li>
 					<li><a href="GestAiuto">Gestione Aiuti</a></li>
-					<li><a href="GestProfilo">Gestione Profilo'</a></li>
+					<li><a href="GestProfilo.jsp">Gestione Profilo</a></li>
 				</ul>
     </td>
   </tr>
