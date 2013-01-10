@@ -80,4 +80,14 @@
     <servlet-name>ConfermaAbilitaServlet</servlet-name>
     <url-pattern>/ConfermaAbilitaServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RicercaProfiloServlet</display-name>
+    <servlet-name>RicercaProfiloServlet</servlet-name>
+    <servlet-class>servlet.RicercaProfiloServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RicercaProfiloServlet</servlet-name>
+    <url-pattern>/RicercaProfiloServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
