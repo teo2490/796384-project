@@ -8,6 +8,7 @@ import javax.ejb.Remote;
 public interface ManagerUtenteRegistratoRemote {
 	
 	public UtenteRegistrato verificaLogin(String email, String password);
+	public UtenteRegistrato ricercaUtente(String email);
 	public boolean controlloEmail(String email);
 	public boolean esisteMail(String email);
 	public void aggiungiUtente(String email,String password, String nome, String cognome);

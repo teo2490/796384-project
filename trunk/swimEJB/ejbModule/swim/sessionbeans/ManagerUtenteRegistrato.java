@@ -34,6 +34,17 @@ public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
 		}
 	}
 	
+	public UtenteRegistrato ricercaUtente(String email){
+		Query q = em.createQuery("SELECT u FROM UtenteRegistrato u WHERE u.email = :email");
+		q.setParameter("email", email);
+		utenti = (List<UtenteRegistrato>) q.getResultList();
+		if(utenti.isEmpty()){
+			return null;
+		} else {
+			return utenti.get(0);
+		}
+	}
+	
 	//Lasciamo solo il controllo su @ o anche gli altri due con limitazione sugli indirizzi?
 	public boolean controlloEmail(String email){
 		if(email.contains("@") && (email.contains(".it") || email.contains(".com"))){
