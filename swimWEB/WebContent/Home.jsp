@@ -21,7 +21,7 @@
 		
 		function check2() {
 			if(document.getElementById("mail").value == "" ||
-				document.getElementById("password").value == "" ||
+				document.getElementById("psw").value == "" ||
 				document.getElementById("nome").value == "" ||
 				document.getElementById("cognome").value == "" ) {
 		  		alert("Uno o più campi sono incompleti.");
@@ -120,7 +120,7 @@
 						<br />
 						<label for="password">Password:</label>
 						<br />
-						<input type="password" name="password" id="password" />
+						<input type="password" name="psw" id="psw" />
                         <br />
                         <label for="nome">Nome:</label>
                         <br />
