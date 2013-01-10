@@ -11,10 +11,9 @@
 <script type="text/javascript">
 		/* funzione Controllo Inserimento Dati*/
 		function check() {
-			if(document.getElementById("nome").value == "" ||
-			   document.getElementById("cognome").value == ""	)
+			if(document.getElementById("email").value == "")
 			{
-		  		alert("Uno o più campi sono incompleti.");
+		  		alert("Campo incompleto.");
 		 		return false;
 			}
 			return true;
@@ -46,16 +45,12 @@
   </tr>
   <tr>
     <td>
-		<form action="RicercaAiutoAmici" method="post" onSubmit="return check()">
+		<form action="RicercaProfiloServlet" method="post" onSubmit="return check()">
     		<div align="center">
 					<fieldset>
-						<label for="id">Nome:</label>
+						<label for="id">Email:</label>
 						<br />
-						<input type="text" name="nome" id="nome" width="746" />
-						<br /><br />
-						<label for="id">Cognome:</label>
-						<br />
-						<input type="text" name="cognome" id="cognome" width="746" />
+						<input type="text" name="email" id="email" width="746" />
 						<br /><br />
 						<input type="submit" name="submit" value="OK" />
 						<br /><br /><br />
