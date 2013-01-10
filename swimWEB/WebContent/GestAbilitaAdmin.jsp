@@ -50,7 +50,7 @@
   	 				<%
 					Object obj = ContextUtil.getInitialContext().lookup("ManagerAmministratore/remote");
   	 				ManagerAmministratoreRemote man = (ManagerAmministratoreRemote) PortableRemoteObject.narrow(obj, ManagerAmministratoreRemote.class);
-					Amministratore a = (Amministratore) request.getAttribute("utente");
+					Amministratore a = (Amministratore) request.getSession().getAttribute("utente");
 					List<Abilita> elenco = man.getElencoRichieste();
 					if (elenco.size() >0)  
 			        { 
