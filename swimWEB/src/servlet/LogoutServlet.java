@@ -27,6 +27,7 @@ public class LogoutServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 		
+        request.getSession().removeAttribute("utente");
 		request.getSession().invalidate();
 		request.setAttribute("messaggio", "Logout eseguito, a presto!");
 		request.getRequestDispatcher("Home.jsp").forward(request, response);
