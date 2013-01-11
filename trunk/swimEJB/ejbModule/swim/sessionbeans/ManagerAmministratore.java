@@ -47,7 +47,7 @@ public class ManagerAmministratore implements ManagerAmministratoreRemote{
 		return richieste;
 	}
 	
-	public Abilita cercaAbilita(String id) {
+	public Abilita cercaAbilita(int id) {
 		Query q = em
 				.createQuery("SELECT a FROM Abilita a WHERE a.id = :id");
 		q.setParameter("id", id);
@@ -57,7 +57,8 @@ public class ManagerAmministratore implements ManagerAmministratoreRemote{
 	
 	public void aggiungiAbilita(String id, String nome, String desc, String email){
 		Amministratore adm = cercaAdmin(email);
-		Abilita ab = cercaAbilita(id);
+		int iid = Integer.parseInt(id);
+		Abilita ab = cercaAbilita(iid);
 		ab.setNome(nome);
 		ab.setDescrizione(desc);
 		ab.switchConferma();
