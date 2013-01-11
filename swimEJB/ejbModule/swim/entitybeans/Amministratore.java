@@ -1,11 +1,12 @@
 package swim.entitybeans;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.*;
 
 @Entity
-public class Amministratore {
+public class Amministratore implements Serializable{
 
 	@Id
 	private String email;

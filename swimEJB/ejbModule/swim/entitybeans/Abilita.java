@@ -1,5 +1,6 @@
 package swim.entitybeans;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -7,14 +8,15 @@ import javax.persistence.*;
 
 @Entity
 //@SequenceGenerator(name="seq", sequenceName="CUST_SEQ")
-public class Abilita {
+public class Abilita implements Serializable{
 
 	@Id
-	@Temporal(TemporalType.TIMESTAMP)
+	//@Temporal(TemporalType.TIMESTAMP)
+	//@GeneratedValue(strategy=GenerationType.AUTO)
+//	@SequenceGenerator(name="seq", sequenceName="CUST_SEQ")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	//OLD @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
 	@Column(name="A_ID")
-	private /*int*/Date id;
+	private int id;
 	private String nome;
 	private boolean conferma = false;
 	private String descrizione;
@@ -25,7 +27,7 @@ public class Abilita {
 	@ManyToMany(mappedBy="abilita")
 	private List<UtenteRegistrato> utente;
 	
-	public Date getId(){
+	public int getId(){
 		return this.id;
 	}
 	

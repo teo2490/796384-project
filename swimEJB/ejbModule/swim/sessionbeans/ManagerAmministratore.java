@@ -11,6 +11,7 @@ import javax.persistence.Query;
 
 import swim.entitybeans.Abilita;
 import swim.entitybeans.Amministratore;
+import swim.entitybeans.UtenteRegistrato;
 
 @Stateless
 @Remote(ManagerAmministratoreRemote.class)
@@ -30,6 +31,11 @@ public class ManagerAmministratore implements ManagerAmministratoreRemote{
 			return null;
 		}
 	}
+	
+	public Amministratore cercaAdmin(String email){
+		admin = em.find(Amministratore.class, email);
+		return admin;
+	}
 	/*
 	public void logout(){
 		admin = null;
@@ -41,12 +47,22 @@ public class ManagerAmministratore implements ManagerAmministratoreRemote{
 		return richieste;
 	}
 	
-	public void aggiungiAbilita(String nome, String desc, Amministratore a){
-		abilita.setNome(nome);
-		abilita.setDescrizione(desc);
-		abilita.switchConferma();
-		abilita.setAmministratore(a);
-		em.persist(abilita);
+	public Abilita cercaAbilita(String id) {
+		Query q = em
+				.createQuery("SELECT a FROM Abilita a WHERE a.id = :id");
+		q.setParameter("id", id);
+		Abilita a = (Abilita) q.getResultList().get(0);
+		return a;
+	}
+	
+	public void aggiungiAbilita(String id, String nome, String desc, String email){
+		Amministratore adm = cercaAdmin(email);
+		Abilita ab = cercaAbilita(id);
+		ab.setNome(nome);
+		ab.setDescrizione(desc);
+		ab.switchConferma();
+		ab.setAmministratore(adm);
+		em.persist(ab);
 	}
 	
 	//Funziona?? Non so se va bene la query o serve altro!
