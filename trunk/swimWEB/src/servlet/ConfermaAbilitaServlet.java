@@ -44,10 +44,11 @@ public class ConfermaAbilitaServlet extends HttpServlet {
 		try {
 			Object obj = ContextUtil.getInitialContext().lookup("ManagerAmministratore/remote");
 			ManagerAmministratoreRemote manager = (ManagerAmministratoreRemote) PortableRemoteObject.narrow(obj, ManagerAmministratoreRemote.class);
+			String id = request.getParameter("id");
 			String nome = request.getParameter("nome");
 			String desc = request.getParameter("desc");
 			Amministratore a = (Amministratore) request.getSession().getAttribute("utente");
-			manager.aggiungiAbilita(nome, desc, a);
+			manager.aggiungiAbilita(id, nome, desc, a.getEmail());
 		} catch (NamingException e) {
 			e.printStackTrace(); 
 		}
