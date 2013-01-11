@@ -1,12 +1,13 @@
 package swim.entitybeans;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="UtenteRegistrato")
-public class UtenteRegistrato {
+public class UtenteRegistrato implements Serializable{
 	
 	@Id
 	@Column(name="U_ID")
@@ -45,7 +46,7 @@ public class UtenteRegistrato {
 	 */
 	@ManyToMany
 	@JoinTable(
-		    name="EJB_ROSTER_TEAM_PLAYER",
+		    name="ABILITA_UTENTE",
 		    joinColumns=
 		        @JoinColumn(name="UtenteRegistrato_ID", referencedColumnName="U_ID"),
 		    inverseJoinColumns=

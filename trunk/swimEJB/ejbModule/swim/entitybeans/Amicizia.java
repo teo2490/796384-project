@@ -1,9 +1,11 @@
 package swim.entitybeans;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
-public class Amicizia {
+public class Amicizia implements Serializable{
 	
 	@ManyToOne
 	private UtenteRegistrato utRichiedente;

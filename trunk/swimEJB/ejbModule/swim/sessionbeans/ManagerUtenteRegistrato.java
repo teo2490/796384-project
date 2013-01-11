@@ -14,57 +14,62 @@ import swim.entitybeans.UtenteRegistrato;
 @Stateless
 @Remote(ManagerUtenteRegistratoRemote.class)
 public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
-	
-	@PersistenceContext( unitName = "swim" )
+
+	@PersistenceContext(unitName = "swim")
 	private EntityManager em;
-	
+
 	private UtenteRegistrato utente;
 	private List<UtenteRegistrato> utenti;
-	
-	//CAMBIATO u.U_ID in u.email
-	public UtenteRegistrato verificaLogin(String email, String password){
-		Query q = em.createQuery("SELECT u FROM UtenteRegistrato u WHERE u.email = :email AND u.password = :password");
+
+	// CAMBIATO u.U_ID in u.email
+	public UtenteRegistrato verificaLogin(String email, String password) {
+		Query q = em
+				.createQuery("SELECT u FROM UtenteRegistrato u WHERE u.email = :email AND u.password = :password");
 		q.setParameter("email", email);
 		q.setParameter("password", password);
 		utenti = (List<UtenteRegistrato>) q.getResultList();
-		if(utenti.isEmpty()){
+		if (utenti.isEmpty()) {
 			return null;
 		} else {
 			return utenti.get(0);
 		}
 	}
-	
-	public UtenteRegistrato ricercaUtente(String email){
-		Query q = em.createQuery("SELECT u FROM UtenteRegistrato u WHERE u.email = :email");
+
+	public UtenteRegistrato ricercaUtente(String email) {
+		Query q = em
+				.createQuery("SELECT u FROM UtenteRegistrato u WHERE u.email = :email");
 		q.setParameter("email", email);
 		utenti = (List<UtenteRegistrato>) q.getResultList();
-		if(utenti.isEmpty()){
+		if (utenti.isEmpty()) {
 			return null;
 		} else {
 			return utenti.get(0);
 		}
 	}
-	
-	//Lasciamo solo il controllo su @ o anche gli altri due con limitazione sugli indirizzi?
-	public boolean controlloEmail(String email){
-		if(email.contains("@") && (email.contains(".it") || email.contains(".com"))){
+
+	// Lasciamo solo il controllo su @ o anche gli altri due con limitazione
+	// sugli indirizzi?
+	public boolean controlloEmail(String email) {
+		if (email.contains("@")
+				&& (email.contains(".it") || email.contains(".com"))) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
-	public boolean esisteMail(String email){
+
+	public boolean esisteMail(String email) {
 		Query q = em.createQuery("SELECT email FROM UtenteRegistrato");
-		List<String> allEmail = (List<String>)q.getResultList();
-		if(allEmail.contains(email)){
+		List<String> allEmail = (List<String>) q.getResultList();
+		if (allEmail.contains(email)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
-	public void aggiungiUtente(String email, String password, String nome, String cognome){
+
+	public void aggiungiUtente(String email, String password, String nome,
+			String cognome) {
 		utente = new UtenteRegistrato();
 		utente.setEmail(email);
 		utente.setPsw(password);
@@ -72,21 +77,26 @@ public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
 		utente.setCognome(cognome);
 		em.persist(utente);
 	}
-	
-	public void cambioPsw(String newPsw, String oldPsw) throws SwimBeanException{
-		if(oldPsw.equals(utente.getPsw())){
-			utente.setPsw(newPsw);
+
+	public void cambioPsw(String email, String newPsw, String oldPsw)
+			throws SwimBeanException {
+		UtenteRegistrato ut = ricercaUtente(email);
+		if (oldPsw.equals(ut.getPsw())) {
+			ut.setPsw(newPsw);
 		} else {
 			throw new SwimBeanException("Inserisci la password corretta!");
 		}
 	}
-	
-	//Non ho bisogno di condizioni. Se non esiste l'URL non si mette nulla
-	public void cambioImm(String url){
-		utente.setUrl(url);
+
+	// Non ho bisogno di condizioni. Se non esiste l'URL non si mette nulla
+	public void cambioImm(String email, String url) {
+		UtenteRegistrato ut = ricercaUtente(email);
+		if (url != null) {
+			ut.setUrl(url);
+		}
 	}
-	
-	//Non penso vada bene...
+
+	// Non penso vada bene...
 	public void logout() {
 		utente = null;
 	}

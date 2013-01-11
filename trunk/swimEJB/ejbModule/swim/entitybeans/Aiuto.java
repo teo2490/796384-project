@@ -1,17 +1,19 @@
 package swim.entitybeans;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.*;
 
 @Entity
 //@SequenceGenerator(name="seq",sequenceName="CUST_SEQ")
-public class Aiuto {
+public class Aiuto implements Serializable{
 	
 	@Id
-	@Temporal(TemporalType.TIMESTAMP)
+	//@Temporal(TemporalType.TIMESTAMP)
 	//@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
-	private /*int*/Date id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
 	private String tipo;
 	private boolean conferma = false;
 	private String feedback;
@@ -22,7 +24,7 @@ public class Aiuto {
 	@ManyToOne
 	private UtenteRegistrato utRiceve;
 	
-	public /*int*/Date getID(){
+	public int getID(){
 		return id;
 	}
 	
