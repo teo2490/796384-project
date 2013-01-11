@@ -74,7 +74,7 @@
 					List<Abilita> elenco = man.getElencoAbilita();
 					if (elenco.size() >0) 
 			        { 
-						for (Abilita e: elenco)	{ out.println("<option value = '"+e.getId()+"' >"+e.getNome()); }
+						for (Abilita e: elenco)	{ out.println("<option value = \""+e.getId()+"\" >"+e.getNome()); }
 			        }   
 					//COSA GLI PASSO?!?
 					%>
