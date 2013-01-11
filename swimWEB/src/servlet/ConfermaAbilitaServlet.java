@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -52,6 +53,10 @@ public class ConfermaAbilitaServlet extends HttpServlet {
 		} catch (NamingException e) {
 			e.printStackTrace(); 
 		}
+		RequestDispatcher disp;
+		request.setAttribute("messaggio", "Abilità aggiunta!");
+		disp = request.getRequestDispatcher("GestAbilitaAdmin.jsp");
+		disp.forward(request, response);
 	}
 
 }
