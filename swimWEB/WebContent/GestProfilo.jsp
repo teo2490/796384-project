@@ -34,7 +34,7 @@
 				<%
 					String messaggio = (String) request.getAttribute("messaggio");
 					if(messaggio != null) {
-						out.println("<p>" + messaggio + "</p>");
+						out.println("<br /><br /><p>" + messaggio + "</p>");
 					}
 				%>
 				<br /><br />
