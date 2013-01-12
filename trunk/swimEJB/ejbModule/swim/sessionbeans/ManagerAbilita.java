@@ -40,19 +40,21 @@ public class ManagerAbilita implements ManagerAbilitaRemote{
 	
 	//Funziona?? Oppure devo tornare abilita per abilita??
 	public List<Abilita> getAbilitaUtente(UtenteRegistrato utente) throws SwimBeanException{
-		Query q = em.createQuery("SELECT ua.Abilita_ID FROM EJB_ROSTER_TEAM_PLAYER ua WHERE ua.UtenteRegistrato_ID = :utente.email");
-		q.setParameter("utente", utente);
-		List<Abilita> abilitaUtente = (List<Abilita>) q.getResultList();
-		if(abilitaUtente.size() == 0){
-			throw new SwimBeanException("Questo utente non possiede alcuna abilita'");
-		} else {
-			return abilitaUtente;
-		}
+//		Query q = em.createQuery("SELECT ua.Abilita_ID FROM ABILITA_UTENTE ua WHERE ua.UtenteRegistrato_ID = :utente.email");
+//		q.setParameter("utente", utente);
+//		List<Abilita> abilitaUtente = (List<Abilita>) q.getResultList();
+//		if(abilitaUtente.size() == 0){
+//			throw new SwimBeanException("Questo utente non possiede alcuna abilita'");
+//		} else {
+//			return abilitaUtente;
+//		}
+		return utente.getAbilita();
 	}
 	
 	public List<Abilita> getElencoAbilitaNonMie(UtenteRegistrato utente){
-		Query q = em.createQuery("SELECT a FROM Abilita a WHERE a NOT IN :utente.abilita");
-		List<Abilita> abilitaNonUtente = (List<Abilita>) q.setParameter("utente", utente).getResultList();
+		Query q = em.createQuery("SELECT a FROM Abilita a WHERE NOT (:utente MEMBER OF a.utente)");
+		q.setParameter("utente", utente);
+		List<Abilita> abilitaNonUtente = (List<Abilita>) q.getResultList();
 		return abilitaNonUtente;
 	}
 	

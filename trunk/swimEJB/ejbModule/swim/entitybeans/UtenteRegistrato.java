@@ -1,6 +1,7 @@
 package swim.entitybeans;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -44,7 +45,7 @@ public class UtenteRegistrato implements Serializable{
 	/**
 	 * Abilità possedute
 	 */
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 		    name="ABILITA_UTENTE",
 		    joinColumns=
@@ -52,7 +53,7 @@ public class UtenteRegistrato implements Serializable{
 		    inverseJoinColumns=
 		        @JoinColumn(name="Abilita_ID", referencedColumnName="A_ID")
 		)
-	private Set<Abilita> abilita;
+	private List<Abilita> abilita;
 
 
 	public String getEmail() {
@@ -97,6 +98,10 @@ public class UtenteRegistrato implements Serializable{
 	
 	public void setAbilita(Abilita abil){
 		this.abilita.add(abil);
+	}
+	
+	public List<Abilita> getAbilita(){
+		return abilita;
 	}
 	
 	//Servono o bastano le query??
