@@ -51,14 +51,14 @@
 					
 						<h3><u>Abilita'</u></h3><br>
 					<%
-				/* 	Object obj = ContextUtil.getInitialContext().lookup("ManagerAbilita/remote");
+				 	Object obj = ContextUtil.getInitialContext().lookup("ManagerAbilita/remote");
 					ManagerAbilitaRemote man = (ManagerAbilitaRemote) PortableRemoteObject.narrow(obj, ManagerAbilitaRemote.class);
 					UtenteRegistrato u1 = (UtenteRegistrato) request.getSession().getAttribute("utente");
 					List<Abilita> elenco = man.getAbilitaUtente(u1);
 					if (elenco.size() >0) 
 			        { 
 						for (Abilita e: elenco)	{ out.println("<p>"+e.getNome()+"</p>"); }
-			        }       */
+			        }       
 					%>
 					<br /><br /><br />
 			</div>
