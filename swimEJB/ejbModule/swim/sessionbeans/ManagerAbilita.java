@@ -59,9 +59,9 @@ public class ManagerAbilita implements ManagerAbilitaRemote{
 	}
 	
 	public void aggiungiAbilita(UtenteRegistrato u, Abilita a){
-		Set<Abilita> al = u.getAbilita();
-		al.add(a);
-		u.setAbilita(al);
+//		Set<Abilita> al = u.getAbilita();
+//		al.add(a);
+//		u.setAbilita(al);
 		Query q = em.createNativeQuery("INSERT INTO `swim`.`ABILITA_UTENTE` (`UtenteRegistrato_ID`, `Abilita_ID`) VALUES (:email, :id);");
 		q.setParameter("email", u.getEmail());
 		q.setParameter("id", a.getId());
@@ -70,6 +70,20 @@ public class ManagerAbilita implements ManagerAbilitaRemote{
 	
 	public void invioRichiestaNuovaAbilita(String nome, String descr){
 		creaNuovaAbilitaDirect(nome, descr);
+	}
+	
+	public Abilita ricercaAbilita(String id) {
+		Query q = em.createQuery("SELECT a FROM Abilita a WHERE a.id = :id");
+		System.out.println(id);
+		int idd = Integer.parseInt(id);
+		q.setParameter("id", idd);
+		List<Abilita> ab;
+		ab = (List<Abilita>) q.getResultList();
+		if (ab.isEmpty()) {
+			return null;
+		} else {
+			return ab.get(0);
+		}
 	}
 
 }

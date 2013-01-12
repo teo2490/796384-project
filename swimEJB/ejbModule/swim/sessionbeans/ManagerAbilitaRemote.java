@@ -16,5 +16,6 @@ public interface ManagerAbilitaRemote {
 	public List<Abilita> getElencoAbilitaNonMie(UtenteRegistrato utente);
 	public void aggiungiAbilita(UtenteRegistrato utente, Abilita abilita);
 	public void invioRichiestaNuovaAbilita(String nome, String descrizione);
+	public Abilita ricercaAbilita(String id);
 
 }
