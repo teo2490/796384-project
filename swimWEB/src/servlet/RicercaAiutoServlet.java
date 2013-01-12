@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 import javax.naming.NamingException;
@@ -44,7 +45,7 @@ public class RicercaAiutoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        Set<UtenteRegistrato> possAiutanti = null;
+        List<UtenteRegistrato> possAiutanti = null;
 		try {
 			Object obj = ContextUtil.getInitialContext().lookup("ManagerAiuto/remote");
 			ManagerAiutoRemote manager = (ManagerAiutoRemote) PortableRemoteObject.narrow(obj, ManagerAiutoRemote.class);
