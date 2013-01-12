@@ -25,9 +25,6 @@ public class TestAbilita {
 	private static ManagerAmministratoreRemote manAdmin = null;
 	private static ManagerUtenteRegistratoRemote manUser = null;
 	
-	private static final String EMAIL_NEW_ADMIN = "test@test.it";
-	private static final String PASSWORD_NEW_ADMIN = "test";
-	private static final int NUMERO_ADMIN_PREDEFINITI = 2;
 	private static final int NUMERO_ABILITA_PREDEFINITE = 4;
 	
 
@@ -39,12 +36,12 @@ public class TestAbilita {
 		manUser = (ManagerUtenteRegistratoRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerUtenteRegistrato/remote"), ManagerUtenteRegistratoRemote.class);
 		ctx = ContextUtil.getInitialContext();
 		ManagerInizializzazioneDatabaseRemote db = (ManagerInizializzazioneDatabaseRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerInizializzazioneDatabase/remote"), ManagerInizializzazioneDatabaseRemote.class);
+		db.pulisciUtenteRegistrato();
 		db.pulisciAbilita();
 		db.pulisciAmministratore();
-		db.pulisciUtenteRegistrato();
-		db.creaUtentiPredefiniti();
 		db.creaAdminPredefiniti();
 		db.creaAbilitaPredefinite();
+		db.creaUtentiPredefiniti();
 		List<Abilita> elenco = (List<Abilita>) manAdmin.getElencoRichieste();
 		for(int i=0; i<elenco.size(); i++){
 			manAdmin.aggiungiAbilita(Integer.toString(elenco.get(i).getId()), elenco.get(i).getNome(), elenco.get(i).getDescrizione(), "admin1@swim.it");
@@ -70,19 +67,21 @@ public class TestAbilita {
 	}
 	
 	@Test
-	public void testAggiungiAbilitaAndGetElencoAbilita() throws SwimBeanException{
+	public void test_AggiungiAbilita_GetAbilitaUtente_GetElencoAbilitaNonMie() throws SwimBeanException{
 		UtenteRegistrato u = manUser.ricercaUtente("rp@mail.it");
 		List<Abilita> elenco = (List<Abilita>)manager.getElencoAbilita();
 		List<Abilita> ablOwned = null;
+		List<Abilita> ablNotOwned = null;
 		manager.aggiungiAbilita(u, elenco.get(0));
-		System.out.println(elenco.get(0).getNome());
-		System.out.println(u.getEmail());
 		manager.aggiungiAbilita(u, elenco.get(1));
 		try{
 			ablOwned = manager.getAbilitaUtente(u);
+			ablNotOwned = manager.getElencoAbilitaNonMie(u);
 		} catch (SwimBeanException e) {}
-		assertNotNull("Abilità in 0 è nulla", ablOwned.get(0));
-		assertNotNull("Abilità in 1 è nulla", ablOwned.get(1));
+		assertEquals("Owned 0 non corrisponde", elenco.get(0).getId(), ablOwned.get(0).getId());
+		assertEquals("Owned 1 non corrisponde", elenco.get(1).getId(), ablOwned.get(1).getId());
+		assertEquals("NotOwned 2 non corrisponde", elenco.get(2).getId(), ablNotOwned.get(0).getId());
+		assertEquals("NotOwned 3 non corrisponde", elenco.get(3).getId(), ablNotOwned.get(1).getId());
 	}
 
 }
