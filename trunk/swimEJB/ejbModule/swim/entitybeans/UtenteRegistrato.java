@@ -49,11 +49,11 @@ public class UtenteRegistrato implements Serializable{
 	@JoinTable(
 		    name="ABILITA_UTENTE",
 		    joinColumns=
-		        @JoinColumn(name="UtenteRegistrato_ID", referencedColumnName="U_ID"),
+		        {@JoinColumn(name="UtenteRegistrato_ID"/*, referencedColumnName="U_ID"*/)},
 		    inverseJoinColumns=
-		        @JoinColumn(name="Abilita_ID", referencedColumnName="A_ID")
+		        {@JoinColumn(name="Abilita_ID"/*, referencedColumnName="A_ID"*/)}
 		)
-	private List<Abilita> abilita;
+	private Set<Abilita> abilita;
 
 
 	public String getEmail() {
@@ -96,11 +96,11 @@ public class UtenteRegistrato implements Serializable{
 		this.url = url;
 	}
 	
-	public List<Abilita> getAbilita(){
+	public Set<Abilita> getAbilita(){
 		return this.abilita;
 	}
 	
-	public void setAbilita(List<Abilita> a){
+	public void setAbilita(Set<Abilita> a){
 		this.abilita = a;
 	}
 	

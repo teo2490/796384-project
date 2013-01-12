@@ -52,19 +52,20 @@ public class ManagerAbilita implements ManagerAbilitaRemote{
 	}
 	
 	public List<Abilita> getElencoAbilitaNonMie(UtenteRegistrato utente){
-		Query q = em.createQuery("SELECT a FROM Abilita a WHERE NOT (:utente MEMBER OF a.utente)");
+		Query q = em.createQuery("SELECT a FROM Abilita a WHERE NOT (:utente MEMBER OF a.utente) AND a.conferma = 1");
 		q.setParameter("utente", utente);
 		List<Abilita> abilitaNonUtente = (List<Abilita>) q.getResultList();
 		return abilitaNonUtente;
 	}
 	
 	public void aggiungiAbilita(UtenteRegistrato u, Abilita a){
-		List<UtenteRegistrato> ul = a.getUtente();
-		List<Abilita> al = u.getAbilita();
-		ul.add(u);
+		Set<Abilita> al = u.getAbilita();
 		al.add(a);
 		u.setAbilita(al);
-		a.setUtente(ul);
+		Query q = em.createNativeQuery("INSERT INTO `swim`.`ABILITA_UTENTE` (`UtenteRegistrato_ID`, `Abilita_ID`) VALUES (:email, :id);");
+		q.setParameter("email", u.getEmail());
+		q.setParameter("id", a.getId());
+		q.executeUpdate();
 	}
 	
 	public void invioRichiestaNuovaAbilita(String nome, String descr){

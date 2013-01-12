@@ -3,6 +3,7 @@ package swim.entitybeans;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -24,8 +25,8 @@ public class Abilita implements Serializable{
 	@ManyToOne
 	private Amministratore admin;
 	
-	@ManyToMany(mappedBy="abilita", fetch = FetchType.EAGER)
-	private List<UtenteRegistrato> utente;
+	@ManyToMany(mappedBy="abilita")
+	private Set<UtenteRegistrato> utente;
 	
 	public int getId(){
 		return this.id;
@@ -63,12 +64,12 @@ public class Abilita implements Serializable{
 		this.admin = admin;
 	}
 	
-	public List<UtenteRegistrato> getUtente(){
+	/*public Set<UtenteRegistrato> getUtente(){
 		return this.utente;
 	}
 	
-	public void setUtente(List<UtenteRegistrato> u){
+	public void setUtente(Set<UtenteRegistrato> u){
 		this.utente = u;
-	}
+	}*/
 
 }

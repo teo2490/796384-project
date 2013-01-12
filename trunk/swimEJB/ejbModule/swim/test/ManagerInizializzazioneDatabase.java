@@ -65,6 +65,7 @@ public class ManagerInizializzazioneDatabase implements ManagerInizializzazioneD
 			q.setParameter("id", a.get(i).getId());
 			q.executeUpdate();
 		}
+		
 	}
 	
 	public void creaAbilitaPredefinite(){
