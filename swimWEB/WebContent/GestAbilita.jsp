@@ -47,6 +47,54 @@
   <tr>
 <!-- QUI -->
     <td>
+    	<div align="center">
+					
+						<h3><u>Abilita'</u></h3><br>
+					<%
+				/* 	Object obj = ContextUtil.getInitialContext().lookup("ManagerAbilita/remote");
+					ManagerAbilitaRemote man = (ManagerAbilitaRemote) PortableRemoteObject.narrow(obj, ManagerAbilitaRemote.class);
+					UtenteRegistrato u1 = (UtenteRegistrato) request.getSession().getAttribute("utente");
+					List<Abilita> elenco = man.getAbilitaUtente(u1);
+					if (elenco.size() >0) 
+			        { 
+						for (Abilita e: elenco)	{ out.println("<p>"+e.getNome()+"</p>"); }
+			        }       */
+					%>
+					<br /><br /><br />
+			</div>
+    </td>
+    </tr>
+    <tr>
+    <td>
+   <form action="AggiungiAbilitaServlet" method="post" onSubmit="return check()">
+    		<div align="center">
+					<fieldset>
+						<h3><u>Aggiungi abilita'</u></h3><br>
+						<br /><br />
+						
+					<select name="abilita">
+					<%
+					Object obja = ContextUtil.getInitialContext().lookup("ManagerAbilita/remote");
+					ManagerAbilitaRemote mana = (ManagerAbilitaRemote) PortableRemoteObject.narrow(obja, ManagerAbilitaRemote.class);
+					UtenteRegistrato u = (UtenteRegistrato) request.getSession().getAttribute("utente");
+					List<Abilita> elencoa = mana.getElencoAbilitaNonMie(u);
+					if (elencoa.size() >0) 
+			        { 
+						for (Abilita e: elencoa)	{ out.println("<option value = '"+e.getId()+"' >"+e.getNome()); }
+			        } 
+					%>
+					</select>
+					<input type="submit" name="submit" value="OK" />
+					<br /><br /><br />
+					</fieldset>
+			</div>
+		</form>
+    </td>
+    </tr>
+<!-- QUI -->
+<div align="center">
+	<tr>
+    <td>
     <form action="RichiestaNuovaAbilitaServlet" method="post" onSubmit="return check()">
     	<div align="center">
 					<fieldset>
@@ -65,6 +113,7 @@
 		</form>
     </td>
   </tr>
+  </div>
 </table>			
 </body>
 </html>
