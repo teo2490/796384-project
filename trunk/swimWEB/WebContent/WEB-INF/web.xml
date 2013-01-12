@@ -100,4 +100,14 @@
     <servlet-name>ModificaProfiloServlet</servlet-name>
     <url-pattern>/ModificaProfiloServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AggiungiAbilitaServlet</display-name>
+    <servlet-name>AggiungiAbilitaServlet</servlet-name>
+    <servlet-class>servlet.AggiungiAbilitaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AggiungiAbilitaServlet</servlet-name>
+    <url-pattern>/AggiungiAbilitaServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
