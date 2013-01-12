@@ -80,7 +80,7 @@
 					List<Abilita> elencoa = mana.getElencoAbilitaNonMie(u);
 					if (elencoa.size() >0) 
 			        { 
-						for (Abilita e: elencoa)	{ out.println("<option value = '"+e.getId()+"' >"+e.getNome()); }
+						for (Abilita e: elencoa)	{ out.println("<option value = \""+Integer.toString(e.getId())+"\" id=\"abil\" >"+e.getNome()+"</option>"); }
 			        } 
 					%>
 					</select>
