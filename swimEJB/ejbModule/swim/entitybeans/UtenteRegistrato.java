@@ -96,12 +96,12 @@ public class UtenteRegistrato implements Serializable{
 		this.url = url;
 	}
 	
-	public void setAbilita(Abilita abil){
-		this.abilita.add(abil);
+	public List<Abilita> getAbilita(){
+		return this.abilita;
 	}
 	
-	public List<Abilita> getAbilita(){
-		return abilita;
+	public void setAbilita(List<Abilita> a){
+		this.abilita = a;
 	}
 	
 	//Servono o bastano le query??
