@@ -24,7 +24,7 @@ public class Abilita implements Serializable{
 	@ManyToOne
 	private Amministratore admin;
 	
-	@ManyToMany(mappedBy="abilita")
+	@ManyToMany(mappedBy="abilita", fetch = FetchType.EAGER)
 	private List<UtenteRegistrato> utente;
 	
 	public int getId(){
