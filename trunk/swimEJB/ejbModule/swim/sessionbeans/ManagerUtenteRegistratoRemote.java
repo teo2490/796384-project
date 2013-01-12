@@ -14,5 +14,5 @@ public interface ManagerUtenteRegistratoRemote {
 	public void aggiungiUtente(String email,String password, String nome, String cognome);
 	public void cambioPsw(String email, String newPsw, String oldPsw) throws SwimBeanException;
 	public void cambioImm(String email, String url);
-	public void logout();
+	//public void logout();
 }

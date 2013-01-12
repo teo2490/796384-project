@@ -14,7 +14,7 @@ public interface ManagerAbilitaRemote {
 	public List<Abilita> getElencoAbilita();
 	public List<Abilita> getAbilitaUtente(UtenteRegistrato utente) throws SwimBeanException;
 	public List<Abilita> getElencoAbilitaNonMie(UtenteRegistrato utente);
-	public void aggiungiAbilita(UtenteRegistrato utente);
+	public void aggiungiAbilita(UtenteRegistrato utente, Abilita abilita);
 	public void invioRichiestaNuovaAbilita(String nome, String descrizione);
 
 }

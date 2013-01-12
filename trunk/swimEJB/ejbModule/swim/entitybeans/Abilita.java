@@ -39,6 +39,14 @@ public class Abilita implements Serializable{
 		return this.descrizione;
 	}
 	
+	public boolean getConferma(){
+		return this.conferma;
+	}
+	
+	public Amministratore getAdmin(){
+		return this.admin;
+	}
+	
 	public void setNome(String nome){
 		this.nome = nome;
 	}
@@ -53,6 +61,14 @@ public class Abilita implements Serializable{
 	
 	public void setAmministratore(Amministratore admin){
 		this.admin = admin;
+	}
+	
+	public List<UtenteRegistrato> getUtente(){
+		return this.utente;
+	}
+	
+	public void setUtente(List<UtenteRegistrato> u){
+		this.utente = u;
 	}
 
 }

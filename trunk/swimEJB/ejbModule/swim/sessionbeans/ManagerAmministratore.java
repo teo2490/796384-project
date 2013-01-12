@@ -20,21 +20,31 @@ public class ManagerAmministratore implements ManagerAmministratoreRemote{
 	@PersistenceContext( unitName = "swim" )
 	private EntityManager em;
 	
-	private Amministratore admin;
-	private Abilita abilita;
+	//private Amministratore admin;
+	private List<Amministratore> amministratori;
+	//private Abilita abilita;
 	
-	public Amministratore verificaLogin(String email, String password){
-		admin = em.find(Amministratore.class, email);
-		if(admin.getPsw().equals(password)) {
-			return admin;
-		} else {
+	public Amministratore verificaLogin(String email, String password) {
+		Query q = em.createQuery("SELECT a FROM Amministratore a WHERE a.email = :email AND a.password = :password");
+		q.setParameter("email", email);
+		q.setParameter("password", password);
+		amministratori = (List<Amministratore>) q.getResultList();
+		if (amministratori.isEmpty()) {
 			return null;
+		} else {
+			return amministratori.get(0);
 		}
 	}
 	
 	public Amministratore cercaAdmin(String email){
-		admin = em.find(Amministratore.class, email);
-		return admin;
+		Query q = em.createQuery("SELECT a FROM Amministratore a WHERE a.email = :email");
+		q.setParameter("email", email);
+		amministratori = (List<Amministratore>) q.getResultList();
+		if (amministratori.isEmpty()) {
+			return null;
+		} else {
+			return amministratori.get(0);
+		}
 	}
 	/*
 	public void logout(){
@@ -47,12 +57,17 @@ public class ManagerAmministratore implements ManagerAmministratoreRemote{
 		return richieste;
 	}
 	
+
 	public Abilita cercaAbilita(int id) {
 		Query q = em
 				.createQuery("SELECT a FROM Abilita a WHERE a.id = :id");
 		q.setParameter("id", id);
-		Abilita a = (Abilita) q.getResultList().get(0);
-		return a;
+		List<Abilita> elenco = (List<Abilita>) q.getResultList();
+		if (elenco.isEmpty()) {
+			return null;
+		} else {
+			return elenco.get(0);
+		}
 	}
 	
 	public void aggiungiAbilita(String id, String nome, String desc, String email){
@@ -67,14 +82,14 @@ public class ManagerAmministratore implements ManagerAmministratoreRemote{
 	}
 	
 	//Funziona?? Non so se va bene la query o serve altro!
-	public void eliminaAbilita(){
-		Query q = em.createQuery("DELETE a FROM Abilita a WHERE a.id = :abl.id");
-		q.setParameter("abl", abilita).executeUpdate();
+	public void eliminaAbilita(Abilita abilita){
+		Query q = em.createQuery("DELETE FROM Abilita a WHERE a.id = :id");
+		q.setParameter("id", abilita.getId()).executeUpdate();
 	}
 	
-	public void cambiaDatiAbilita(String nome, String descr){
+	/*public void cambiaDatiAbilita(Abilita abilita, String nome, String descr){
 		abilita.setNome(nome);
 		abilita.setDescrizione(descr);
-	}
+	}*/
 
 }

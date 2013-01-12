@@ -58,8 +58,13 @@ public class ManagerAbilita implements ManagerAbilitaRemote{
 		return abilitaNonUtente;
 	}
 	
-	public void aggiungiAbilita(UtenteRegistrato utente){
-		utente.setAbilita(abilita);
+	public void aggiungiAbilita(UtenteRegistrato u, Abilita a){
+		List<UtenteRegistrato> ul = a.getUtente();
+		List<Abilita> al = u.getAbilita();
+		ul.add(u);
+		al.add(a);
+		u.setAbilita(al);
+		a.setUtente(ul);
 	}
 	
 	public void invioRichiestaNuovaAbilita(String nome, String descr){
