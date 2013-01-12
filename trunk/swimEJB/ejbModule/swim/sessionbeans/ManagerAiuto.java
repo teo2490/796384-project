@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import swim.entitybeans.UtenteRegistrato;
 import swim.entitybeans.Aiuto;
 
+import java.util.List;
 import java.util.Set;
 
 @Stateless
@@ -40,9 +41,9 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	
 	
 	//Funziona?? Oppure devo ritornare utente per utente??
-	public Set<UtenteRegistrato> ricercaPerAbilita(String abilita) throws SwimBeanException{
+	public List<UtenteRegistrato> ricercaPerAbilita(String abilita) throws SwimBeanException{
 		Query q = em.createQuery("SELECT u FROM UtenteRegistrato u WHERE :abilita IN u.abilita");
-		Set<UtenteRegistrato> utenti = (Set<UtenteRegistrato>) q.setParameter("abilita", abilita).getResultList();
+		List<UtenteRegistrato> utenti = (List<UtenteRegistrato>) q.setParameter("abilita", abilita).getResultList();
 		if(utenti.size() == 0){
 			throw new SwimBeanException("Nessun utente ha questa abilita'");
 		} else {

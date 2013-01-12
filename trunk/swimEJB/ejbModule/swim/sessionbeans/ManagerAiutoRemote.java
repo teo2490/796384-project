@@ -5,12 +5,13 @@ import swim.entitybeans.UtenteRegistrato;
 
 import javax.ejb.Remote;
 
+import java.util.List;
 import java.util.Set;
 
 @Remote
 public interface ManagerAiutoRemote {
 	
-	public Set<UtenteRegistrato> ricercaPerAbilita(String abilita) throws SwimBeanException;
+	public List<UtenteRegistrato> ricercaPerAbilita(String abilita) throws SwimBeanException;
 	public Set<UtenteRegistrato> ricercaTraAmici(String abilita) throws SwimBeanException;
 	public void invioRichiestaAiuto(String tipo, UtenteRegistrato richiedente, UtenteRegistrato richiesto);
 	public void confermaRichiesta();
