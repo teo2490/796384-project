@@ -51,14 +51,18 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	
 	
 	//Funziona?? Oppure devo ritornare utente per utente??
-	public List<UtenteRegistrato> ricercaPerAbilita(Abilita abilita) throws SwimBeanException{
+	public List<String> ricercaPerAbilita(Abilita abilita) throws SwimBeanException{
 		Query q = em.createQuery("SELECT u FROM UtenteRegistrato u WHERE :abilita MEMBER OF u.abilita");
 		q.setParameter("abilita", abilita);
+		List<String> idUtenti = null;
 		List<UtenteRegistrato> utenti = (List<UtenteRegistrato>) q.getResultList();
-		if(utenti.size() == 0){
+		if(utenti.isEmpty()){
 			throw new SwimBeanException("Nessun utente ha questa abilita'");
 		} else {
-			return utenti;
+			for(int i=0; i<utenti.size(); i++){
+				idUtenti.add(utenti.get(i).getEmail()); 
+			}
+			return idUtenti;
 		}
 	}
 	

@@ -12,7 +12,7 @@ import java.util.Set;
 @Remote
 public interface ManagerAiutoRemote {
 	
-	public List<UtenteRegistrato> ricercaPerAbilita(Abilita abilita) throws SwimBeanException;
+	public List<String> ricercaPerAbilita(Abilita abilita) throws SwimBeanException;
 	public List<UtenteRegistrato> ricercaTraAmici(Abilita abilita, UtenteRegistrato utente) throws SwimBeanException;
 	public void invioRichiestaAiuto(String tipo, UtenteRegistrato richiedente, UtenteRegistrato richiesto);
 	public void confermaRichiesta();
