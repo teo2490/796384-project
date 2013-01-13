@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 import javax.naming.NamingException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import swim.entitybeans.Abilita;
 import swim.entitybeans.UtenteRegistrato;
 import swim.sessionbeans.ManagerAiutoRemote;
 import swim.sessionbeans.SwimBeanException;
@@ -43,7 +45,7 @@ public class RicercaAiutoAmiciServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        Set<UtenteRegistrato> possAiutanti = null;
+        List<UtenteRegistrato> possAiutanti = null;
         //---Impedisce di fare azioni senza essere loggato
         UtenteRegistrato u = (UtenteRegistrato) request.getSession().getAttribute("utente");
         if(u.equals(null)){
@@ -55,8 +57,9 @@ public class RicercaAiutoAmiciServlet extends HttpServlet {
 			ManagerAiutoRemote manager = (ManagerAiutoRemote) PortableRemoteObject.narrow(obj, ManagerAiutoRemote.class);
 			
 			String abilita = request.getParameter("helpKey");
+			Abilita a = manager.ricercaAbilita(abilita);
 			try {
-				possAiutanti = manager.ricercaTraAmici(abilita);
+				possAiutanti = manager.ricercaTraAmici(a, u);
 			} catch (SwimBeanException e) {
 				e.printStackTrace();
 			}

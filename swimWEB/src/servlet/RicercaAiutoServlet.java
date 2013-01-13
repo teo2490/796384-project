@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import swim.entitybeans.Abilita;
 import swim.entitybeans.UtenteRegistrato;
 import swim.sessionbeans.ManagerAiutoRemote;
 import swim.sessionbeans.ManagerUtenteRegistratoRemote;
@@ -45,17 +46,24 @@ public class RicercaAiutoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        List<UtenteRegistrato> possAiutanti = null;
+        List<String> possAiutanti = null;
 		try {
 			Object obj = ContextUtil.getInitialContext().lookup("ManagerAiuto/remote");
 			ManagerAiutoRemote manager = (ManagerAiutoRemote) PortableRemoteObject.narrow(obj, ManagerAiutoRemote.class);
 			
 			String abilita = request.getParameter("helpKey");
+			Abilita a = manager.ricercaAbilita(abilita);
 			try {
-				possAiutanti = manager.ricercaPerAbilita(abilita);
+				possAiutanti = manager.ricercaPerAbilita(a);
 			} catch (SwimBeanException e) {
 				e.printStackTrace();
 			}
+			//System.out.println(possAiutanti.get(0).getEmail());
+			//
+//			for(UtenteRegistrato u: possAiutanti){
+//				
+//			}
+			//
 //Invio l'elenco dei possibili aiutanti alla pagina di scelta
 			request.setAttribute("possAiutanti",possAiutanti);
 			//request.getRequestDispatcher("ShowAiutanti.jsp").forward(request, response);

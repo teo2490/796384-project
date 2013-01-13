@@ -27,10 +27,11 @@
 				    </div>
 				</div>
 			<% 
-			List<UtenteRegistrato> ris;
-			ris = (List<UtenteRegistrato>)request.getSession().getAttribute("possAiutanti");
+			List<String> ris;
+			ris = (List<String>)request.getSession().getAttribute("possAiutanti");
 			//Devo stampare i possibili aiutanti
-			for (UtenteRegistrato u: ris)	{ out.println("<p>"+u.getNome()+"&nbsp"+u.getCognome()+"&nbsp"+u.getEmail()+"&nbsp"+"</p>"); }
+			for (String u: ris)	{ out.println(u); }
+			//out.println("<p>"+u.getNome()+"&nbsp"+u.getCognome()+"&nbsp"+u.getEmail()+"&nbsp"+"</p>");
 			%>
 			</div>
 		</div>
