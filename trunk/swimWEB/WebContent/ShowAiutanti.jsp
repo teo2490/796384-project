@@ -21,11 +21,12 @@
 					<div id="menu">
 				        <ul>
 				            <li><a href="Home.jsp">Home</a></li>
-				            <li><a href="HomeUtente.jsp">Profilo</a></li>	
-				            <li><a href="LogoutServlet">Logout</a></li>				            
+				            <!-- <li><a href="HomeUtente.jsp">Profilo</a></li>	
+				            <li><a href="LogoutServlet">Logout</a></li>	 -->			            
 				        </ul>
 				    </div>
 				</div>
+				<br/><br/><br/><br/>
 			<% 
 			List<String> ris;
 			ris = (List<String>)request.getSession().getAttribute("possAiutanti");
