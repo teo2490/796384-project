@@ -36,6 +36,7 @@ public class TestAbilita {
 		manUser = (ManagerUtenteRegistratoRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerUtenteRegistrato/remote"), ManagerUtenteRegistratoRemote.class);
 		ctx = ContextUtil.getInitialContext();
 		ManagerInizializzazioneDatabaseRemote db = (ManagerInizializzazioneDatabaseRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerInizializzazioneDatabase/remote"), ManagerInizializzazioneDatabaseRemote.class);
+		db.pulisciABILITA_UTENTE();
 		db.pulisciUtenteRegistrato();
 		db.pulisciAbilita();
 		db.pulisciAmministratore();
@@ -45,8 +46,7 @@ public class TestAbilita {
 		List<Abilita> elenco = (List<Abilita>) manAdmin.getElencoRichieste();
 		for(int i=0; i<elenco.size(); i++){
 			manAdmin.aggiungiAbilita(Integer.toString(elenco.get(i).getId()), elenco.get(i).getNome(), elenco.get(i).getDescrizione(), "admin1@swim.it");
-		}
-		
+		}	
 	}
 	
 	@Test
