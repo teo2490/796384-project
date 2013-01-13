@@ -54,7 +54,12 @@
 				 	Object obj = ContextUtil.getInitialContext().lookup("ManagerAbilita/remote");
 					ManagerAbilitaRemote man = (ManagerAbilitaRemote) PortableRemoteObject.narrow(obj, ManagerAbilitaRemote.class);
 					UtenteRegistrato u1 = (UtenteRegistrato) request.getSession().getAttribute("utente");
-					List<Abilita> elenco = man.getAbilitaUtente(u1);
+					List<Abilita> elenco = null;
+					try{
+						elenco = man.getAbilitaUtente(u1);
+					}catch(SwimBeanException e){
+						out.println("L'utente non possiede ancora abilita'!");	
+					}
 					if (elenco.size() >0) 
 			        { 
 						for (Abilita e: elenco)	{ out.println("<p>"+e.getNome()+"</p>"); }
