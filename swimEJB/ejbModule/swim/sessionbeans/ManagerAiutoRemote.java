@@ -1,5 +1,6 @@
 package swim.sessionbeans;
 
+import swim.entitybeans.Abilita;
 import swim.entitybeans.Aiuto;
 import swim.entitybeans.UtenteRegistrato;
 
@@ -11,12 +12,17 @@ import java.util.Set;
 @Remote
 public interface ManagerAiutoRemote {
 	
-	public List<UtenteRegistrato> ricercaPerAbilita(String abilita) throws SwimBeanException;
-	public Set<UtenteRegistrato> ricercaTraAmici(String abilita) throws SwimBeanException;
+	public List<UtenteRegistrato> ricercaPerAbilita(Abilita abilita) throws SwimBeanException;
+	public List<UtenteRegistrato> ricercaTraAmici(Abilita abilita, UtenteRegistrato utente) throws SwimBeanException;
 	public void invioRichiestaAiuto(String tipo, UtenteRegistrato richiedente, UtenteRegistrato richiesto);
 	public void confermaRichiesta();
-	public String controlloFeedback() throws SwimBeanException;
+	public String controlloFeedback(Aiuto aiuto) throws SwimBeanException;
 	public void aggiungiFeedback(String testo);
-	public Set<Aiuto> getElencoRichiesteAiuto(UtenteRegistrato utente) throws SwimBeanException;
-
+	public List<String> getElencoFeedbackUtente(UtenteRegistrato u);
+	public List<Aiuto> getElencoRichiesteAiutoFatteNonConfermate(UtenteRegistrato utente) throws SwimBeanException;
+	public List<Aiuto> getElencoRichiesteAiutoFatteConfermate(UtenteRegistrato utente) throws SwimBeanException;
+	public List<Aiuto> getElencoRichiesteAiutoRicevuteNonConfermate(UtenteRegistrato utente) throws SwimBeanException;
+	public List<Aiuto> getElencoRichiesteAiutoRicevuteConfermate(UtenteRegistrato utente) throws SwimBeanException;
+	public Abilita ricercaAbilita(String id);
+	
 }

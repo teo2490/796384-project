@@ -6,12 +6,15 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.hibernate.validator.Size;
+
 @Entity
 @Table(name="UtenteRegistrato")
 public class UtenteRegistrato implements Serializable{
 	
 	@Id
-	@Column(name="U_ID")
+	@Column(name="U_ID"/*, length=255*/)
+	//@Size(max=255)
 	private String email;
 	private String password;
 	private String nome;

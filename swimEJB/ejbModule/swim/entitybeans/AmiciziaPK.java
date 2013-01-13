@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 
+import org.hibernate.validator.Size;
+
 public class AmiciziaPK implements Serializable{
 	
 	private UtenteRegistrato utRichiedente;

@@ -24,7 +24,7 @@ public class Aiuto implements Serializable{
 	@ManyToOne
 	private UtenteRegistrato utRiceve;
 	
-	public int getID(){
+	public int getId(){
 		return id;
 	}
 	
