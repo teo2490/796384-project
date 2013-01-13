@@ -63,9 +63,9 @@ public class RicercaAiutoServlet extends HttpServlet {
 //			for(UtenteRegistrato u: possAiutanti){
 //				
 //			}
-			//
+			// 
 //Invio l'elenco dei possibili aiutanti alla pagina di scelta
-			request.setAttribute("possAiutanti",possAiutanti);
+			request.getSession().setAttribute("possAiutanti",possAiutanti);
 			//request.getRequestDispatcher("ShowAiutanti.jsp").forward(request, response);
 			//RequestDispatcher disp = null;
 			RequestDispatcher disp = request.getRequestDispatcher("ShowAiutanti.jsp");
