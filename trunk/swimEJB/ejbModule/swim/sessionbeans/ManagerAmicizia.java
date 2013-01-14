@@ -33,10 +33,14 @@ public class ManagerAmicizia implements ManagerAmiciziaRemote{
 	}
 	
 	//Funziona?? Oppure devo ritornare utente per utente??
-	public List<UtenteRegistrato> getElecoAmici(UtenteRegistrato utente){
+	public List<UtenteRegistrato> getElencoAmici(UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT u FROM (UtenteRegistrato u, Amicizia a) WHERE (a.conferma = true AND (:utente MEMBER OF u.sFriendship OR :utente MEMBER OF u.rFriendship))");
 		List<UtenteRegistrato> amici = (List<UtenteRegistrato>) q.setParameter("utente", utente).getResultList();
-		return amici;
+		if(amici.size() == 0){
+			throw new SwimBeanException("Non hai amici!");
+		} else {
+			return amici;
+		}
 	}
 	
 	//Funziona?? Oppure devo ritornare richiesta per richiesta??
