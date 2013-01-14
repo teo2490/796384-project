@@ -13,9 +13,9 @@ import java.util.Set;
 public interface ManagerAiutoRemote {
 	
 	public List<String> ricercaPerAbilita(Abilita abilita) throws SwimBeanException;
-	public List<UtenteRegistrato> ricercaTraAmici(Abilita abilita, UtenteRegistrato utente) throws SwimBeanException;
+	public List<String> ricercaTraAmici(Abilita abilita, UtenteRegistrato utente) throws SwimBeanException;
 	public void invioRichiestaAiuto(String tipo, UtenteRegistrato richiedente, UtenteRegistrato richiesto);
-	public void confermaRichiesta();
+	public void confermaRichiesta(String id);
 	public String controlloFeedback(Aiuto aiuto) throws SwimBeanException;
 	public void aggiungiFeedback(String testo);
 	public List<String> getElencoFeedbackUtente(UtenteRegistrato u);
@@ -24,5 +24,6 @@ public interface ManagerAiutoRemote {
 	public List<Aiuto> getElencoRichiesteAiutoRicevuteNonConfermate(UtenteRegistrato utente) throws SwimBeanException;
 	public List<Aiuto> getElencoRichiesteAiutoRicevuteConfermate(UtenteRegistrato utente) throws SwimBeanException;
 	public Abilita ricercaAbilita(String id);
+	public Aiuto ricercaAiuto(String id);
 	
 }
