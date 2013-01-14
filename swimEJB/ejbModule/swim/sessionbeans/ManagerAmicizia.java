@@ -27,9 +27,10 @@ public class ManagerAmicizia implements ManagerAmiciziaRemote{
 		Amicizia amicizia = new Amicizia();
 		amicizia.setRichiedente(richiedente);
 		amicizia.setRichiesto(richiesto);
+		em.persist(amicizia);
 	}
 	
-	public void invioRichiestaAmicizia(UtenteRegistrato richiedente, UtenteRegistrato richiesto) throws SwimBeanException{
+	public void invioRichiestaAmicizia(UtenteRegistrato richiedente, UtenteRegistrato richiesto){
 		creaAmiciziaDirect(richiedente, richiesto);
 	}
 	
@@ -92,7 +93,7 @@ public class ManagerAmicizia implements ManagerAmiciziaRemote{
 	}
 	
 	public Amicizia ricercaAmicizia(String id) {
-		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.id = :id");
+		Query q = em.createQuery("SELECT a FROM Amicizia a WHERE a.id = :id");
 		//System.out.println(id);
 		int idd = Integer.parseInt(id);
 		q.setParameter("id", idd);
