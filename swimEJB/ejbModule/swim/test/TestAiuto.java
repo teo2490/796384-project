@@ -12,10 +12,12 @@ import org.junit.Test;
 
 import swim.entitybeans.Abilita;
 import swim.entitybeans.Aiuto;
+import swim.entitybeans.UtenteRegistrato;
 import swim.sessionbeans.ManagerAbilitaRemote;
 import swim.sessionbeans.ManagerAiutoRemote;
 import swim.sessionbeans.ManagerAmministratoreRemote;
 import swim.sessionbeans.ManagerUtenteRegistratoRemote;
+import swim.sessionbeans.SwimBeanException;
 import swim.util.ContextUtil;
 
 public class TestAiuto {
@@ -39,15 +41,15 @@ public class TestAiuto {
 		ctx = ContextUtil.getInitialContext();
 		ManagerInizializzazioneDatabaseRemote db = (ManagerInizializzazioneDatabaseRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerInizializzazioneDatabase/remote"), ManagerInizializzazioneDatabaseRemote.class);
 		db.pulisciABILITA_UTENTE();
-		db.pulisciUtenteRegistrato();
-		db.pulisciAbilita();
 		db.pulisciAiuto();
+		db.pulisciAbilita();
+		db.pulisciUtenteRegistrato();
 		db.pulisciAmministratore();
 		db.creaAdminPredefiniti();
-		//db.creaAiutiPredefiniti();
-		db.creaAbilitaPredefinite();
 		db.creaUtentiPredefiniti();
+		db.creaAbilitaPredefinite();
 		db.creaAiutiPredefiniti(manUser.ricercaUtente("mr@mail.it"), manUser.ricercaUtente("rp@mail.it"));
+		db.creaABILITA_UTENTE();
 		
 		List<Abilita> elenco = (List<Abilita>) manAdmin.getElencoRichieste();
 		for(int i=0; i<elenco.size(); i++){
@@ -56,8 +58,27 @@ public class TestAiuto {
 	}
 	
 	@Test
-	public void prova(){
-		assertNull("prova", null);
+	public void testRicercaTraAmici(){
+		//Da fare quando creo la tabella amicizia!!
+	}
+	
+	@Test
+	public void testRicercaPerAbilita() throws SwimBeanException{
+		
+		List<Abilita> elenco = (List<Abilita>) manAbil.getElencoAbilita();
+		for(int i=0; i<elenco.size(); i++){
+			if(elenco.get(i).getNome() == "C" || elenco.get(i).getNome() == "Java"){
+				List<String> elencoEmail = manager.ricercaPerAbilita(elenco.get(i));
+				UtenteRegistrato u = manUser.ricercaUtente(elencoEmail.get(0));
+				assertNotNull("L'abilità è posseduta da almeno un utente", u);
+			} else {
+				List<String> elencoEmail = manager.ricercaPerAbilita(elenco.get(i));
+				System.out.println(elenco.get(i));
+				System.out.println(manUser.ricercaUtente(elencoEmail.get(0)).getEmail());
+				UtenteRegistrato u = manUser.ricercaUtente(elencoEmail.get(0));
+				assertNull("L'abilità" +elenco.get(i).getNome()+ "non è posseduta da nessun utente", u);
+			}
+		}
 	}
 
 }

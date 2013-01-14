@@ -10,6 +10,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.hibernate.engine.ExecuteUpdateResultCheckStyle;
+
 import com.sun.jmx.snmp.Timestamp;
 
 import swim.entitybeans.Abilita;
@@ -59,9 +61,9 @@ public class ManagerAbilita implements ManagerAbilitaRemote{
 	}
 	
 	public void aggiungiAbilita(UtenteRegistrato u, Abilita a){
-//		Set<Abilita> al = u.getAbilita();
-//		al.add(a);
-//		u.setAbilita(al);
+		/*List<Abilita> al = u.getAbilita();
+		al.add(a);
+		u.setAbilita(al);*/
 		Query q = em.createNativeQuery("INSERT INTO `swim`.`ABILITA_UTENTE` (`UtenteRegistrato_ID`, `Abilita_ID`) VALUES (:email, :id);");
 		q.setParameter("email", u.getEmail());
 		q.setParameter("id", a.getId());
