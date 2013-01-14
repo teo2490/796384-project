@@ -43,7 +43,7 @@
 					<li><a href="RicercaAiutoSistema.jsp">Cerca Aiuto nell'intero Sistema</a></li>
 					<li><a href="RicercaAiutoAmici.jsp">Cerca Aiuto tra gli Amici</a></li>
 					<li><a href="RicercaProfilo.jsp">Cerca Utente</a></li>
-					<li><a href="GestAmicizia">Gestione Amicizie</a></li>
+					<li><a href="GestAmicizia.jsp">Gestione Amicizie</a></li>
 					<li><a href="GestAbilita.jsp">Gestione Abilita'</a></li>
 					<li><a href="GestAiuto.jsp">Gestione Aiuti</a></li>
 					<li><a href="GestProfilo.jsp">Gestione Profilo</a></li>

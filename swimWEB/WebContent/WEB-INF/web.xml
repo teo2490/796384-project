@@ -140,4 +140,24 @@
     <servlet-name>RichiestaAiutoServlet</servlet-name>
     <url-pattern>/RichiestaAiutoServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ConfermaAmiciziaServlet</display-name>
+    <servlet-name>ConfermaAmiciziaServlet</servlet-name>
+    <servlet-class>servlet.ConfermaAmiciziaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConfermaAmiciziaServlet</servlet-name>
+    <url-pattern>/ConfermaAmiciziaServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RichiestaAmiciziaServlet</display-name>
+    <servlet-name>RichiestaAmiciziaServlet</servlet-name>
+    <servlet-class>servlet.RichiestaAmiciziaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RichiestaAmiciziaServlet</servlet-name>
+    <url-pattern>/RichiestaAmiciziaServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
