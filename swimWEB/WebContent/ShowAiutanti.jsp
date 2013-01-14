@@ -20,9 +20,17 @@
 					</div>					
 					<div id="menu">
 				        <ul>
-				            <li><a href="Home.jsp">Home</a></li>
-				            <!-- <li><a href="HomeUtente.jsp">Profilo</a></li>	
-				            <li><a href="LogoutServlet">Logout</a></li>	 -->			            
+				            
+				            <%
+				            UtenteRegistrato ut = (UtenteRegistrato) request.getSession().getAttribute("utente");
+				            if(ut==null){
+				            	out.println("<li><a href=\"Home.jsp\">Home</a></li>");
+				            }
+				            else{
+				            	out.println("<li><a href=\"HomeUtente.jsp\">Profilo</a></li>");
+				            	out.println("<li><a href=\"LogoutServlet\">Logout</a></li>");
+				            }
+				            %>		            
 				        </ul>
 				    </div>
 				</div>
@@ -31,7 +39,7 @@
 			List<String> ris;
 			ris = (List<String>)request.getSession().getAttribute("possAiutanti");
 			//Devo stampare i possibili aiutanti
-			for (String u: ris)	{ out.println(u); }
+			for (String u: ris)	{ out.println(u+"<br />"); }
 			//out.println("<p>"+u.getNome()+"&nbsp"+u.getCognome()+"&nbsp"+u.getEmail()+"&nbsp"+"</p>");
 			%>
 			</div>
