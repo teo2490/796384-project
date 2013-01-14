@@ -1,5 +1,6 @@
 package swim.sessionbeans;
 
+import swim.entitybeans.Abilita;
 import swim.entitybeans.UtenteRegistrato;
 
 import javax.ejb.Remote;
@@ -14,5 +15,6 @@ public interface ManagerUtenteRegistratoRemote {
 	public void aggiungiUtente(String email,String password, String nome, String cognome);
 	public void cambioPsw(String email, String newPsw, String oldPsw) throws SwimBeanException;
 	public void cambioImm(String email, String url);
+	public boolean utentePossiedeAbilita(UtenteRegistrato u, Abilita a);
 	//public void logout();
 }

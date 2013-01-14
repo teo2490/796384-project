@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import swim.entitybeans.Abilita;
 import swim.entitybeans.UtenteRegistrato;
 
 @Stateless
@@ -89,6 +90,14 @@ public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
 		UtenteRegistrato ut = ricercaUtente(email);
 		if (url != null) {
 			ut.setUrl(url);
+		}
+	}
+	
+	public boolean utentePossiedeAbilita(UtenteRegistrato u, Abilita a){
+		if(u.getAbilita().contains(a)){
+			return true;
+		} else {
+			return false;
 		}
 	}
 
