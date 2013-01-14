@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Gestione Abilità</title>
+<title>Gestione Amicizia</title>
 <style type="text/css">
 			@import url(css/main.css);
 </style>
@@ -41,7 +41,7 @@
 <table width="795px" border="0" align="center">
   <tr>
     <td>
-	<div align="center"><h3>GESTIONE AIUTI</h3></div>
+	<div align="center"><h3>GESTIONE AMICIZIE</h3></div>
     </td>
   </tr>
   <tr>
@@ -49,20 +49,20 @@
     <td>
     	<div align="center">
 					
-						<h3><u>Richieste di Aiuto</u></h3><br>
+						<h3><u>Richieste di Amicizia</u></h3><br>
 					<%
-					Object obj = ContextUtil.getInitialContext().lookup("ManagerAiuto/remote");
-  	 				ManagerAiutoRemote man = (ManagerAiutoRemote) PortableRemoteObject.narrow(obj, ManagerAiutoRemote.class);
+					Object obj = ContextUtil.getInitialContext().lookup("ManagerAmicizia/remote");
+  	 				ManagerAmiciziaRemote man = (ManagerAmiciziaRemote) PortableRemoteObject.narrow(obj, ManagerAmiciziaRemote.class);
 					UtenteRegistrato u = (UtenteRegistrato) request.getSession().getAttribute("utente");
 					try{
-						List<Aiuto> elenco = man.getElencoRichiesteAiutoRicevuteNonConfermate(u);
+						List<Amicizia> elenco = man.getElencoRichiesteAmiciziaRicevute(u);
 						if (!elenco.isEmpty())  
 				        { 
 							//"<p>"+e.getNome()+"</p><img src=\"image/ok.png\" height=\"20px\" width=\"20px\"><img src=\"image/no.png\" height=\"20px\" width=\"20px\" style=\"margin-left: 15px\"><br />"
-							for (Aiuto e: elenco)	{ out.println("<form action=\"ConfermaAiutoServlet\" method=\"post\"><input type=\"text\" name=\"id\" id=\"id\" value=\""+e.getId()+"\" style=\"visibility: hidden;\" /><p>"+e.getTipo()+"&nbsp"+e.getRichiedente().getEmail()+"</p><input type=\"submit\" name=\"submit\" value=\"Conferma\" id=\"ok\"/></form><br />"); }
+							for (Amicizia e: elenco)	{ out.println("<form action=\"ConfermaAmiciziaServlet\" method=\"post\"><input type=\"text\" name=\"id\" id=\"id\" value=\""+e.getId()+"\" style=\"visibility: hidden;\" /><p>"+e.getRichiedente().getEmail()+"</p><input type=\"submit\" name=\"submit\" value=\"Conferma\" id=\"ok\"/></form><br />"); }
 				        }
 					}catch(SwimBeanException e){
-						out.println("Non ci sono richieste di aiuto per te!");
+						out.println("Non ci sono richieste di amicizia per te!");
 					}
 					%> 
 					<br /><br /><br />
@@ -71,26 +71,15 @@
     </tr>
     <tr>
     <td>
-   <form action="RichiestaAiutoServlet" method="post" onSubmit="return check()">
+   <form action="RichiestaAmiciziaServlet" method="post" onSubmit="return check()">
     		<div align="center">
 					<fieldset>
-						<h3><u>Invio Richiesta di Aiuto</u></h3><br>
+						<h3><u>Invio Richiesta di Amicizia</u></h3><br>
 						<br /><br />
-					<label for="email">Email dell'aiutante scelto:</label>
+					<label for="email">Email dell'utente:</label>
 						<br />
 						<input type="text" name="email" id="email" />
 						<br />
-					<select name="abilita">
-					<%
-					Object obja = ContextUtil.getInitialContext().lookup("ManagerAbilita/remote");
-					ManagerAbilitaRemote mana = (ManagerAbilitaRemote) PortableRemoteObject.narrow(obja, ManagerAbilitaRemote.class);
-					List<Abilita> elencoa = mana.getElencoAbilita();
-					if (elencoa.size() >0) 
-			        { 
-						for (Abilita e: elencoa)	{ out.println("<option value = \""+Integer.toString(e.getId())+"\" id=\"abil\" >"+e.getNome()+"</option>"); }
-			        } 
-					%>
-					</select>
 					<input type="submit" name="submit" value="OK" />
 					<br /><br /><br />
 					</fieldset>
@@ -104,20 +93,20 @@
     <td>
     	<div align="center">
 					
-						<h3><u>Feedback</u></h3><br>
+						<h3><u>Amici</u></h3><br>
 					<%
-					Object objf = ContextUtil.getInitialContext().lookup("ManagerAiuto/remote");
-  	 				ManagerAiutoRemote manf = (ManagerAiutoRemote) PortableRemoteObject.narrow(objf, ManagerAiutoRemote.class);
+					Object objf = ContextUtil.getInitialContext().lookup("ManagerAmicizia/remote");
+  	 				ManagerAmiciziaRemote manf = (ManagerAmiciziaRemote) PortableRemoteObject.narrow(objf, ManagerAmiciziaRemote.class);
 					UtenteRegistrato uf = (UtenteRegistrato) request.getSession().getAttribute("utente");
 					try{
-					List<Aiuto> elencof = manf.getElencoRichiesteAiutoFatteConfermateSenzaFeedback(uf);
+					List<UtenteRegistrato> elencof = manf.getElencoAmici(uf);
 					if (elencof.size() >0)  
 			        { 
 						//"<p>"+e.getNome()+"</p><img src=\"image/ok.png\" height=\"20px\" width=\"20px\"><img src=\"image/no.png\" height=\"20px\" width=\"20px\" style=\"margin-left: 15px\"><br />"
-						for (Aiuto e: elencof)	{ out.println("<form action=\"FeedbackServlet\" method=\"post\"><input type=\"text\" name=\"id\" id=\"id\" value=\""+e.getId()+"\" style=\"visibility: hidden;\" /><p>"+e.getTipo()+"&nbsp"+e.getRichiesto().getEmail()+"</p><input type=\"text\" name=\"feedback\" id=\"feedback\" /><input type=\"submit\" name=\"submit\" value=\"Conferma\" id=\"ok\"/><br />"); }
+						for (UtenteRegistrato e: elencof)	{ out.println(e.getEmail()+"&nbsp"+e.getNome()+"&nbsp"+e.getCognome()+"<br />"); }
 			        }
 					}catch(SwimBeanException e){
-						out.println("Non hai ricevuto aiuto per cui lasciare un feedback!");
+						out.println("Non hai amici!");
 					}
 					%>
 					<br /><br /><br />
