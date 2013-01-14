@@ -21,7 +21,11 @@
 		}
 		</script>
 </head>
+<%@ page import="swim.sessionbeans.*" %>
 <%@ page import="swim.entitybeans.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="swim.util.ContextUtil" %>
+<%@ page import="javax.rmi.PortableRemoteObject" %>
 <body>
 <div id="content">
 			<div id="subcontent">
@@ -48,13 +52,19 @@
   <tr>
     <td>
 		<%
+		Object obj = ContextUtil.getInitialContext().lookup("ManagerAiuto/remote");
+		ManagerAiutoRemote man = (ManagerAiutoRemote) PortableRemoteObject.narrow(obj, ManagerAiutoRemote.class);
 		UtenteRegistrato u = (UtenteRegistrato)request.getSession().getAttribute("ut");
 		try{
 			out.println("<br /><br />"+u.getEmail()+"<br />");
-			out.println(u.getNome()+"&nbsp"+u.getCognome());
+			out.println(u.getNome()+"&nbsp"+u.getCognome()+"<br />");
+			List<Aiuto> fb = man.getElencoRichiesteAiutoRicevuteConfermateConFeedback(u);
 			//STAMPARE FEEDBACK
+			for (Aiuto f: fb)	{ out.println(f.getFeedback()+"<br />"); }
 		}catch(NullPointerException e){
 			out.println("Nessun utente corrisponde all'email inserita!");
+		}catch(SwimBeanException se){
+			out.println("Questo utente non ha feedback!!");
 		}
 		%>
     </td>
