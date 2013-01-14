@@ -10,6 +10,7 @@ import swim.entitybeans.Abilita;
 import swim.entitybeans.UtenteRegistrato;
 import swim.entitybeans.Aiuto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -30,13 +31,14 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	}
 	
 	// NON SO SE FUNZIONA!!
-	public List<UtenteRegistrato> ricercaTraAmici(Abilita abilita, UtenteRegistrato utente) throws SwimBeanException{
+	public List<String> ricercaTraAmici(Abilita abilita, UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT u FROM UtenteRegistrato u, Amicizia a WHERE u = a.utRichiedente AND :abilita MEMBER OF u.abilita AND :utente = a.utRichiesto");
 		Query q1 = em.createQuery("SELECT u FROM UtenteRegistrato u, Amicizia a WHERE u = a.utRichiesto AND :abilita MEMBER OF u.abilita AND :utente = a.utRichiedente");
 		q.setParameter("abilita", abilita);
 		q.setParameter("utente", utente);
 		q1.setParameter("abilita", abilita);
 		q1.setParameter("utente", utente);
+		List<String> idUtenti = new ArrayList<String>();
 		List<UtenteRegistrato> utenti = (List<UtenteRegistrato>) q.getResultList();
 		List<UtenteRegistrato> daSvuotare = (List<UtenteRegistrato>) q1.getResultList();
 		for(int i=0; i<daSvuotare.size(); i++){
@@ -45,7 +47,10 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 		if(utenti.size() == 0){
 			throw new SwimBeanException("Non hai amici con questa abilita'");
 		} else {
-			return utenti;
+			for(int i=0; i<utenti.size(); i++){
+				idUtenti.add(utenti.get(i).getEmail()); 
+			}
+			return idUtenti;
 		}
 	}
 	
@@ -54,7 +59,7 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	public List<String> ricercaPerAbilita(Abilita abilita) throws SwimBeanException{
 		Query q = em.createQuery("SELECT u FROM UtenteRegistrato u WHERE :abilita MEMBER OF u.abilita");
 		q.setParameter("abilita", abilita);
-		List<String> idUtenti = null;
+		List<String> idUtenti = new ArrayList<String>();
 		List<UtenteRegistrato> utenti = (List<UtenteRegistrato>) q.getResultList();
 		if(utenti.isEmpty()){
 			throw new SwimBeanException("Nessun utente ha questa abilita'");
@@ -71,8 +76,9 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 		creaAiutoDirect(tipo, richiedente, richiesto);
 	}
 	
-	public void confermaRichiesta(){
-		aiuto.switchConferma();
+	public void confermaRichiesta(String id){
+		Aiuto a = ricercaAiuto(id);
+		a.switchConferma();
 	}
 	
 	public String controlloFeedback(Aiuto aiuto) throws SwimBeanException{
@@ -142,11 +148,25 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	
 	public Abilita ricercaAbilita(String id) {
 		Query q = em.createQuery("SELECT a FROM Abilita a WHERE a.id = :id");
-		System.out.println(id);
+		//System.out.println(id);
 		int idd = Integer.parseInt(id);
 		q.setParameter("id", idd);
 		List<Abilita> ab;
 		ab = (List<Abilita>) q.getResultList();
+		if (ab.isEmpty()) {
+			return null;
+		} else {
+			return ab.get(0);
+		}
+	}
+	
+	public Aiuto ricercaAiuto(String id) {
+		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.id = :id");
+		//System.out.println(id);
+		int idd = Integer.parseInt(id);
+		q.setParameter("id", idd);
+		List<Aiuto> ab;
+		ab = (List<Aiuto>) q.getResultList();
 		if (ab.isEmpty()) {
 			return null;
 		} else {

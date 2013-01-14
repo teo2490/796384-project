@@ -55,4 +55,12 @@ public class Aiuto implements Serializable{
 	public void setUtRiceve(UtenteRegistrato richiedente){
 		this.utRiceve = richiedente;
 	}
+	
+	public UtenteRegistrato getRichiedente(){
+		return this.utRiceve;
+	}
+	
+	public UtenteRegistrato getRichiesto(){
+		return this.utFornisce;
+	}
 }
