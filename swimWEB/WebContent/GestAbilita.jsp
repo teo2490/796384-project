@@ -57,13 +57,16 @@
 					List<Abilita> elenco = null;
 					try{
 						elenco = man.getAbilitaUtente(u1);
+						if (!elenco.isEmpty()) 
+				        { 
+							for (Abilita e: elenco)	{ out.println("<p>"+e.getNome()+"</p>"); }
+				        }    
 					}catch(SwimBeanException e){
 						out.println("L'utente non possiede ancora abilita'!");	
+					}catch(NullPointerException e){
+						out.println("L'utente non possiede ancora abilita'!");
 					}
-					if (elenco.size() >0) 
-			        { 
-						for (Abilita e: elenco)	{ out.println("<p>"+e.getNome()+"</p>"); }
-			        }       
+					   
 					%>
 					<br /><br /><br />
 			</div>

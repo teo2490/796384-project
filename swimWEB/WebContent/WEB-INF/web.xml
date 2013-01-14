@@ -110,4 +110,14 @@
     <servlet-name>AggiungiAbilitaServlet</servlet-name>
     <url-pattern>/AggiungiAbilitaServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ConfermaAiutoServlet</display-name>
+    <servlet-name>ConfermaAiutoServlet</servlet-name>
+    <servlet-class>servlet.ConfermaAiutoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConfermaAiutoServlet</servlet-name>
+    <url-pattern>/ConfermaAiutoServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
