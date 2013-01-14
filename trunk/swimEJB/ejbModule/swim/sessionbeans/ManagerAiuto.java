@@ -110,7 +110,7 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	public List<String> getElencoFeedbackUtente(UtenteRegistrato u){
 		Query q = em.createQuery("SELECT a.feedback FROM Aiuto a WHERE :utente = a.utFornisce AND NOT (a.feedback=null)");
 		q.setParameter("utente", u);
-		List<String> elencoFeedback = q.getResultList();
+		List<String> elencoFeedback = (List<String>) q.getResultList();
 		if(elencoFeedback.isEmpty()){
 			return null;
 		} else {
@@ -148,6 +148,17 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 			return richieste;
 		}
 	}
+	
+	public List<Aiuto> getElencoRichiesteAiutoRicevuteConfermateConFeedback(UtenteRegistrato utente) throws SwimBeanException{
+		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = true AND NOT (a.feedback = NULL) AND a.utFornisce = :utente");
+		List<Aiuto> richieste = (List<Aiuto>) q.setParameter("utente", utente).getResultList();
+		if(richieste.size() == 0){
+			throw new SwimBeanException("Non ci sono feedback!");
+		} else {
+			return richieste;
+		}
+	}
+	
 	
 	public List<Aiuto> getElencoRichiesteAiutoRicevuteNonConfermate(UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = false AND a.utFornisce = :utente");
