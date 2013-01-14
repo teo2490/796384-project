@@ -5,14 +5,17 @@ import swim.entitybeans.UtenteRegistrato;
 
 import javax.ejb.Remote;
 
+import java.util.List;
 import java.util.Set;
 
 @Remote
 public interface ManagerAmiciziaRemote {
 	
 	public void invioRichiestaAmicizia(UtenteRegistrato richiedente, UtenteRegistrato richiesto) throws SwimBeanException;
-	public Set<UtenteRegistrato> getElecoAmici(UtenteRegistrato utente);
-	public Set<Amicizia> getElencoRichiesteAmicizia(UtenteRegistrato utente) throws SwimBeanException;
-	public void accettaAmicizia();
+	public List<UtenteRegistrato> getElecoAmici(UtenteRegistrato utente);
+	public List<Amicizia> getElencoRichiesteAmiciziaRicevute(UtenteRegistrato utente) throws SwimBeanException;
+	public List<Amicizia> getElencoRichiesteAmiciziaInviate(UtenteRegistrato utente) throws SwimBeanException;
+	public void accettaAmicizia(Amicizia a);
+	public boolean esisteAmicizia(UtenteRegistrato u1, UtenteRegistrato u2);
 
 }
