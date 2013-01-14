@@ -28,6 +28,7 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 		aiuto.setTipo(abilita); //Cosa intendiamo con tipo??
 		aiuto.setUtFornisce(richiesto);
 		aiuto.setUtRiceve(richiedente);
+		em.persist(aiuto);
 	}
 	
 	// NON SO SE FUNZIONA!!
@@ -90,8 +91,20 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 		}
 	}
 	
-	public void aggiungiFeedback(String feedback){
-		aiuto.setFeedback(feedback);
+	public void aggiungiFeedback(Aiuto at, String feedback){
+		Aiuto a = new Aiuto();
+		a.setTipo(at.getTipo());
+		a.setUtFornisce(at.getRichiesto());
+		a.setUtRiceve(at.getRichiedente());
+		a.switchConferma();
+		a.setFeedback(feedback);
+		eliminaAiuto(at);
+		em.persist(a);
+	}
+	
+	public void eliminaAiuto(Aiuto at){
+		Query q = em.createQuery("DELETE FROM Aiuto a WHERE a.id = :id");
+		q.setParameter("id", at.getId()).executeUpdate();
 	}
 	
 	public List<String> getElencoFeedbackUtente(UtenteRegistrato u){
@@ -118,6 +131,16 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	
 	public List<Aiuto> getElencoRichiesteAiutoFatteConfermate(UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = true AND a.utRiceve = :utente");
+		List<Aiuto> richieste = (List<Aiuto>) q.setParameter("utente", utente).getResultList();
+		if(richieste.size() == 0){
+			throw new SwimBeanException("Non ci sono richieste di aiuto per te!");
+		} else {
+			return richieste;
+		}
+	}
+	
+	public List<Aiuto> getElencoRichiesteAiutoFatteConfermateSenzaFeedback(UtenteRegistrato utente) throws SwimBeanException{
+		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = true AND a.feedback = NULL AND a.utRiceve = :utente");
 		List<Aiuto> richieste = (List<Aiuto>) q.setParameter("utente", utente).getResultList();
 		if(richieste.size() == 0){
 			throw new SwimBeanException("Non ci sono richieste di aiuto per te!");
