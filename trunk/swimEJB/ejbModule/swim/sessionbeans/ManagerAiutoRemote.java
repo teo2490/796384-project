@@ -17,10 +17,12 @@ public interface ManagerAiutoRemote {
 	public void invioRichiestaAiuto(String tipo, UtenteRegistrato richiedente, UtenteRegistrato richiesto);
 	public void confermaRichiesta(String id);
 	public String controlloFeedback(Aiuto aiuto) throws SwimBeanException;
-	public void aggiungiFeedback(String testo);
+	public void aggiungiFeedback(Aiuto at, String feedback);
+	public void eliminaAiuto(Aiuto at);
 	public List<String> getElencoFeedbackUtente(UtenteRegistrato u);
 	public List<Aiuto> getElencoRichiesteAiutoFatteNonConfermate(UtenteRegistrato utente) throws SwimBeanException;
 	public List<Aiuto> getElencoRichiesteAiutoFatteConfermate(UtenteRegistrato utente) throws SwimBeanException;
+	public List<Aiuto> getElencoRichiesteAiutoFatteConfermateSenzaFeedback(UtenteRegistrato utente) throws SwimBeanException;
 	public List<Aiuto> getElencoRichiesteAiutoRicevuteNonConfermate(UtenteRegistrato utente) throws SwimBeanException;
 	public List<Aiuto> getElencoRichiesteAiutoRicevuteConfermate(UtenteRegistrato utente) throws SwimBeanException;
 	public Abilita ricercaAbilita(String id);
