@@ -34,9 +34,11 @@ public class Amicizia implements Serializable{
 		return utenteRichiesto.getEmail();
 	}*/
 	
+
 	public int getId(){
 		return this.id;
 	}
+	
 	public void switchConferma(){
 		this.conferma = true;
 	}

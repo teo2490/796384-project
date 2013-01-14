@@ -32,6 +32,8 @@ public interface ManagerInizializzazioneDatabaseRemote {
 	public void creaUtentiPredefiniti();
 	public void creaAbilitaPredefinite();
 	public void creaAdminPredefiniti();
-	public void creaAiutiPredefiniti(UtenteRegistrato fornitore, UtenteRegistrato ricevente);
+	public void creaAiutiPredefiniti(UtenteRegistrato Fornisce, UtenteRegistrato Riceve);
+	public void creaABILITA_UTENTE();
+	public void pulisciCreaDB();
 
 }

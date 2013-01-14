@@ -122,7 +122,7 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	public List<Aiuto> getElencoRichiesteAiutoFatteNonConfermate(UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = false AND a.utRiceve = :utente");
 		List<Aiuto> richieste = (List<Aiuto>) q.setParameter("utente", utente).getResultList();
-		if(richieste.size() == 0){
+		if(richieste.isEmpty()){
 			throw new SwimBeanException("Non ci sono richieste di aiuto per te!");
 		} else {
 			return richieste;
@@ -132,7 +132,7 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	public List<Aiuto> getElencoRichiesteAiutoFatteConfermate(UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = true AND a.utRiceve = :utente");
 		List<Aiuto> richieste = (List<Aiuto>) q.setParameter("utente", utente).getResultList();
-		if(richieste.size() == 0){
+		if(richieste.isEmpty()){
 			throw new SwimBeanException("Non ci sono richieste di aiuto per te!");
 		} else {
 			return richieste;
@@ -142,7 +142,7 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	public List<Aiuto> getElencoRichiesteAiutoFatteConfermateSenzaFeedback(UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = true AND a.feedback = NULL AND a.utRiceve = :utente");
 		List<Aiuto> richieste = (List<Aiuto>) q.setParameter("utente", utente).getResultList();
-		if(richieste.size() == 0){
+		if(richieste.isEmpty()){
 			throw new SwimBeanException("Non ci sono richieste di aiuto per te!");
 		} else {
 			return richieste;
@@ -152,7 +152,7 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	public List<Aiuto> getElencoRichiesteAiutoRicevuteConfermateConFeedback(UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = true AND NOT (a.feedback = NULL) AND a.utFornisce = :utente");
 		List<Aiuto> richieste = (List<Aiuto>) q.setParameter("utente", utente).getResultList();
-		if(richieste.size() == 0){
+		if(richieste.isEmpty()){
 			throw new SwimBeanException("Non ci sono feedback!");
 		} else {
 			return richieste;
@@ -163,7 +163,7 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	public List<Aiuto> getElencoRichiesteAiutoRicevuteNonConfermate(UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = false AND a.utFornisce = :utente");
 		List<Aiuto> richieste = (List<Aiuto>) q.setParameter("utente", utente).getResultList();
-		if(richieste.size() == 0){
+		if(richieste.isEmpty()){
 			throw new SwimBeanException("Non ci sono richieste di aiuto per te!");
 		} else {
 			return richieste;
@@ -173,7 +173,7 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	public List<Aiuto> getElencoRichiesteAiutoRicevuteConfermate(UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = true AND a.utFornisce = :utente");
 		List<Aiuto> richieste = (List<Aiuto>) q.setParameter("utente", utente).getResultList();
-		if(richieste.size() == 0){
+		if(richieste.isEmpty()){
 			throw new SwimBeanException("Non ci sono richieste di aiuto per te!");
 		} else {
 			return richieste;

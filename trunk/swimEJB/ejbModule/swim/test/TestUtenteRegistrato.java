@@ -1,19 +1,21 @@
-//-------------NON FUNZIONA IL CONTEXTUTIL!!!!!----------------
-
 package swim.test;
 
 import static org.junit.Assert.*;
 import static swim.test.ManagerInizializzazioneDatabaseRemote.EMAIL_UTENTI;
 import static swim.test.ManagerInizializzazioneDatabaseRemote.PASSWORD_UTENTI;
 
+import java.util.List;
+
 import javax.naming.InitialContext;
 import javax.rmi.PortableRemoteObject;
 
-import org.jboss.remoting.InvocationFailureException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import swim.entitybeans.Abilita;
 import swim.entitybeans.UtenteRegistrato;
+import swim.sessionbeans.ManagerAbilitaRemote;
+import swim.sessionbeans.ManagerAmministratoreRemote;
 import swim.sessionbeans.ManagerUtenteRegistratoRemote;
 import swim.sessionbeans.SwimBeanException;
 import swim.util.ContextUtil;
@@ -22,6 +24,8 @@ public class TestUtenteRegistrato {
 	
 	private static InitialContext ctx = null;
 	private static ManagerUtenteRegistratoRemote manager = null;
+	private static ManagerAbilitaRemote manAbil = null;
+	private static ManagerAmministratoreRemote manAdmin = null;
 	
 	private static final String EMAIL_NEW_UTENTE = "test@test.fr";
 	private static final String PASSWORD_NEW_UTENTE = "test";
@@ -32,10 +36,21 @@ public class TestUtenteRegistrato {
 	public static void setUpBeforeClass() throws Exception {
 		ctx = ContextUtil.getInitialContext();
 		manager = (ManagerUtenteRegistratoRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerUtenteRegistrato/remote"), ManagerUtenteRegistratoRemote.class);
+		manAbil = (ManagerAbilitaRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerAbilita/remote"), ManagerAbilitaRemote.class);
+		manAdmin = (ManagerAmministratoreRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerAmministratore/remote"), ManagerAmministratoreRemote.class);
 		ctx = ContextUtil.getInitialContext();
 		ManagerInizializzazioneDatabaseRemote db = (ManagerInizializzazioneDatabaseRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerInizializzazioneDatabase/remote"), ManagerInizializzazioneDatabaseRemote.class);
+		db.pulisciABILITA_UTENTE();
+		db.pulisciAbilita();
 		db.pulisciUtenteRegistrato();
 		db.creaUtentiPredefiniti();
+		db.creaAbilitaPredefinite();
+		db.creaABILITA_UTENTE();
+		
+		List<Abilita> elenco = (List<Abilita>) manAdmin.getElencoRichieste();
+		for(int i=0; i<elenco.size(); i++){
+			manAdmin.aggiungiAbilita(Integer.toString(elenco.get(i).getId()), elenco.get(i).getNome(), elenco.get(i).getDescrizione(), "admin1@swim.it");
+		}
 	}
 	
 	@Test
@@ -125,6 +140,21 @@ public class TestUtenteRegistrato {
 		assertNull("L'immagine è stata cambiata ad un utente sbagliato", u.getUrl());
 		u = manager.ricercaUtente("mr@mail.it");
 		assertNull("L'immagine è stata cambiata ad un utente sbagliato", u.getUrl());
+	}
+	
+	@Test
+	public void testUtentePossiedeAbilita() throws SwimBeanException{
+		UtenteRegistrato u = (UtenteRegistrato) manager.ricercaUtente("rp@mail.it");
+		List<Abilita> elenco = (List<Abilita>) manAbil.getAbilitaUtente(u);
+		for(int i=0; i<elenco.size(); i++){
+			boolean flag = manager.utentePossiedeAbilita(u, elenco.get(i));
+			assertTrue("L'utente non possiede un'abilità che dovrebbe possedere", flag);
+		}
+		elenco = (List<Abilita>) manAbil.getElencoAbilitaNonMie(u);
+		for(int i=0; i<elenco.size(); i++){
+			boolean flag = manager.utentePossiedeAbilita(u, elenco.get(i));
+			assertFalse("L'utente possiede un'abilità che non dovrebbe possedere", flag);
+		}
 	}
 
 }

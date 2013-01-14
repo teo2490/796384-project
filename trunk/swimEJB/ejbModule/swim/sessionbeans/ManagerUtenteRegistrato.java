@@ -94,9 +94,11 @@ public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
 	}
 	
 	public boolean utentePossiedeAbilita(UtenteRegistrato u, Abilita a){
+		System.out.println(u.getAbilita());
 		if(u.getAbilita().contains(a)){
 			return true;
 		} else {
+			System.out.println(a);
 			return false;
 		}
 	}
