@@ -41,10 +41,10 @@ public class ManagerAmicizia implements ManagerAmiciziaRemote{
 		List<Amicizia> amicRichiesto = (List<Amicizia>) q.setParameter("utente", utente).getResultList();
 		List<UtenteRegistrato> amici = new ArrayList<UtenteRegistrato>();
 		for(int i=0; i<amicRichiedente.size(); i++){
-			amici.add(amicRichiedente.get(i).getRichiedente());
+			amici.add(amicRichiedente.get(i).getRichiesto());
 		}
 		for(int i=0; i<amicRichiesto.size(); i++){
-			amici.add(amicRichiesto.get(i).getRichiesto());
+			amici.add(amicRichiesto.get(i).getRichiedente());
 		}
 		if(amici.size() == 0){
 			throw new SwimBeanException("Non hai amici!");
