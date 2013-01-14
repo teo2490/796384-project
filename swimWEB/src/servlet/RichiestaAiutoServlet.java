@@ -57,9 +57,14 @@ public class RichiestaAiutoServlet extends HttpServlet {
 			Abilita a = manager.ricercaAbilita(abilita);
 			UtenteRegistrato uRichiesto = manageru.ricercaUtente(email);
 			//Controllo che uRichiesto abbia l'abilità specificata
-			manager.invioRichiestaAiuto(a.getNome(), uRichiedente, uRichiesto);
+			if(manageru.utentePossiedeAbilita(uRichiesto, a)){
+				manager.invioRichiestaAiuto(a.getNome(), uRichiedente, uRichiesto);
+				request.setAttribute("messaggio", "Richiesta inviata correttamente!");
+			}
+			else{
+				request.setAttribute("messaggio", "L'utente non possiede l'abilità selezionata!");
+			}
 			
-			request.setAttribute("messaggio", "Richiesta inviata correttamente!");
 			RequestDispatcher disp = request
 					.getRequestDispatcher("GestAiuto.jsp");
 			disp.forward(request, response);

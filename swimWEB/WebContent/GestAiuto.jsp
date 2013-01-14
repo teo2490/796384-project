@@ -59,7 +59,7 @@
 						if (!elenco.isEmpty())  
 				        { 
 							//"<p>"+e.getNome()+"</p><img src=\"image/ok.png\" height=\"20px\" width=\"20px\"><img src=\"image/no.png\" height=\"20px\" width=\"20px\" style=\"margin-left: 15px\"><br />"
-							for (Aiuto e: elenco)	{ out.println("<form action=\"ConfermaAiutoServlet\" method=\"post\"><input type=\"text\" name=\"id\" id=\"id\" value=\""+e.getId()+"\" style=\"visibility: hidden;\" /><p>"+e.getTipo()+"&nbsp"+e.getRichiedente().getEmail()+"</p><input type=\"submit\" name=\"submit\" value=\"Conferma\" id=\"ok\"/><br />"); }
+							for (Aiuto e: elenco)	{ out.println("<form action=\"ConfermaAiutoServlet\" method=\"post\"><input type=\"text\" name=\"id\" id=\"id\" value=\""+e.getId()+"\" style=\"visibility: hidden;\" /><p>"+e.getTipo()+"&nbsp"+e.getRichiedente().getEmail()+"</p><input type=\"submit\" name=\"submit\" value=\"Conferma\" id=\"ok\"/></form><br />"); }
 				        }
 					}catch(SwimBeanException e){
 						out.println("Non ci sono richieste di aiuto per te!");
