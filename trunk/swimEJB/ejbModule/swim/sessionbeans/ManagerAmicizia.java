@@ -1,5 +1,6 @@
 package swim.sessionbeans;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.ejb.Remote;
@@ -19,10 +20,10 @@ public class ManagerAmicizia implements ManagerAmiciziaRemote{
 	@PersistenceContext( unitName = "swim" )
 	private EntityManager em;
 	
-	private Amicizia amicizia;
+	//private Amicizia amicizia;
 	
 	private void creaAmiciziaDirect(UtenteRegistrato richiedente, UtenteRegistrato richiesto){
-		amicizia = new Amicizia();
+		Amicizia amicizia = new Amicizia();
 		amicizia.setRichiedente(richiedente);
 		amicizia.setRichiesto(richiesto);
 	}
@@ -32,16 +33,16 @@ public class ManagerAmicizia implements ManagerAmiciziaRemote{
 	}
 	
 	//Funziona?? Oppure devo ritornare utente per utente??
-	public Set<UtenteRegistrato> getElecoAmici(UtenteRegistrato utente){
-		Query q = em.createQuery("SELECT u FROM (UtenteRegistrato u, Amicizia a) WHERE (a.conferma = true AND (u IN :utente.sFriendship OR u IN :utente.rFriendship))");
-		Set<UtenteRegistrato> amici = (Set<UtenteRegistrato>) q.setParameter("utente", utente).getResultList();
+	public List<UtenteRegistrato> getElecoAmici(UtenteRegistrato utente){
+		Query q = em.createQuery("SELECT u FROM (UtenteRegistrato u, Amicizia a) WHERE (a.conferma = true AND (:utente MEMBER OF u.sFriendship OR :utente MEMBER OF u.rFriendship))");
+		List<UtenteRegistrato> amici = (List<UtenteRegistrato>) q.setParameter("utente", utente).getResultList();
 		return amici;
 	}
 	
 	//Funziona?? Oppure devo ritornare richiesta per richiesta??
-	public Set<Amicizia> getElencoRichiesteAmicizia(UtenteRegistrato utente) throws SwimBeanException{
-		Query q = em.createQuery("SELECT a FROM Amicizia a WHERE (a.conferma = false AND (a.utRichiedente = :utente OR a.utRichiesto = :utente))");
-		Set<Amicizia> richieste = (Set<Amicizia>) q.setParameter("utente", utente).getResultList();
+	public List<Amicizia> getElencoRichiesteAmiciziaRicevute(UtenteRegistrato utente) throws SwimBeanException{
+		Query q = em.createQuery("SELECT a FROM Amicizia a WHERE (a.conferma = false AND a.utRichiesto = :utente))");
+		List<Amicizia> richieste = (List<Amicizia>) q.setParameter("utente", utente).getResultList();
 		if(richieste.size() == 0){
 			throw new SwimBeanException("Non ci sono richieste di amicizia per te!");
 		} else {
@@ -49,8 +50,30 @@ public class ManagerAmicizia implements ManagerAmiciziaRemote{
 		}
 	}
 	
-	public void accettaAmicizia(){
-		amicizia.switchConferma();
+	public List<Amicizia> getElencoRichiesteAmiciziaInviate(UtenteRegistrato utente) throws SwimBeanException{
+		Query q = em.createQuery("SELECT a FROM Amicizia a WHERE (a.conferma = false AND a.utRichiedente = :utente))");
+		List<Amicizia> richieste = (List<Amicizia>) q.setParameter("utente", utente).getResultList();
+		if(richieste.size() == 0){
+			throw new SwimBeanException("Non ci sono amicizie inviate da te!");
+		} else {
+			return richieste;
+		}
+	}
+	
+	public void accettaAmicizia(Amicizia a){
+		a.switchConferma();
+	}
+	
+	public boolean esisteAmicizia(UtenteRegistrato u1, UtenteRegistrato u2){
+		Query q = em.createQuery("SELECT a FROM Amicizia a WHERE ((a.utRichiedente = :u1 AND a.utRichiesto = :u2) OR (a.utRichiedente = :u2 AND a.utRichiesto = :u1))");
+		q.setParameter("u1", u1);
+		q.setParameter("u2", u2);
+		List<Amicizia> amicizia = (List<Amicizia>) q.getResultList();
+		if(amicizia.isEmpty()){
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }
