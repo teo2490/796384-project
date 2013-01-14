@@ -1,5 +1,6 @@
 package swim.sessionbeans;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -34,8 +35,17 @@ public class ManagerAmicizia implements ManagerAmiciziaRemote{
 	
 	//Funziona?? Oppure devo ritornare utente per utente??
 	public List<UtenteRegistrato> getElencoAmici(UtenteRegistrato utente) throws SwimBeanException{
-		Query q = em.createQuery("SELECT u FROM (UtenteRegistrato u, Amicizia a) WHERE (a.conferma = true AND (:utente MEMBER OF u.sFriendship OR :utente MEMBER OF u.rFriendship))");
-		List<UtenteRegistrato> amici = (List<UtenteRegistrato>) q.setParameter("utente", utente).getResultList();
+		Query q = em.createQuery("SELECT a FROM Amicizia a WHERE a.conferma = true AND a.utRichiedente = :utente");
+		List<Amicizia> amicRichiedente = (List<Amicizia>) q.setParameter("utente", utente).getResultList();
+		q = em.createQuery("SELECT a FROM Amicizia a WHERE a.conferma = true AND a.utRichiesto = :utente");
+		List<Amicizia> amicRichiesto = (List<Amicizia>) q.setParameter("utente", utente).getResultList();
+		List<UtenteRegistrato> amici = new ArrayList<UtenteRegistrato>();
+		for(int i=0; i<amicRichiedente.size(); i++){
+			amici.add(amicRichiedente.get(i).getRichiedente());
+		}
+		for(int i=0; i<amicRichiesto.size(); i++){
+			amici.add(amicRichiesto.get(i).getRichiesto());
+		}
 		if(amici.size() == 0){
 			throw new SwimBeanException("Non hai amici!");
 		} else {
@@ -64,7 +74,8 @@ public class ManagerAmicizia implements ManagerAmiciziaRemote{
 		}
 	}
 	
-	public void accettaAmicizia(Amicizia a){
+	public void accettaAmicizia(String id){
+		Amicizia a = ricercaAmicizia(id);
 		a.switchConferma();
 	}
 	
@@ -77,6 +88,20 @@ public class ManagerAmicizia implements ManagerAmiciziaRemote{
 			return false;
 		} else {
 			return true;
+		}
+	}
+	
+	public Amicizia ricercaAmicizia(String id) {
+		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.id = :id");
+		//System.out.println(id);
+		int idd = Integer.parseInt(id);
+		q.setParameter("id", idd);
+		List<Amicizia> ab;
+		ab = (List<Amicizia>) q.getResultList();
+		if (ab.isEmpty()) {
+			return null;
+		} else {
+			return ab.get(0);
 		}
 	}
 
