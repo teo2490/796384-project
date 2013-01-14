@@ -12,7 +12,7 @@ import java.util.Set;
 public interface ManagerAmiciziaRemote {
 	
 	public void invioRichiestaAmicizia(UtenteRegistrato richiedente, UtenteRegistrato richiesto) throws SwimBeanException;
-	public List<UtenteRegistrato> getElecoAmici(UtenteRegistrato utente);
+	public List<UtenteRegistrato> getElencoAmici(UtenteRegistrato utente) throws SwimBeanException;
 	public List<Amicizia> getElencoRichiesteAmiciziaRicevute(UtenteRegistrato utente) throws SwimBeanException;
 	public List<Amicizia> getElencoRichiesteAmiciziaInviate(UtenteRegistrato utente) throws SwimBeanException;
 	public void accettaAmicizia(Amicizia a);
