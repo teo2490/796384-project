@@ -18,7 +18,6 @@
 					</div>					
 					<div id="menu">
 				        <ul>
-				            <li><a href="Home.jsp">Home</a></li>
 				            <li><a href="LogoutServlet">Logout</a></li>				            
 				        </ul>
 				    </div>
