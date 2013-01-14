@@ -76,7 +76,7 @@
 					<fieldset>
 						<h3><u>Invio Richiesta di Aiuto</u></h3><br>
 						<br /><br />
-					<label for="email">Email Aiutante Richiesto:</label>
+					<label for="email">Email dell'aiutante scelto:</label>
 						<br />
 						<input type="text" name="email" id="email" />
 						<br />
@@ -110,14 +110,14 @@
   	 				ManagerAiutoRemote manf = (ManagerAiutoRemote) PortableRemoteObject.narrow(objf, ManagerAiutoRemote.class);
 					UtenteRegistrato uf = (UtenteRegistrato) request.getSession().getAttribute("utente");
 					try{
-					List<Aiuto> elencof = manf.getElencoRichiesteAiutoFatteConfermate(uf);
+					List<Aiuto> elencof = manf.getElencoRichiesteAiutoFatteConfermateSenzaFeedback(uf);
 					if (elencof.size() >0)  
 			        { 
 						//"<p>"+e.getNome()+"</p><img src=\"image/ok.png\" height=\"20px\" width=\"20px\"><img src=\"image/no.png\" height=\"20px\" width=\"20px\" style=\"margin-left: 15px\"><br />"
 						for (Aiuto e: elencof)	{ out.println("<form action=\"FeedbackServlet\" method=\"post\"><input type=\"text\" name=\"id\" id=\"id\" value=\""+e.getId()+"\" style=\"visibility: hidden;\" /><p>"+e.getTipo()+"&nbsp"+e.getRichiesto().getEmail()+"</p><input type=\"text\" name=\"feedback\" id=\"feedback\" /><input type=\"submit\" name=\"submit\" value=\"Conferma\" id=\"ok\"/><br />"); }
 			        }
 					}catch(SwimBeanException e){
-						out.println("Non ci sono richieste di aiuto per te!");
+						out.println("Non hai ricevuto aiuto per cui lasciare un feedback!");
 					}
 					%>
 					<br /><br /><br />

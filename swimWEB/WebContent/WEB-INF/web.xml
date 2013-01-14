@@ -120,4 +120,24 @@
     <servlet-name>ConfermaAiutoServlet</servlet-name>
     <url-pattern>/ConfermaAiutoServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FeedbackServlet</display-name>
+    <servlet-name>FeedbackServlet</servlet-name>
+    <servlet-class>servlet.FeedbackServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FeedbackServlet</servlet-name>
+    <url-pattern>/FeedbackServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RichiestaAiutoServlet</display-name>
+    <servlet-name>RichiestaAiutoServlet</servlet-name>
+    <servlet-class>servlet.RichiestaAiutoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RichiestaAiutoServlet</servlet-name>
+    <url-pattern>/RichiestaAiutoServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
