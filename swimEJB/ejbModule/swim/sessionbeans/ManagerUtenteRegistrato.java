@@ -94,13 +94,21 @@ public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
 	}
 	
 	public boolean utentePossiedeAbilita(UtenteRegistrato u, Abilita a){
-		System.out.println(u.getAbilita());
-		if(u.getAbilita().contains(a)){
-			return true;
-		} else {
-			System.out.println(a);
-			return false;
+		Query q = em.createQuery("SELECT u.abilita FROM UtenteRegistrato u WHERE u = :utente");
+		List<Abilita> elenco = (List<Abilita>) q.setParameter("utente", u).getResultList();
+		for(int i=0; i<elenco.size(); i++){
+			if(elenco.get(i).getId() == a.getId()){
+				return true;
+			}
 		}
+		return false;
+//		System.out.println(u.getAbilita());
+//		if(u.getAbilita().contains(a)){
+//			return true;
+//		} else {
+//			System.out.println(a);
+//			return false;
+//		}
 	}
 
 	// Non penso vada bene...
