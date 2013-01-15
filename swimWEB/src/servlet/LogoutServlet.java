@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import swim.entitybeans.Amministratore;
 import swim.entitybeans.UtenteRegistrato;
 
 /**
@@ -29,8 +30,19 @@ public class LogoutServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         //---Impedisce di fare azioni senza essere loggato
-        UtenteRegistrato u = (UtenteRegistrato) request.getSession().getAttribute("utente");
-        if(u.equals(null)){
+        if(request.getSession().getAttribute("utente") instanceof UtenteRegistrato){
+        	UtenteRegistrato u = (UtenteRegistrato) request.getSession().getAttribute("utente");
+        	if(u.equals(null)){
+            	return;
+            }
+        }
+        else if (request.getSession().getAttribute("utente") instanceof Amministratore){
+        	Amministratore u = (Amministratore) request.getSession().getAttribute("utente");
+        	if(u.equals(null)){
+            	return;
+            }
+        }
+        else if(request.getSession().getAttribute("utente") == null){
         	return;
         }
         //---		
