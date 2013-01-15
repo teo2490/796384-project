@@ -48,8 +48,14 @@ public class ConfermaAbilitaServlet extends HttpServlet {
 			String id = request.getParameter("id");
 			String nome = request.getParameter("nome");
 			String desc = request.getParameter("desc");
+			String azione = request.getParameter("azione");
+			if(azione.equals("conferma")){
 			Amministratore a = (Amministratore) request.getSession().getAttribute("utente");
 			manager.aggiungiAbilita(id, nome, desc, a.getEmail());
+			}
+			if(azione.equals("elimina")){
+				manager.eliminaAbilita(id);
+			}
 		} catch (NamingException e) {
 			e.printStackTrace(); 
 		}
