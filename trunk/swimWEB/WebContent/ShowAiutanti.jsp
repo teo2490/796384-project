@@ -34,12 +34,20 @@
 				        </ul>
 				    </div>
 				</div>
+				<%
+					String messaggio = (String) request.getAttribute("messaggio");
+					if(messaggio != null) {
+						out.println("<p>" + messaggio + "</p>");
+					}
+				%>
 				<br/><br/><br/><br/>
 			<% 
 			List<String> ris;
 			ris = (List<String>)request.getSession().getAttribute("possAiutanti");
+			if(ris != null){
 			//Devo stampare i possibili aiutanti
 			for (String u: ris)	{ out.println(u+"<br />"); }
+			}
 			//out.println("<p>"+u.getNome()+"&nbsp"+u.getCognome()+"&nbsp"+u.getEmail()+"&nbsp"+"</p>");
 			%>
 			</div>

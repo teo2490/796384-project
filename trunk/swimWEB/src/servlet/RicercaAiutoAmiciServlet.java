@@ -66,7 +66,12 @@ public class RicercaAiutoAmiciServlet extends HttpServlet {
 //			}
 			// 
 //Invio l'elenco dei possibili aiutanti alla pagina di scelta
+			if(possAiutanti == null){
+				request.getSession().setAttribute("messaggio","Nessun utente possiede l'abilità scelta!");
+			}
+			else{
 			request.getSession().setAttribute("possAiutanti",possAiutanti);
+			}
 			//request.getRequestDispatcher("ShowAiutanti.jsp").forward(request, response);
 			//RequestDispatcher disp = null;
 			RequestDispatcher disp = request.getRequestDispatcher("ShowAiutanti.jsp");
