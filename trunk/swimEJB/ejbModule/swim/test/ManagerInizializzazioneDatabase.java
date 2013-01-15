@@ -43,7 +43,7 @@ public class ManagerInizializzazioneDatabase implements ManagerInizializzazioneD
 	public void pulisciAiuto(){
 		List<Aiuto> a = (List<Aiuto>) em.createQuery("SELECT a FROM Aiuto a").getResultList();
 		for(int i=0; i<a.size(); i++){	
-			Query q = em.createQuery("DELETE FROM Abilita a WHERE a.id = :id");
+			Query q = em.createQuery("DELETE FROM Aiuto a WHERE a.id = :id");
 			q.setParameter("id", a.get(i).getId());
 			q.executeUpdate();
 		}
@@ -60,7 +60,9 @@ public class ManagerInizializzazioneDatabase implements ManagerInizializzazioneD
 	
 	public void pulisciABILITA_UTENTE(){
 		Query q = em.createNativeQuery("DELETE FROM `swim`.`ABILITA_UTENTE` WHERE `UtenteRegistrato_ID`='rp@mail.it'");
+		Query q1 = em.createNativeQuery("DELETE FROM `swim`.`ABILITA_UTENTE` WHERE `UtenteRegistrato_ID`='mr@mail.it'");
 		q.executeUpdate();
+		q1.executeUpdate();
 	}
 	
 	public void pulisciAbilita(){
@@ -136,19 +138,20 @@ public class ManagerInizializzazioneDatabase implements ManagerInizializzazioneD
 		idAbilita = q1.getResultList();
 		q.setParameter("id", idAbilita.get(0));
 		q.executeUpdate();
+		q = em.createNativeQuery("INSERT INTO `swim`.`ABILITA_UTENTE` (`UtenteRegistrato_ID`, `Abilita_ID`) VALUES (:email, :id);");
+		q.setParameter("email", "mr@mail.it");
+		q1 = em.createQuery("SELECT a.id FROM Abilita a WHERE a.nome = 'Verniciare'");
+		idAbilita = q1.getResultList();
+		q.setParameter("id", idAbilita.get(0));
+		q.executeUpdate();
 	}
 	
-	public void pulisciCreaDB(){
-		this.pulisciABILITA_UTENTE();
-		this.pulisciAiuto();
-		this.pulisciAbilita();
-		this.pulisciUtenteRegistrato();
-		this.pulisciAmministratore();
-		this.creaAdminPredefiniti();
-		this.creaUtentiPredefiniti();
-		this.creaAbilitaPredefinite();
-		//this.creaAiutiPredefiniti();
-		//this.creaABILITA_UTENTE();
+	public void creaAmiciziePredefinite(UtenteRegistrato richiedente, UtenteRegistrato richiesto){
+		Amicizia a = new Amicizia();
+		a.setRichiedente(richiedente);
+		a.setRichiesto(richiesto);
+		a.switchConferma();
+		em.persist(a);
 	}
 	
 }

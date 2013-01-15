@@ -2,7 +2,6 @@ package swim.test;
 
 import javax.ejb.Remote;
 
-import swim.entitybeans.Amministratore;
 import swim.entitybeans.UtenteRegistrato;
 
 @Remote
@@ -29,11 +28,12 @@ public interface ManagerInizializzazioneDatabaseRemote {
 	public void pulisciAbilita();
 	public void pulisciAiuto();
 	public void pulisciABILITA_UTENTE();
+	public void pulisciAmicizia();
 	public void creaUtentiPredefiniti();
 	public void creaAbilitaPredefinite();
 	public void creaAdminPredefiniti();
-	public void creaAiutiPredefiniti(UtenteRegistrato Fornisce, UtenteRegistrato Riceve);
+	public void creaAiutiPredefiniti(UtenteRegistrato fornisce, UtenteRegistrato riceve);
 	public void creaABILITA_UTENTE();
-	public void pulisciCreaDB();
+	public void creaAmiciziePredefinite(UtenteRegistrato richiedente, UtenteRegistrato richiesto);
 
 }

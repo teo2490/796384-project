@@ -6,7 +6,6 @@ import swim.entitybeans.UtenteRegistrato;
 import javax.ejb.Remote;
 
 import java.util.List;
-import java.util.Set;
 
 @Remote
 public interface ManagerAmiciziaRemote {

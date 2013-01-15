@@ -83,12 +83,12 @@ public class TestAmministratore {
 	@Test
 	public void testEliminaAbilita(){
 		List<Abilita> elenco = (List<Abilita>)manager.getElencoRichieste();
-		int[] id = new int[elenco.size()];
+		Integer[] id = new Integer[elenco.size()];
 		for(int i=0; i<elenco.size(); i++){
 			id[i] = elenco.get(i).getId();
 		}
 		Abilita a = manager.cercaAbilita(id[0]);
-		manager.eliminaAbilita(a);
+		manager.eliminaAbilita(id[0].toString());
 		a = manager.cercaAbilita(id[0]);
 		assertNull("L'abilità non è stata eliminata", a);
 		for(int i=1; i<elenco.size(); i++){

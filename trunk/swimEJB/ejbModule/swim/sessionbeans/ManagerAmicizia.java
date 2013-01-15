@@ -2,7 +2,6 @@ package swim.sessionbeans;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -10,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import swim.entitybeans.Aiuto;
 import swim.entitybeans.UtenteRegistrato;
 import swim.entitybeans.Amicizia;
 
