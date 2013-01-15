@@ -28,6 +28,10 @@ public class Aiuto implements Serializable{
 		return id;
 	}
 	
+	public boolean getConferma(){
+		return this.conferma;
+	}
+	
 	public String getTipo(){
 		return tipo;
 	}

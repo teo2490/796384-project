@@ -43,6 +43,10 @@ public class Amicizia implements Serializable{
 		this.conferma = true;
 	}
 	
+	public boolean getConferma(){
+		return this.conferma;
+	}
+	
 	public UtenteRegistrato getRichiedente(){
 		return utRichiedente;
 	}

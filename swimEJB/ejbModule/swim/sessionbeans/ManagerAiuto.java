@@ -84,9 +84,11 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	
 	public String controlloFeedback(Aiuto aiuto) throws SwimBeanException{
 		String feedback = aiuto.getFeedback();
-		if(feedback.equals("") || feedback == null){
+		if(feedback == null){
 			throw new SwimBeanException("Nessun feedback disponibile per questo aiuto!");
-		} else {
+		} else if (feedback.equals("")){
+			throw new SwimBeanException("Nessun feedback disponibile per questo aiuto!");
+		}else{
 			return feedback;
 		}
 	}
@@ -118,7 +120,7 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 		}
 	}
 	
-	//Funziona?? Oppure devo ritornare richiesta per richiesta??
+	/*
 	public List<Aiuto> getElencoRichiesteAiutoFatteNonConfermate(UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = false AND a.utRiceve = :utente");
 		List<Aiuto> richieste = (List<Aiuto>) q.setParameter("utente", utente).getResultList();
@@ -137,7 +139,7 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 		} else {
 			return richieste;
 		}
-	}
+	}*/
 	
 	public List<Aiuto> getElencoRichiesteAiutoFatteConfermateSenzaFeedback(UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = true AND a.feedback = NULL AND a.utRiceve = :utente");
