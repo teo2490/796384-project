@@ -44,6 +44,12 @@ public class RichiestaAiutoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+        //---Impedisce di fare azioni senza essere loggato
+        UtenteRegistrato u = (UtenteRegistrato) request.getSession().getAttribute("utente");
+        if(u.equals(null)){
+        	return;
+        }
+        //---
 		UtenteRegistrato uRichiedente = (UtenteRegistrato) request.getSession().getAttribute("utente");
 		try {
 			Object obj = ContextUtil.getInitialContext().lookup("ManagerAiuto/remote");
@@ -53,7 +59,12 @@ public class RichiestaAiutoServlet extends HttpServlet {
 			
 			String abilita = request.getParameter("abilita");
 			String email = request.getParameter("email");
-			
+			if(manageru.ricercaUtente(email)==null){
+				request.setAttribute("messaggio", "L'utente non è iscritto al sistema!");
+			}
+			else if(u.getEmail().equals(email)){
+				request.setAttribute("messaggio", "Non puoi chiedere aiuto a te stesso!");
+			}else{
 			Abilita a = manager.ricercaAbilita(abilita);
 			UtenteRegistrato uRichiesto = manageru.ricercaUtente(email);
 			//Controllo che uRichiesto abbia l'abilità specificata
@@ -64,7 +75,7 @@ public class RichiestaAiutoServlet extends HttpServlet {
 			else{
 				request.setAttribute("messaggio", "L'utente non possiede l'abilità selezionata!");
 			}
-			
+			}
 			RequestDispatcher disp = request
 					.getRequestDispatcher("GestAiuto.jsp");
 			disp.forward(request, response);

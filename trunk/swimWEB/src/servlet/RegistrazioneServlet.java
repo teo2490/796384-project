@@ -50,7 +50,7 @@ public class RegistrazioneServlet extends HttpServlet {
 			String cognome = request.getParameter("cognome");
 			
 			boolean exist = false;
-			if(manager.esisteMail(email))	exist = true;
+			if(manager.esisteMail(email) || !manager.controlloEmail(email))	exist = true;
 			
 			if(exist == false){
 				manager.aggiungiUtente(email,password,nome,cognome);
