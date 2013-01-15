@@ -82,9 +82,11 @@ public class ManagerAmministratore implements ManagerAmministratoreRemote{
 	}
 	
 	//Funziona?? Non so se va bene la query o serve altro!
-	public void eliminaAbilita(Abilita abilita){
+	public void eliminaAbilita(String id){
+		int iid = Integer.parseInt(id);
+		Abilita ab = cercaAbilita(iid);
 		Query q = em.createQuery("DELETE FROM Abilita a WHERE a.id = :id");
-		q.setParameter("id", abilita.getId()).executeUpdate();
+		q.setParameter("id", ab.getId()).executeUpdate();
 	}
 	
 	/*public void cambiaDatiAbilita(Abilita abilita, String nome, String descr){
