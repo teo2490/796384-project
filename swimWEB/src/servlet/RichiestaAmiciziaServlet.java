@@ -44,6 +44,12 @@ public class RichiestaAmiciziaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+        //---Impedisce di fare azioni senza essere loggato
+        UtenteRegistrato u1 = (UtenteRegistrato) request.getSession().getAttribute("utente");
+        if(u1.equals(null)){
+        	return;
+        }
+        //---
 		UtenteRegistrato u = (UtenteRegistrato) request.getSession().getAttribute("utente");
 		try {
 			Object obj = ContextUtil.getInitialContext().lookup("ManagerAmicizia/remote");
@@ -52,7 +58,12 @@ public class RichiestaAmiciziaServlet extends HttpServlet {
 			ManagerUtenteRegistratoRemote manageru = (ManagerUtenteRegistratoRemote) PortableRemoteObject.narrow(obju, ManagerUtenteRegistratoRemote.class);
 			
 			String email = request.getParameter("email");
-			
+			if(manageru.ricercaUtente(email)==null){
+				request.setAttribute("messaggio", "L'utente non è iscritto al sistema!");
+			}
+			else if(u.getEmail().equals(email)){
+				request.setAttribute("messaggio", "Non puoi chiedere l'amicizia a te stesso!");
+			}else{
 			UtenteRegistrato amico = manageru.ricercaUtente(email);
 			//Controllo che non ci sia già un'amicizia tra i due utenti
 			if(!manager.esisteAmicizia(u, amico)){
@@ -62,7 +73,7 @@ public class RichiestaAmiciziaServlet extends HttpServlet {
 			else{
 				request.setAttribute("messaggio", "Sei già amico di questo utente!");
 			}
-			
+			}
 			RequestDispatcher disp = request
 					.getRequestDispatcher("GestAmicizia.jsp");
 			disp.forward(request, response);

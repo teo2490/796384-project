@@ -44,6 +44,12 @@ public class RicercaProfiloServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        //---Impedisce di fare azioni senza essere loggato
+        UtenteRegistrato u1 = (UtenteRegistrato) request.getSession().getAttribute("utente");
+        if(u1.equals(null)){
+        	return;
+        }
+        //---
         UtenteRegistrato u = null;
 		try {
 			Object obj = ContextUtil.getInitialContext().lookup("ManagerUtenteRegistrato/remote");
