@@ -53,6 +53,17 @@
     		<div align="center">
 					<fieldset>
 						<h3><u>CERCA UN AIUTO</u></h3><br>
+						<%
+						Object obja = ContextUtil.getInitialContext().lookup("ManagerAmicizia/remote");
+						ManagerAmiciziaRemote mana = (ManagerAmiciziaRemote) PortableRemoteObject.narrow(obja, ManagerAmiciziaRemote.class);
+						UtenteRegistrato u = (UtenteRegistrato) request.getSession().getAttribute("utente");
+						try{
+						mana.getElencoAmici(u);
+						}catch(SwimBeanException e){
+							out.println("Non hai amici a cui chiedere un aiuto!");
+							return;
+						}
+						%>
 						<label for="id">Tipo di aiuto:</label>
 						<br /><br />
 						
@@ -64,7 +75,7 @@
 					if (elenco.size() >0) 
 			        { 
 						for (Abilita e: elenco)	{ out.println("<option value = '"+e.getId()+"' >"+e.getNome()); }
-			        }   
+			        }
 					%>
 					</select>
 					<input type="submit" name="submit" value="OK" />
