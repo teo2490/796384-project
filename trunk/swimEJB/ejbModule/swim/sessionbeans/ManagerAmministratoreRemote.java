@@ -17,7 +17,7 @@ public interface ManagerAmministratoreRemote {
 	public List<Abilita> getElencoRichieste();
 	public Abilita cercaAbilita(int id);
 	public void aggiungiAbilita(String id, String nome, String desc, String email);
-	public void eliminaAbilita(Abilita abilita);
+	public void eliminaAbilita(String id);
 	//public void cambiaDatiAbilita(String nome, String descr);
 
 
