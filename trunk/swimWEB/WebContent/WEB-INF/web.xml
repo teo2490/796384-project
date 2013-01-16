@@ -160,4 +160,14 @@
     <servlet-name>RichiestaAmiciziaServlet</servlet-name>
     <url-pattern>/RichiestaAmiciziaServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PannelloControllo</display-name>
+    <servlet-name>PannelloControllo</servlet-name>
+    <servlet-class>servlet.PannelloControllo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PannelloControllo</servlet-name>
+    <url-pattern>/PannelloControllo</url-pattern>
+  </servlet-mapping>
 </web-app>
