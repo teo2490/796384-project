@@ -15,7 +15,7 @@ public interface ManagerInizializzazioneDatabaseRemote {
 	
 	public static final int NUMERO_ABILITA_PREDEFINITE = 4;
 	public static final String[] NOME_ABILITA = {"Cucinare", "Verniciare", "Java", "C"};
-	public static final String[] DESCR_ABILITA = {"Prepara ottimi piatti", "Vernicia ogni parete", "Sa programare in java", "Sa programmare in C"};
+	public static final String[] DESCR_ABILITA = {"Prepara ottimi piatti", "Vernicia ogni parete", "Programmare in java", "Programmare in C"};
 	
 	public static final int NUMERO_ADMIN_PREDEFINITI = 2;
 	public static final String[] EMAIL_ADMIN = {"admin1@swim.it", "admin2@swim.it"};

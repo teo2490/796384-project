@@ -59,10 +59,10 @@ public class ManagerInizializzazioneDatabase implements ManagerInizializzazioneD
 	}
 	
 	public void pulisciABILITA_UTENTE(){
-		Query q = em.createNativeQuery("DELETE FROM `swim`.`ABILITA_UTENTE` WHERE `UtenteRegistrato_ID`='rp@mail.it'");
-		Query q1 = em.createNativeQuery("DELETE FROM `swim`.`ABILITA_UTENTE` WHERE `UtenteRegistrato_ID`='mr@mail.it'");
+		Query q = em.createNativeQuery("DELETE FROM `swim`.`ABILITA_UTENTE` WHERE NOT(`UtenteRegistrato_ID` = 'a')");
+		//Query q1 = em.createNativeQuery("DELETE FROM `swim`.`ABILITA_UTENTE` WHERE `UtenteRegistrato_ID`='mr@mail.it'");
 		q.executeUpdate();
-		q1.executeUpdate();
+		//q1.executeUpdate();
 	}
 	
 	public void pulisciAbilita(){
