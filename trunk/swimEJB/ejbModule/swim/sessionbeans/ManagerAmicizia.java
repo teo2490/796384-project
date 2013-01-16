@@ -32,7 +32,6 @@ public class ManagerAmicizia implements ManagerAmiciziaRemote{
 		creaAmiciziaDirect(richiedente, richiesto);
 	}
 	
-	//Funziona?? Oppure devo ritornare utente per utente??
 	public List<UtenteRegistrato> getElencoAmici(UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT a FROM Amicizia a WHERE a.conferma = true AND a.utRichiedente = :utente");
 		List<Amicizia> amicRichiedente = (List<Amicizia>) q.setParameter("utente", utente).getResultList();
@@ -52,7 +51,6 @@ public class ManagerAmicizia implements ManagerAmiciziaRemote{
 		}
 	}
 	
-	//Funziona?? Oppure devo ritornare richiesta per richiesta??
 	public List<Amicizia> getElencoRichiesteAmiciziaRicevute(UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT a FROM Amicizia a WHERE (a.conferma = false AND a.utRichiesto = :utente))");
 		List<Amicizia> richieste = (List<Amicizia>) q.setParameter("utente", utente).getResultList();
@@ -92,7 +90,6 @@ public class ManagerAmicizia implements ManagerAmiciziaRemote{
 	
 	public Amicizia ricercaAmicizia(String id) {
 		Query q = em.createQuery("SELECT a FROM Amicizia a WHERE a.id = :id");
-		//System.out.println(id);
 		int idd = Integer.parseInt(id);
 		q.setParameter("id", idd);
 		List<Amicizia> ab;

@@ -15,7 +15,6 @@ public class Amministratore implements Serializable{
 	@OneToMany(mappedBy="admin")
 	private Set<Abilita> declAbil;
 
-	
 	public String getEmail() {
 		return email;
 	}
@@ -31,4 +30,5 @@ public class Amministratore implements Serializable{
 	public void setPsw(String psw) {
 		this.password = psw;
 	}
+	
 }

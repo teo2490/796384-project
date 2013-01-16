@@ -1,27 +1,18 @@
 package swim.test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.ejb.Remote;
-import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.rmi.PortableRemoteObject;
 
 import swim.entitybeans.Abilita;
 import swim.entitybeans.Aiuto;
 import swim.entitybeans.Amicizia;
 import swim.entitybeans.Amministratore;
 import swim.entitybeans.UtenteRegistrato;
-import swim.sessionbeans.ManagerAbilitaRemote;
-import swim.sessionbeans.ManagerAiutoRemote;
-import swim.sessionbeans.ManagerAmiciziaRemote;
-import swim.sessionbeans.ManagerAmministratoreRemote;
-import swim.sessionbeans.ManagerUtenteRegistratoRemote;
-import swim.util.ContextUtil;
 
 @Stateless
 @Remote(ManagerInizializzazioneDatabaseRemote.class)
@@ -60,9 +51,7 @@ public class ManagerInizializzazioneDatabase implements ManagerInizializzazioneD
 	
 	public void pulisciABILITA_UTENTE(){
 		Query q = em.createNativeQuery("DELETE FROM `swim`.`ABILITA_UTENTE` WHERE NOT(`UtenteRegistrato_ID` = 'a')");
-		//Query q1 = em.createNativeQuery("DELETE FROM `swim`.`ABILITA_UTENTE` WHERE `UtenteRegistrato_ID`='mr@mail.it'");
 		q.executeUpdate();
-		//q1.executeUpdate();
 	}
 	
 	public void pulisciAbilita(){

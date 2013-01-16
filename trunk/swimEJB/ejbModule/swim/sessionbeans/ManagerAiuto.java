@@ -12,7 +12,6 @@ import swim.entitybeans.Aiuto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Stateless
 @Remote(ManagerAiutoRemote.class)
@@ -25,13 +24,12 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	
 	private void creaAiutoDirect(String abilita, UtenteRegistrato richiedente, UtenteRegistrato richiesto){
 		aiuto = new Aiuto();
-		aiuto.setTipo(abilita); //Cosa intendiamo con tipo??
+		aiuto.setTipo(abilita);
 		aiuto.setUtFornisce(richiesto);
 		aiuto.setUtRiceve(richiedente);
 		em.persist(aiuto);
 	}
 	
-	// NON SO SE FUNZIONA!!
 	public List<String> ricercaTraAmici(Abilita abilita, UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT u FROM UtenteRegistrato u, Amicizia a WHERE u = a.utRichiedente AND :abilita MEMBER OF u.abilita AND :utente = a.utRichiesto");
 		Query q1 = em.createQuery("SELECT u FROM UtenteRegistrato u, Amicizia a WHERE u = a.utRichiesto AND :abilita MEMBER OF u.abilita AND :utente = a.utRichiedente");
@@ -55,8 +53,6 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 		}
 	}
 	
-	
-	//Funziona?? Oppure devo ritornare utente per utente??
 	public List<String> ricercaPerAbilita(Abilita abilita) throws SwimBeanException{
 		Query q = em.createQuery("SELECT u FROM UtenteRegistrato u WHERE :abilita MEMBER OF u.abilita");
 		q.setParameter("abilita", abilita);
@@ -72,7 +68,6 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 		}
 	}
 	
-	//Può essere finito così??
 	public void invioRichiestaAiuto(String tipo, UtenteRegistrato richiedente, UtenteRegistrato richiesto){
 		creaAiutoDirect(tipo, richiedente, richiesto);
 	}
@@ -120,27 +115,6 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 		}
 	}
 	
-	/*
-	public List<Aiuto> getElencoRichiesteAiutoFatteNonConfermate(UtenteRegistrato utente) throws SwimBeanException{
-		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = false AND a.utRiceve = :utente");
-		List<Aiuto> richieste = (List<Aiuto>) q.setParameter("utente", utente).getResultList();
-		if(richieste.isEmpty()){
-			throw new SwimBeanException("Non ci sono richieste di aiuto per te!");
-		} else {
-			return richieste;
-		}
-	}
-	
-	public List<Aiuto> getElencoRichiesteAiutoFatteConfermate(UtenteRegistrato utente) throws SwimBeanException{
-		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = true AND a.utRiceve = :utente");
-		List<Aiuto> richieste = (List<Aiuto>) q.setParameter("utente", utente).getResultList();
-		if(richieste.isEmpty()){
-			throw new SwimBeanException("Non ci sono richieste di aiuto per te!");
-		} else {
-			return richieste;
-		}
-	}*/
-	
 	public List<Aiuto> getElencoRichiesteAiutoFatteConfermateSenzaFeedback(UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = true AND a.feedback = NULL AND a.utRiceve = :utente");
 		List<Aiuto> richieste = (List<Aiuto>) q.setParameter("utente", utente).getResultList();
@@ -182,9 +156,9 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 		}
 	}
 	
+	//Portata anche qui per non dover usare il manager delle abilità  nelle servlet di aiuto
 	public Abilita ricercaAbilita(String id) {
 		Query q = em.createQuery("SELECT a FROM Abilita a WHERE a.id = :id");
-		//System.out.println(id);
 		int idd = Integer.parseInt(id);
 		q.setParameter("id", idd);
 		List<Abilita> ab;
@@ -198,7 +172,6 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	
 	public Aiuto ricercaAiuto(String id) {
 		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.id = :id");
-		//System.out.println(id);
 		int idd = Integer.parseInt(id);
 		q.setParameter("id", idd);
 		List<Aiuto> ab;
@@ -209,5 +182,27 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 			return ab.get(0);
 		}
 	}
+	
+	
+	//Possibile implementarle in seguito qualora dovessero servire
+	/*public List<Aiuto> getElencoRichiesteAiutoFatteNonConfermate(UtenteRegistrato utente) throws SwimBeanException{
+		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = false AND a.utRiceve = :utente");
+		List<Aiuto> richieste = (List<Aiuto>) q.setParameter("utente", utente).getResultList();
+		if(richieste.isEmpty()){
+			throw new SwimBeanException("Non ci sono richieste di aiuto per te!");
+		} else {
+			return richieste;
+		}
+	}
+	
+	public List<Aiuto> getElencoRichiesteAiutoFatteConfermate(UtenteRegistrato utente) throws SwimBeanException{
+		Query q = em.createQuery("SELECT a FROM Aiuto a WHERE a.conferma = true AND a.utRiceve = :utente");
+		List<Aiuto> richieste = (List<Aiuto>) q.setParameter("utente", utente).getResultList();
+		if(richieste.isEmpty()){
+			throw new SwimBeanException("Non ci sono richieste di aiuto per te!");
+		} else {
+			return richieste;
+		}
+	}*/
 
 }

@@ -19,10 +19,8 @@ public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
 	@PersistenceContext(unitName = "swim")
 	private EntityManager em;
 
-	//private UtenteRegistrato utente;
 	private List<UtenteRegistrato> utenti;
 
-	// CAMBIATO u.U_ID in u.email
 	public UtenteRegistrato verificaLogin(String email, String password) {
 		Query q = em.createQuery("SELECT u FROM UtenteRegistrato u WHERE u.email = :email AND u.password = :password");
 		q.setParameter("email", email);
@@ -46,8 +44,6 @@ public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
 		}
 	}
 
-	// Lasciamo solo il controllo su @ o anche gli altri due con limitazione
-	// sugli indirizzi?
 	public boolean controlloEmail(String email) {
 		if (email.contains("@") && (email.contains(".it") || email.contains(".com"))) {
 			return true;
@@ -84,14 +80,6 @@ public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
 			throw new SwimBeanException("Inserisci la password corretta!");
 		}
 	}
-
-	// Non ho bisogno di condizioni. Se non esiste l'URL non si mette nulla
-	public void cambioImm(String email, String url) {
-		UtenteRegistrato ut = ricercaUtente(email);
-		if (url != null) {
-			ut.setUrl(url);
-		}
-	}
 	
 	public boolean utentePossiedeAbilita(UtenteRegistrato u, Abilita a){
 		Query q = em.createQuery("SELECT u.abilita FROM UtenteRegistrato u WHERE u = :utente");
@@ -102,18 +90,15 @@ public class ManagerUtenteRegistrato implements ManagerUtenteRegistratoRemote {
 			}
 		}
 		return false;
-//		System.out.println(u.getAbilita());
-//		if(u.getAbilita().contains(a)){
-//			return true;
-//		} else {
-//			System.out.println(a);
-//			return false;
-//		}
 	}
-
-	// Non penso vada bene...
-	/*public void logout() {
-		utente = null;
+	
+	
+	//Parte commentata perché riguardante l'immagine del profilo (possibile aggiungere in seguito)
+	/*public void cambioImm(String email, String url) {
+		UtenteRegistrato ut = ricercaUtente(email);
+		if (url != null) {
+			ut.setUrl(url);
+		}
 	}*/
 
 }

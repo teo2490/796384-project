@@ -34,6 +34,10 @@ public class TestAmministratore {
 		manager = (ManagerAmministratoreRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerAmministratore/remote"), ManagerAmministratoreRemote.class);
 		ctx = ContextUtil.getInitialContext();
 		ManagerInizializzazioneDatabaseRemote db = (ManagerInizializzazioneDatabaseRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerInizializzazioneDatabase/remote"), ManagerInizializzazioneDatabaseRemote.class);
+		db.pulisciAmicizia();
+		db.pulisciAiuto();
+		db.pulisciABILITA_UTENTE();
+		db.pulisciUtenteRegistrato();
 		db.pulisciAbilita();
 		db.pulisciAmministratore();
 		db.creaAdminPredefiniti();
@@ -124,21 +128,4 @@ public class TestAmministratore {
 		assertEquals("Non sono state prese tutte le richieste", NUMERO_ABILITA_PREDEFINITE-2, elenco.size());
 	}
 	
-	/*@Test
-	public void testCambiaDatiAbilita(){
-		List<Abilita> elenco = (List<Abilita>)manager.getElencoRichieste();
-		Abilita a = elenco.get(1);
-		String nomeDaMantenere = a.getNome();
-		String descrDaMantenere = a.getDescrizione();
-		a = elenco.get(0);
-		manager.cambiaDatiAbilita(a, "newName", "newDescr");
-		elenco = (List<Abilita>)manager.getElencoRichieste();
-		a = elenco.get(0);
-		assertEquals("Il nome non è stato modificato", "newName", a.getNome());
-		assertEquals("La descrizione non è stato modificato", "newDescr", a.getDescrizione());
-		a = elenco.get(1);
-		assertEquals("Il nome non è stato modificato", nomeDaMantenere, a.getNome());
-		assertEquals("La descrizione non è stato modificato", descrDaMantenere, a.getDescrizione());
-	}*/
-
 }
