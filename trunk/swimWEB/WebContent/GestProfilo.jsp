@@ -50,19 +50,19 @@
 					Object obj = ContextUtil.getInitialContext().lookup("ManagerUtenteRegistrato/remote");
   	 				ManagerUtenteRegistratoRemote man = (ManagerUtenteRegistratoRemote) PortableRemoteObject.narrow(obj, ManagerUtenteRegistratoRemote.class);
 					UtenteRegistrato u = (UtenteRegistrato) request.getSession().getAttribute("utente");
-					String url = "";
+					/* String url = "";
 					try{
 						url = u.getUrl();
 					}catch(NullPointerException e){
 						url = "";
-					}
+					} */
 					out.println(u.getNome()+"&nbsp"+u.getCognome()+"<br /><br />");
 					out.println(u.getEmail());
 					out.println("<form action=\"ModificaProfiloServlet\" method=\"post\">");
 					out.println("<p>Vecchia Password: </p><input type=\"text\" name=\"oldpsw\" id=\"oldpsw\" value=\""+u.getPsw()+"\" />");
 					out.println("<p>Nuova Password: </p><input type=\"text\" name=\"newpsw\" id=\"newpsw\" value=\""+""+"\" />");
-					out.println("<p>URL Immagine: </p><input type=\"text\" name=\"url\" id=\"url\" value=\""+url+"\" /><br /><br />");
-					out.println("<input type=\"submit\" name=\"submit\" value=\"Conferma\" id=\"ok\"/></form><br />");
+					/* out.println("<p>URL Immagine: </p><input type=\"text\" name=\"url\" id=\"url\" value=\""+url+"\" /><br /><br />");
+					out.println("<input type=\"submit\" name=\"submit\" value=\"Conferma\" id=\"ok\"/></form><br />"); */
 			     
 					%>
 		<br /><br /><br />

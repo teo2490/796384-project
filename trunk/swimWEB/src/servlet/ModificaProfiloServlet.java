@@ -60,8 +60,8 @@ public class ModificaProfiloServlet extends HttpServlet {
 			if (!newpsw.equals("")) {
 				manager.cambioPsw(u.getEmail(), newpsw, oldpsw);
 			}
-			String url = request.getParameter("url");
-			manager.cambioImm(u.getEmail(), url);
+//			String url = request.getParameter("url");
+//			manager.cambioImm(u.getEmail(), url);
 
 			request.setAttribute("messaggio", "Dati modificati correttamente!");
 			RequestDispatcher disp = request
