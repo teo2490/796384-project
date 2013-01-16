@@ -55,7 +55,7 @@
 					if (elenco.size() >0)  
 			        { 
 						//"<p>"+e.getNome()+"</p><img src=\"image/ok.png\" height=\"20px\" width=\"20px\"><img src=\"image/no.png\" height=\"20px\" width=\"20px\" style=\"margin-left: 15px\"><br />"
-						for (Abilita e: elenco)	{ out.println("<form action=\"ConfermaAbilitaServlet\" method=\"post\"><input type=\"text\" name=\"id\" id=\"id\" value=\""+e.getId()+"\" style=\"visibility: hidden;\" /><br /><input type=\"text\" name=\"nome\" id=\"nome\" value=\""+e.getNome()+"\" /><input type=\"text\" name=\"desc\" id=\"desc\" value=\""+e.getDescrizione()+"\" /><br /><input type=\"radio\" name=\"azione\" value=\"conferma\">Conferma<input type=\"radio\" name=\"azione\" value=\"elimina\">Elimina<input type=\"submit\" name=\"submit\" value=\"Conferma\" id=\"ok\"/></form><br /><br />"); }
+						for (Abilita e: elenco)	{ out.println("<form action=\"ConfermaAbilitaServlet\" method=\"post\"><input type=\"text\" name=\"id\" id=\"id\" value=\""+e.getId()+"\" style=\"visibility: hidden;\" /><br /><input type=\"text\" name=\"nome\" id=\"nome\" value=\""+e.getNome()+"\" /><input type=\"text\" name=\"desc\" id=\"desc\" value=\""+e.getDescrizione()+"\" /><br /><input type=\"radio\" name=\"azione\" value=\"conferma\" checked=\"checked\">Conferma<input type=\"radio\" name=\"azione\" value=\"elimina\">Elimina<input type=\"submit\" name=\"submit\" value=\"Conferma\" id=\"ok\"/></form><br /><br />"); }
 			        }
 					}
 					else{
