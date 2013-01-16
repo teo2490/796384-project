@@ -1,53 +1,39 @@
 package swim.entitybeans;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
-
-import org.hibernate.validator.Size;
 
 @Entity
 @Table(name="UtenteRegistrato")
 public class UtenteRegistrato implements Serializable{
 	
 	@Id
-	@Column(name="U_ID"/*, length=255*/)
-	//@Size(max=255)
+	@Column(name="U_ID")
 	private String email;
 	private String password;
 	private String nome;
 	private String cognome;
-	private String url;
+	//private String url; //Parte commentata perché riguardante l'immagine del profilo (possibile aggiungere in seguito)
 	
-	/**
-	 * Aiuti forniti
-	 */
+	//Aiuti forniti
 	@OneToMany(mappedBy="utFornisce")
 	private Set<Aiuto> sHelp;
 	
-	/**
-	 * Aiuti ricevuti (??e richieste di amicizia??)
-	 */
+	//Aiuti ricevuti
 	@OneToMany(mappedBy="utRiceve")
 	private Set<Aiuto> rHelp;
 	
-	/**
-	 * Amicizie di cui si è il richiedente
-	 */
+	//Amicizie di cui si è il richiedente
 	@OneToMany(mappedBy="utRichiedente")
 	private Set<Amicizia> sFriendship;
 	
-	/**
-	 * Amicizie di cui si è il richiesto
-	 */
+	//Amicizie di cui si è il richiesto
 	@OneToMany(mappedBy="utRichiesto")
 	private Set<Amicizia> rFriendship;
 	
-	/**
-	 * Abilità possedute
-	 */
+	//Abilità possedute
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 		    name="ABILITA_UTENTE",
@@ -91,13 +77,14 @@ public class UtenteRegistrato implements Serializable{
 		this.cognome = cognome;
 	}
 	
-	public String getUrl() {
+	//Parte commentata perché riguardante l'immagine del profilo (possibile aggiungere in seguito)
+	/*public String getUrl() {
 		return url;
 	}
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
+	}*/
 	
 	public Set<Abilita> getAbilita(){
 		return this.abilita;
@@ -106,23 +93,7 @@ public class UtenteRegistrato implements Serializable{
 	public void setAbilita(Set<Abilita> a){
 		this.abilita = a;
 	}
-	
-	//Servono o bastano le query??
-	/*public Set<Aiuto> getShelp(){
-		return this.sHelp;
-	}
-	
-	public Set<Aiuto> getRhelp(){
-		return this.rHelp;
-	}
-	
-	public Set<Amicizia> getSfriendship(){
-		return this.sFriendship;
-	}
-	
-	public Set<Amicizia> getRfriendship(){
-		return this.rFriendship;
-	}*/
+
 	
 	@Override
 	public int hashCode() {

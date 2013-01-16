@@ -17,24 +17,8 @@ public class Amicizia implements Serializable{
 	@ManyToOne
 	private UtenteRegistrato utRichiesto;
 	
-	/*@Id
-	@Column(name="Email_Richiedente")
-	private String emailRichiedente = utRichiedente.getEmail();
-	@Id
-	@Column(name="Email_Richiesto")
-	private String emailRichiesto = utRichiesto.getEmail();*/
-	
 	private boolean conferma;
 	
-	/*public String getEmailRichiedente(){
-		return utenteRichiedente.getEmail();
-	}
-	
-	public String getEmailRichiesto(){
-		return utenteRichiesto.getEmail();
-	}*/
-	
-
 	public int getId(){
 		return this.id;
 	}

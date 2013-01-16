@@ -1,7 +1,6 @@
 package swim.sessionbeans;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -11,7 +10,6 @@ import javax.persistence.Query;
 
 import swim.entitybeans.Abilita;
 import swim.entitybeans.Amministratore;
-import swim.entitybeans.UtenteRegistrato;
 
 @Stateless
 @Remote(ManagerAmministratoreRemote.class)
@@ -20,9 +18,7 @@ public class ManagerAmministratore implements ManagerAmministratoreRemote{
 	@PersistenceContext( unitName = "swim" )
 	private EntityManager em;
 	
-	//private Amministratore admin;
 	private List<Amministratore> amministratori;
-	//private Abilita abilita;
 	
 	public Amministratore verificaLogin(String email, String password) {
 		Query q = em.createQuery("SELECT a FROM Amministratore a WHERE a.email = :email AND a.password = :password");
@@ -46,18 +42,13 @@ public class ManagerAmministratore implements ManagerAmministratoreRemote{
 			return amministratori.get(0);
 		}
 	}
-	/*
-	public void logout(){
-		admin = null;
-	}
-	*/
+
 	public List<Abilita> getElencoRichieste(){
 		Query q = em.createQuery("SELECT a FROM Abilita a WHERE a.conferma = 0");
 		List<Abilita> richieste = (List<Abilita>) q.getResultList();
 		return richieste;
 	}
 	
-
 	public Abilita cercaAbilita(int id) {
 		Query q = em
 				.createQuery("SELECT a FROM Abilita a WHERE a.id = :id");
@@ -81,17 +72,11 @@ public class ManagerAmministratore implements ManagerAmministratoreRemote{
 		em.persist(ab);
 	}
 	
-	//Funziona?? Non so se va bene la query o serve altro!
 	public void eliminaAbilita(String id){
 		int iid = Integer.parseInt(id);
 		Abilita ab = cercaAbilita(iid);
 		Query q = em.createQuery("DELETE FROM Abilita a WHERE a.id = :id");
 		q.setParameter("id", ab.getId()).executeUpdate();
 	}
-	
-	/*public void cambiaDatiAbilita(Abilita abilita, String nome, String descr){
-		abilita.setNome(nome);
-		abilita.setDescrizione(descr);
-	}*/
 
 }

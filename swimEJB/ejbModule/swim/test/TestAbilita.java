@@ -36,6 +36,8 @@ public class TestAbilita {
 		manUser = (ManagerUtenteRegistratoRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerUtenteRegistrato/remote"), ManagerUtenteRegistratoRemote.class);
 		ctx = ContextUtil.getInitialContext();
 		ManagerInizializzazioneDatabaseRemote db = (ManagerInizializzazioneDatabaseRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerInizializzazioneDatabase/remote"), ManagerInizializzazioneDatabaseRemote.class);
+		db.pulisciAmicizia();
+		db.pulisciAiuto();
 		db.pulisciABILITA_UTENTE();
 		db.pulisciUtenteRegistrato();
 		db.pulisciAbilita();

@@ -40,9 +40,12 @@ public class TestUtenteRegistrato {
 		manAdmin = (ManagerAmministratoreRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerAmministratore/remote"), ManagerAmministratoreRemote.class);
 		ctx = ContextUtil.getInitialContext();
 		ManagerInizializzazioneDatabaseRemote db = (ManagerInizializzazioneDatabaseRemote) PortableRemoteObject.narrow(ctx.lookup("ManagerInizializzazioneDatabase/remote"), ManagerInizializzazioneDatabaseRemote.class);
+		db.pulisciAmicizia();
+		db.pulisciAiuto();
 		db.pulisciABILITA_UTENTE();
-		db.pulisciAbilita();
 		db.pulisciUtenteRegistrato();
+		db.pulisciAbilita();
+		db.pulisciAmministratore();
 		db.creaUtentiPredefiniti();
 		db.creaAbilitaPredefinite();
 		db.creaABILITA_UTENTE();
@@ -130,7 +133,8 @@ public class TestUtenteRegistrato {
 		assertEquals("La password è stata cambiata nonostante la vecchia password fosse sbagliata", u.getPsw(), newPsw);
 	}
 	
-	@Test
+	//Parte commentata perché riguardante l'immagine del profilo (possibile aggiungere in seguito)
+	/*@Test
 	public void testCambioImm(){
 		String newUrl = "www.imm.it";
 		manager.cambioImm("rp@mail.it", newUrl);
@@ -140,7 +144,7 @@ public class TestUtenteRegistrato {
 		assertNull("L'immagine è stata cambiata ad un utente sbagliato", u.getUrl());
 		u = manager.ricercaUtente("mr@mail.it");
 		assertNull("L'immagine è stata cambiata ad un utente sbagliato", u.getUrl());
-	}
+	}*/
 	
 	@Test
 	public void testUtentePossiedeAbilita() throws SwimBeanException{

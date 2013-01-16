@@ -21,12 +21,14 @@ public interface ManagerAiutoRemote {
 	public void eliminaAiuto(Aiuto at);
 	public List<String> getElencoFeedbackUtente(UtenteRegistrato u);
 	public List<Aiuto> getElencoRichiesteAiutoRicevuteConfermateConFeedback(UtenteRegistrato utente) throws SwimBeanException;
-	/*public List<Aiuto> getElencoRichiesteAiutoFatteNonConfermate(UtenteRegistrato utente) throws SwimBeanException;
-	public List<Aiuto> getElencoRichiesteAiutoFatteConfermate(UtenteRegistrato utente) throws SwimBeanException;*/
 	public List<Aiuto> getElencoRichiesteAiutoFatteConfermateSenzaFeedback(UtenteRegistrato utente) throws SwimBeanException;
 	public List<Aiuto> getElencoRichiesteAiutoRicevuteNonConfermate(UtenteRegistrato utente) throws SwimBeanException;
 	public List<Aiuto> getElencoRichiesteAiutoRicevuteConfermate(UtenteRegistrato utente) throws SwimBeanException;
-	public Abilita ricercaAbilita(String id);
+	public Abilita ricercaAbilita(String id); //Portata anche qui per non dover usare il manager delle abilità  nelle servlet di aiuto
 	public Aiuto ricercaAiuto(String id);
+	
+	//Possibile implementarle in seguito qualora dovessero servire
+	/*public List<Aiuto> getElencoRichiesteAiutoFatteNonConfermate(UtenteRegistrato utente) throws SwimBeanException;
+	public List<Aiuto> getElencoRichiesteAiutoFatteConfermate(UtenteRegistrato utente) throws SwimBeanException;*/
 	
 }

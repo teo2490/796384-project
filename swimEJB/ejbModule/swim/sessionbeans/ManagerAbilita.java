@@ -1,18 +1,12 @@
 package swim.sessionbeans;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import org.hibernate.engine.ExecuteUpdateResultCheckStyle;
-
-import com.sun.jmx.snmp.Timestamp;
 
 import swim.entitybeans.Abilita;
 import swim.entitybeans.UtenteRegistrato;
@@ -33,14 +27,12 @@ public class ManagerAbilita implements ManagerAbilitaRemote{
 		em.persist(abilita);
 	}
 	
-	//Funziona?? Oppure devo tornare abilita per abilita??
 	public List<Abilita> getElencoAbilita(){
 		Query q = em.createQuery("SELECT a FROM Abilita a WHERE a.conferma = 1");
 		List<Abilita> allAbilita = (List<Abilita>) q.getResultList();
 		return allAbilita;
 	}
 	
-	//Funziona?? Oppure devo tornare abilita per abilita??
 	public List<Abilita> getAbilitaUtente(UtenteRegistrato utente) throws SwimBeanException{
 		Query q = em.createQuery("SELECT a FROM Abilita a WHERE :utente MEMBER OF a.utente");
 		q.setParameter("utente", utente);
@@ -50,7 +42,6 @@ public class ManagerAbilita implements ManagerAbilitaRemote{
 		} else {
 			return abilitaUtente;
 		}
-		//return utente.getAbilita();
 	}
 	
 	public List<Abilita> getElencoAbilitaNonMie(UtenteRegistrato utente){
@@ -61,9 +52,6 @@ public class ManagerAbilita implements ManagerAbilitaRemote{
 	}
 	
 	public void aggiungiAbilita(UtenteRegistrato u, Abilita a){
-		/*List<Abilita> al = u.getAbilita();
-		al.add(a);
-		u.setAbilita(al);*/
 		Query q = em.createNativeQuery("INSERT INTO `swim`.`ABILITA_UTENTE` (`UtenteRegistrato_ID`, `Abilita_ID`) VALUES (:email, :id);");
 		q.setParameter("email", u.getEmail());
 		q.setParameter("id", a.getId());

@@ -14,7 +14,9 @@ public interface ManagerUtenteRegistratoRemote {
 	public boolean esisteMail(String email);
 	public void aggiungiUtente(String email,String password, String nome, String cognome);
 	public void cambioPsw(String email, String newPsw, String oldPsw) throws SwimBeanException;
-	public void cambioImm(String email, String url);
 	public boolean utentePossiedeAbilita(UtenteRegistrato u, Abilita a);
-	//public void logout();
+	
+	//Parte commentata perché riguardante l'immagine del profilo (possibile aggiungere in seguito)
+	//public void cambioImm(String email, String url);
+
 }
