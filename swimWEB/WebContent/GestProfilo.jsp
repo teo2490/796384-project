@@ -60,9 +60,9 @@
 					out.println(u.getEmail());
 					out.println("<form action=\"ModificaProfiloServlet\" method=\"post\">");
 					out.println("<p>Vecchia Password: </p><input type=\"text\" name=\"oldpsw\" id=\"oldpsw\" value=\""+u.getPsw()+"\" />");
-					out.println("<p>Nuova Password: </p><input type=\"text\" name=\"newpsw\" id=\"newpsw\" value=\""+""+"\" />");
-					/* out.println("<p>URL Immagine: </p><input type=\"text\" name=\"url\" id=\"url\" value=\""+url+"\" /><br /><br />");
-					out.println("<input type=\"submit\" name=\"submit\" value=\"Conferma\" id=\"ok\"/></form><br />"); */
+					out.println("<p>Nuova Password: </p><input type=\"text\" name=\"newpsw\" id=\"newpsw\" value=\""+""+"\" /><br /><br />");
+					// out.println("<p>URL Immagine: </p><input type=\"text\" name=\"url\" id=\"url\" value=\""+url+"\" /><br /><br />");
+					out.println("<input type=\"submit\" name=\"submit\" value=\"Conferma\" id=\"ok\"/></form><br />"); 
 			     
 					%>
 		<br /><br /><br />
