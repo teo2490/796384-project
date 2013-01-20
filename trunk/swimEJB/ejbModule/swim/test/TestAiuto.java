@@ -62,10 +62,14 @@ public class TestAiuto {
 	public void testRicercaPerAbilita() throws SwimBeanException{
 		List<Abilita> elenco = (List<Abilita>) manAbil.getElencoAbilita();
 		for(int i=0; i<elenco.size(); i++){
-			if(elenco.get(i).getNome().equals("C") || elenco.get(i).getNome().equals("Java") || elenco.get(i).getNome().equals("Verniciare")){
+			if(elenco.get(i).getNome().equals("C") || elenco.get(i).getNome().equals("Java")){
 				List<String> elencoEmail = manager.ricercaPerAbilita(elenco.get(i));
 				UtenteRegistrato u = manUser.ricercaUtente(elencoEmail.get(0));
-				assertNotNull("L'abilità è posseduta da almeno un utente", u);
+				assertEquals("L'abilità è posseduta dall'utente sbagliato", "rp@mail.it", u.getEmail());
+			} else if(elenco.get(i).getNome().equals("Verniciare")){
+				List<String> elencoEmail = manager.ricercaPerAbilita(elenco.get(i));
+				UtenteRegistrato u = manUser.ricercaUtente(elencoEmail.get(0));
+				assertEquals("L'abilità è posseduta dall'utente sbagliato", "mr@mail.it", u.getEmail());
 			} else {
 				List<String> elencoEmail = null;
 				try{
