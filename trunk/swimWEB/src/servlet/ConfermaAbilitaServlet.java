@@ -42,6 +42,7 @@ public class ConfermaAbilitaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        RequestDispatcher disp;
 		try {
 			Object obj = ContextUtil.getInitialContext().lookup("ManagerAmministratore/remote");
 			ManagerAmministratoreRemote manager = (ManagerAmministratoreRemote) PortableRemoteObject.narrow(obj, ManagerAmministratoreRemote.class);
@@ -52,15 +53,15 @@ public class ConfermaAbilitaServlet extends HttpServlet {
 			if(azione.equals("conferma")){
 			Amministratore a = (Amministratore) request.getSession().getAttribute("utente");
 			manager.aggiungiAbilita(id, nome, desc, a.getEmail());
+			request.setAttribute("messaggio", "Abilità aggiunta!");
 			}
 			if(azione.equals("elimina")){
 				manager.eliminaAbilita(id);
+				request.setAttribute("messaggio", "Richiesta eliminata!");
 			}
 		} catch (NamingException e) {
 			e.printStackTrace(); 
 		}
-		RequestDispatcher disp;
-		request.setAttribute("messaggio", "Abilità aggiunta!");
 		disp = request.getRequestDispatcher("GestAbilitaAdmin.jsp");
 		disp.forward(request, response);
 	}

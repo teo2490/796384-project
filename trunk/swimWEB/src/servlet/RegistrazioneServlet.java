@@ -43,12 +43,14 @@ public class RegistrazioneServlet extends HttpServlet {
 		try {
 			Object obj = ContextUtil.getInitialContext().lookup("ManagerUtenteRegistrato/remote");
 			ManagerUtenteRegistratoRemote manager = (ManagerUtenteRegistratoRemote) PortableRemoteObject.narrow(obj, ManagerUtenteRegistratoRemote.class);
-			
+			RequestDispatcher disp;
 			String email = request.getParameter("mail");
 			String password = request.getParameter("psw");
 			String nome = request.getParameter("nome");
 			String cognome = request.getParameter("cognome");
 			
+			if(!(email.equals("admin1@swim.it") || email.equals("admin2@swim.it"))){
+						
 			boolean exist = false;
 			if(manager.esisteMail(email) || !manager.controlloEmail(email))	exist = true;
 			
@@ -56,12 +58,16 @@ public class RegistrazioneServlet extends HttpServlet {
 				manager.aggiungiUtente(email,password,nome,cognome);
 			}
 			
-			RequestDispatcher disp;
+			
 			if(exist == true) {
 				request.setAttribute("messaggio", "Errore: Registrazione.");
 			} else {
 				request.setAttribute("messaggio", "Registrazione completata! Ora puoi effettuare il login.");
 			}
+			} else {
+				request.setAttribute("messaggio", "Errore: Registrazione.");
+			}
+			
 			disp = request.getRequestDispatcher("Home.jsp");
 			disp.forward(request, response);
 		} catch (NamingException e) {
