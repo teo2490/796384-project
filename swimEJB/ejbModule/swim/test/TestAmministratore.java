@@ -74,29 +74,20 @@ public class TestAmministratore {
 	}
 	
 	@Test
-	public void testCercaAbilita(){
-		Abilita a = null;
-		List<Abilita> elenco = (List<Abilita>)manager.getElencoRichieste();
-		for(int i=0; i<elenco.size(); i++){
-			int id = elenco.get(i).getId();
-			a = manager.cercaAbilita(id);
-			assertEquals("L'abilità trovata non è quella cercata", a.getId(), id);
-		}
-	}
-	
-	@Test
 	public void testEliminaAbilita(){
 		List<Abilita> elenco = (List<Abilita>)manager.getElencoRichieste();
+		String[] ids = new String[elenco.size()];
 		Integer[] id = new Integer[elenco.size()];
 		for(int i=0; i<elenco.size(); i++){
 			id[i] = elenco.get(i).getId();
+			ids[i] = id[i].toString();
 		}
-		Abilita a = manager.cercaAbilita(id[0]);
-		manager.eliminaAbilita(id[0].toString());
-		a = manager.cercaAbilita(id[0]);
+		Abilita a = manager.ricercaAbilita(ids[0]);
+		manager.eliminaAbilita(ids[0].toString());
+		a = manager.ricercaAbilita(ids[0]);
 		assertNull("L'abilità non è stata eliminata", a);
 		for(int i=1; i<elenco.size(); i++){
-			a = manager.cercaAbilita(id[i]);
+			a = manager.ricercaAbilita(ids[i]);
 			assertNotNull("L'abilità che è stata eliminata non doveva essere cancellata", a);
 		}
 	}
@@ -104,19 +95,21 @@ public class TestAmministratore {
 	@Test
 	public void testAggiungiAbilita(){
 		List<Abilita> elenco = (List<Abilita>)manager.getElencoRichieste();
-		int[] id = new int[elenco.size()];
+		Integer[] id = new Integer[elenco.size()];
+		String[] ids = new String[elenco.size()];
 		for(int i=0; i<elenco.size(); i++){
 			id[i] = elenco.get(i).getId();
+			ids[i] = id[i].toString();
 		}
-		Abilita a = manager.cercaAbilita(id[0]);
+		Abilita a = manager.ricercaAbilita(ids[0]);
 		String nome = a.getNome();
 		String descr = a.getDescrizione();
 		manager.aggiungiAbilita(Integer.toString(a.getId()), nome, descr, "admin1@swim.it");
-		a = manager.cercaAbilita(id[0]);
+		a = manager.ricercaAbilita(ids[0]);
 		assertTrue("L'abilità non è stata aggiunta", a.getConferma());
 		assertEquals("Il creatore dell'abilità non corrisponde", "admin1@swim.it", a.getAdmin().getEmail());
 		for(int i=1; i<elenco.size(); i++){
-			a = manager.cercaAbilita(id[i]);
+			a = manager.ricercaAbilita(ids[i]);
 			assertFalse("L'abilità che è stata aggiunta non doveva essere aggiunta", a.getConferma());
 		}
 	}
