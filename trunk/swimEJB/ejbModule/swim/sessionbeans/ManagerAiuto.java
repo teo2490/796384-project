@@ -105,8 +105,7 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 	
 	/**
 	 * Il metodo restituisce il feedback che è stato lasciato su un aiuto.
-	 * Se non ci sono feedback o il feedback lasciato non contiene alcun carattere viene lanciata un'eccezione.
-	 * Se è presente almeno un carattere viene restituito il feedback.
+	 * Se non ci sono feedback viene lanciata un'eccezione, altrimenti viene restituito il feedback.
 	 * 
 	 * @param aiuto	Aiuto di cui si vuole recuperare il feedback
 	 */
@@ -114,9 +113,9 @@ public class ManagerAiuto implements ManagerAiutoRemote{
 		String feedback = aiuto.getFeedback();
 		if(feedback == null){
 			throw new SwimBeanException("Nessun feedback disponibile per questo aiuto!");
-		} else if (feedback.equals("")){
+		}/*else if (feedback.equals("")){
 			throw new SwimBeanException("Nessun feedback disponibile per questo aiuto!");
-		}else{
+		}*/else{
 			return feedback;
 		}
 	}
