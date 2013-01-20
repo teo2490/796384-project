@@ -8,6 +8,18 @@
 <style type="text/css">
 			@import url(css/main.css);
 </style>
+<script type="text/javascript">
+		/* funzione Controllo Inserimento Dati*/
+		function check() {
+			if(document.getElementById("nome").value == "" ||
+				document.getElementById("desc").value == "") {
+		  		alert("Uno o più campi sono incompleti.");
+		 		return false;
+			}
+			return true;
+		}
+</script>
+</style>
 </head>
 <%@ page import="swim.sessionbeans.*" %>
 <%@ page import="swim.entitybeans.*" %>
@@ -73,25 +85,31 @@
     </tr>
     <tr>
     <td>
-   <form action="AggiungiAbilitaServlet" method="post" onSubmit="return check()">
+   <form action="AggiungiAbilitaServlet" method="post">
     		<div align="center">
 					<fieldset>
 						<h3><u>Aggiungi abilita'</u></h3><br>
 						<br /><br />
 						
-					<select name="abilita">
+					
 					<%
 					Object obja = ContextUtil.getInitialContext().lookup("ManagerAbilita/remote");
 					ManagerAbilitaRemote mana = (ManagerAbilitaRemote) PortableRemoteObject.narrow(obja, ManagerAbilitaRemote.class);
 					UtenteRegistrato u = (UtenteRegistrato) request.getSession().getAttribute("utente");
 					List<Abilita> elencoa = mana.getElencoAbilitaNonMie(u);
-					if (elencoa.size() >0) 
+					if (!elencoa.isEmpty()) 
 			        { 
-						for (Abilita e: elencoa)	{ out.println("<option value = \""+Integer.toString(e.getId())+"\" id=\"abil\" >"+e.getNome()+"</option>"); }
+						out.println("<select name=\"abilita\">");
+						for (Abilita e: elencoa)	{ 
+							out.println("<option value = \""+Integer.toString(e.getId())+"\" id=\"abil\" >"+e.getNome()+"</option>");
+							}
+						out.println("</select>");
+						out.println("<input type=\"submit\" name=\"submit\" value=\"OK\" />");
 			        } 
+					else {
+						out.println("<p>L'utente possiede tutte le abilità esistenti nel sistema</p>");
+					}
 					%>
-					</select>
-					<input type="submit" name="submit" value="OK" />
 					<br /><br /><br />
 					</fieldset>
 			</div>
