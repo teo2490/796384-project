@@ -57,6 +57,8 @@ public class RicercaAiutoServlet extends HttpServlet {
 				possAiutanti = manager.ricercaPerAbilita(a);
 			} catch (SwimBeanException e) {
 				e.printStackTrace();
+				possAiutanti = null;
+				request.getSession().setAttribute("possAiutanti",possAiutanti);
 			}
 			//System.out.println(possAiutanti.get(0).getEmail());
 			//
